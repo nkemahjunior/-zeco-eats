@@ -4,6 +4,7 @@ interface fnProps {
   id: string
   attributes?: InputHTMLAttributes<HTMLInputElement>
   events?: DOMAttributes<HTMLInputElement>
+  placeHolder?: string
   className?: string
   py?: string
   px?: string
@@ -18,6 +19,7 @@ export default function TextInput({
   id,
   attributes,
   events,
+  placeHolder = '',
   className,
   py = 'py-2',
   px = 'px-2',
@@ -31,6 +33,7 @@ export default function TextInput({
     <input
       id={id}
       {...attributes}
+      placeholder={placeHolder}
       {...events}
       type="text"
       className={`${focusBorderColor} ${focusBg} ${width} ${rounded} border-2 border-solid border-transparent ${bg} ${px} ${py} ${className}`}

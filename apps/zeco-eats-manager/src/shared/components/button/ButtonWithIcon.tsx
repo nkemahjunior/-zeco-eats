@@ -1,6 +1,7 @@
 interface fnProps {
   children: React.ReactNode
   roundedCorners?: string
+  textColor?: string
   color?: string
   hoverColor?: string
   justify?: string
@@ -15,6 +16,7 @@ interface fnProps {
 export default function ButtonWithIcon({
   children,
   roundedCorners = 'rounded-lg',
+  textColor = 'text-black',
   color = 'bg-background',
   hoverColor = 'hover:bg-backgroundShade1',
   justify = 'justify-center',
@@ -31,7 +33,7 @@ export default function ButtonWithIcon({
       role=""
       {...ariaAttributes}
       {...events}
-      className={`${className} ${roundedCorners} ${font} ${color} ${hoverColor} ${height} ${width} flex items-center ${justify} ${gapX} text-black transition-colors duration-300`}
+      className={`${className} ${roundedCorners} ${font} ${color} ${hoverColor} ${height} ${width} flex items-center ${justify} ${gapX} ${textColor} transition-colors duration-300`}
     >
       {children}
     </button>
