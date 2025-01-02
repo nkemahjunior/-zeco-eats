@@ -6,8 +6,8 @@ export default function RatingText() {
       {' '}
       <p>
         {' '}
-        "I loved how the boxes looked, everything was also very piping hot just
-        the way I like it. Thankyou x"
+        &quot;I loved how the boxes looked, everything was also very piping hot
+        just the way I like it. Thankyou x&quot;
       </p>
       <div className="flex items-center space-x-1 text-storeTextColorTint">
         <Rating rating={5} textColor="text-black" />

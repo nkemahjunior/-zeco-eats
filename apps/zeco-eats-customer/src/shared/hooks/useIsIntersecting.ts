@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react'
 export function useIsIntersecting(
   ref: React.RefObject<HTMLElement>,
   initial: boolean,
-  options: IntersectionObserverInit = {},
+  options: IntersectionObserverInit = {}
   //TODO fix or remove the any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dependencies: any[] = []
+  // dependencies: any[] = []
 ): boolean {
   const [isIntersecting, setIsIntersecting] = useState(initial)
 
@@ -21,7 +20,7 @@ export function useIsIntersecting(
     observer.observe(element)
 
     return () => observer.unobserve(element)
-  }, [ref, options, ...dependencies])
+  }, [ref, options /*, ...dependencies]*/])
 
   return isIntersecting
 }

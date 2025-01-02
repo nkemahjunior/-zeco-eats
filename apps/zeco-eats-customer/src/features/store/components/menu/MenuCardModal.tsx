@@ -15,12 +15,11 @@ export default function MenuCardModal({
 }) {
   const observerRef = useRef<HTMLDivElement | null>(null)
 
-  const isIntersecting = useIsIntersecting(
-    observerRef,
-    true,
-    { root: null, rootMargin: '0px ', threshold: 1 },
-    []
-  )
+  const isIntersecting = useIsIntersecting(observerRef, true, {
+    root: null,
+    rootMargin: '0px ',
+    threshold: 1,
+  })
 
   return (
     <div

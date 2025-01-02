@@ -1,4 +1,4 @@
-import { FaRegStar, FaStar, FaStarHalf } from 'react-icons/fa'
+import { FaRegStar, FaStar } from 'react-icons/fa'
 import { FaStarHalfStroke } from 'react-icons/fa6'
 
 type fnProps = {

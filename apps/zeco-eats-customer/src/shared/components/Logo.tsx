@@ -2,7 +2,7 @@ interface fnProps {
   text1Size: string
 }
 
-export default function ({ text1Size }: fnProps) {
+export default function Logo({ text1Size }: fnProps) {
   return (
     <div className="p-2e font-extrabold text-secondary">
       <div className={`${text1Size}`}>Zeco Eats</div>
