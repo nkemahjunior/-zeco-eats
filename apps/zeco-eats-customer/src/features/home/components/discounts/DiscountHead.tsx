@@ -1,14 +1,15 @@
 'use client'
-import SectionTitle from '@/shared/components/text/Heading'
+
+// import SelectionTitle from '@/features/store/components/menu/modal/SelectionTitle'
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
 
 export default function DiscountHead() {
   return (
     <div className="flex items-center justify-between border-2 border-solid border-red-700">
-      <SectionTitle
+      {/* <SelectionTitle
         titleSM="Up to -40% Discount Offers 🎊"
         titleMD="Up to -40% 🎊 Zeco Eats exclusive deals"
-      />
+      /> */}
 
       <div className="border-2 border-solid border-red-700 2xl:w-fit">
         <div className="flex space-x-1 overflow-hidden rounded-2xl border-2 border-solid border-secondary px-1 py-2 2xl:hidden">

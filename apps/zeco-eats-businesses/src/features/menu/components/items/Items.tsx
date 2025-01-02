@@ -1,15 +1,15 @@
-'use state'
+'use client'
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
-import CustomSelect from '@/shared/components/inputs/CustomSelect'
+// import CustomSelect from '@/shared/components/inputs/CustomSelect'
 import Line from '@/shared/components/Line'
 import Heading from '@/shared/components/text/Heading'
-import { useState } from 'react'
+// import { useState } from 'react'
 import { BiPlus } from 'react-icons/bi'
 import { CiSearch } from 'react-icons/ci'
 
 export default function Items() {
-  const [price, setPrice] = useState(0)
-  const sortPrices = [100, 200, 300, 400, 500] //when real data comes, take min price and create sort prices by adding 50 or whatever to it
+  // const [price, setPrice] = useState(0)
+  // const sortPrices = [100, 200, 300, 400, 500] //when real data comes, take min price and create sort prices by adding 50 or whatever to it
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
@@ -45,7 +45,7 @@ export default function Items() {
           />
         </div>
 
-        <CustomSelect data={sortPrices} onchange={setPrice} />
+        {/* <CustomSelect data={sortPrices} onchange={setPrice} /> */}
       </div>
     </div>
   )

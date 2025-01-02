@@ -6,9 +6,9 @@ import ButtonWithIcon from '../button/ButtonWithIcon'
 import { PiCaretUpDownFill } from 'react-icons/pi'
 
 interface fnProps {
-  data: (string | number)[]
-  onchange: (arg: string | number) => void
-  children: React.ReactNode
+  data: string[]
+  onchange: (arg: string) => void
+  //children: React.ReactNode
 }
 
 const dropdownVariants: Variants = {

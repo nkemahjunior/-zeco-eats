@@ -102,14 +102,14 @@ export default function EditSchedule() {
             <Heading2 text="Start time" />
             <CustomSelect
               data={createTimePoints(0, 49)}
-              onchange={setSelectedStartTime}
+              onchange={(arg: string) => setSelectedStartTime(arg)}
             />
           </div>
           <div className="space-y-4">
             <Heading2 text="End time" />
             <CustomSelect
               data={createTimePoints(0, 49)}
-              onchange={setSelectedEndTime}
+              onchange={(arg: string) => setSelectedEndTime(arg)}
             />
           </div>
         </div>

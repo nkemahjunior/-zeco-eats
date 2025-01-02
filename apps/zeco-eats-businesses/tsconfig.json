@@ -26,13 +26,14 @@
     }
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
     "../../apps/zeco-eats-businesses/.next/types/**/*.ts",
     "../../dist/apps/zeco-eats-businesses/.next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }
