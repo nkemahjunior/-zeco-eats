@@ -15,10 +15,10 @@ export default function MenuNav() {
           Overview
         </Link>
         <Link
-          href="/menu/menus"
-          className={` ${pathname == '/menu/menus' ? 'border-secondary' : 'border-transparent'} border-b-4 border-solid pb-2`}
+          href="/menu/schedule"
+          className={` ${pathname == '/menu/schedule' || pathname == '/menu/schedule/edit' ? 'border-secondary' : 'border-transparent'} border-b-4 border-solid pb-2`}
         >
-          Menus
+          Menu schedule
         </Link>
         <Link
           href="/menu/categories"

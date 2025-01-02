@@ -68,7 +68,7 @@ export default function CustomSelect({ data, onchange }: fnProps) {
 
   return (
     <div
-      className="relative w-fit"
+      className="relative z-10 w-fit"
       ref={ref}
 
       // tabIndex={0}
