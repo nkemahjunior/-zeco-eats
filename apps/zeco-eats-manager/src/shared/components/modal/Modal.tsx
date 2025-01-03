@@ -27,11 +27,11 @@ export default function Modal() {
         {/* <div
           className={` ${modalProps?.bg} ${modalProps?.className} h-full w-full overflow-y-auto`}
         > */}
-        {modalProps?.showCloseBtn && (
+        {/* {modalProps?.showCloseBtn && (
           <div className={`flex w-full ${modalProps?.closeBtnPos}`}>
             <CloseBtn />
           </div>
-        )}
+        )} */}
         {modalContent}
       </div>
     </div>
