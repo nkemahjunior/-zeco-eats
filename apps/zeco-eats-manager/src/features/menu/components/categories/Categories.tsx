@@ -1,7 +1,10 @@
+'use client'
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
+import TextInput from '@/shared/components/inputs/TextInput'
 import TextInputWithIcon from '@/shared/components/inputs/TextInputWithIcon'
 import Heading from '@/shared/components/text/Heading'
-import { BiPlus } from 'react-icons/bi'
+import { ChangeEvent, useState } from 'react'
+import { BiPlus, BiSave } from 'react-icons/bi'
 
 const fakeCategories = Array.from({ length: 5 }, (_, i) => {
   return {
@@ -12,29 +15,54 @@ const fakeCategories = Array.from({ length: 5 }, (_, i) => {
 })
 
 export default function Categories() {
+  const [searchCategories, setSearchCategories] = useState(fakeCategories)
+  const [toggleAddNewCategory, setToggleAddNewCategory] = useState(false)
+
+  const searchForCategories = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 0) {
+      setSearchCategories(fakeCategories)
+      return
+    }
+    const arr = searchCategories.filter((el) =>
+      el.name.toLocaleLowerCase().includes(e.target.value.toLowerCase())
+    )
+    setSearchCategories(arr)
+  }
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <Heading text={`Categories`} />
+
         <ButtonWithIcon
           textColor="text-white"
           color="bg-secondary"
           hoverColor="hover:bg-secondaryTint"
           width="w-[9rem]"
+          events={{ onClick: () => setToggleAddNewCategory((v) => !v) }}
         >
           <span className="font-medium text-white">
-            <BiPlus />
+            {toggleAddNewCategory ? <BiSave /> : <BiPlus />}
           </span>
-          <span>New category</span>
+          <span> {toggleAddNewCategory ? 'Save' : 'New category'}</span>
         </ButtonWithIcon>
       </div>
-      <div>
+      <div className="flex items-center justify-between">
         <TextInputWithIcon
           id="searchCategory"
           placeHolder="Search"
           width="w-[20%]"
           className="placeholder:text-black"
+          events={{ onChange: searchForCategories }}
         />
+
+        {toggleAddNewCategory && (
+          <TextInput
+            id="addNewCategory"
+            placeHolder="Add new category"
+            width="w-[15%]"
+          />
+        )}
       </div>
 
       <div>
@@ -48,7 +76,7 @@ export default function Categories() {
           </thead>
 
           <tbody>
-            {fakeCategories.map((el, i) => (
+            {searchCategories.map((el, i) => (
               <tr
                 key={i}
                 className="border-backgroundBorder hover:bg-background cursor-pointer transition-colors duration-300"

@@ -6,9 +6,9 @@ interface fnProps {
   events?: DOMAttributes<HTMLInputElement>
   placeHolder?: string
   className?: string
-  py?: string
   px?: string
   width?: string
+  height?: string
   rounded?: string
   bg?: string
   focusBorderColor?: string
@@ -21,9 +21,9 @@ export default function TextInput({
   events,
   placeHolder = '',
   className,
-  py = 'py-2',
   px = 'px-2',
   width = 'w-full',
+  height = 'h-[2.5rem]',
   rounded = 'rounded-lg',
   bg = 'bg-background',
   focusBorderColor = 'focus:border-secondary',
@@ -36,7 +36,7 @@ export default function TextInput({
       placeholder={placeHolder}
       {...events}
       type="text"
-      className={`${focusBorderColor} ${focusBg} ${width} ${rounded} border-2 border-solid border-transparent ${bg} ${px} ${py} ${className}`}
+      className={`${focusBorderColor} ${focusBg} ${width} ${height} ${rounded} border-2 border-solid border-transparent ${bg} ${px} ${className}`}
     />
   )
 }
