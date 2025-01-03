@@ -44,11 +44,12 @@ export default function SortableCategory({ el }: fnProps) {
   const [items, setItems] = useState(['1', '2', '3', '4', '5'])
 
   const reorderItems = (e: DragEndEvent) => {
-    if (!e.over) return
-    if (e.active.id !== e.over.id) {
+    const over = e.over
+    if (!over) return
+    if (e.active.id !== over.id) {
       setItems((item) => {
         const oldIdx = item.indexOf(e.active.id.toString())
-        const newIdx = item.indexOf(e.over!.id.toString())
+        const newIdx = item.indexOf(over.id.toString())
 
         return arrayMove(item, oldIdx, newIdx)
       })

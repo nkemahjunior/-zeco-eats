@@ -3,7 +3,11 @@ import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
 import TextInput from '@/shared/components/inputs/TextInput'
 import TextInputWithIcon from '@/shared/components/inputs/TextInputWithIcon'
 import Heading from '@/shared/components/text/Heading'
-import { ChangeEvent, useState } from 'react'
+import {
+  ModalContext,
+  modalContextTypes,
+} from '@/shared/context/modal/ModalProvider'
+import { ChangeEvent, useContext, useState } from 'react'
 import { BiPlus, BiSave } from 'react-icons/bi'
 
 const fakeCategories = Array.from({ length: 5 }, (_, i) => {
@@ -17,6 +21,9 @@ const fakeCategories = Array.from({ length: 5 }, (_, i) => {
 export default function Categories() {
   const [searchCategories, setSearchCategories] = useState(fakeCategories)
   const [toggleAddNewCategory, setToggleAddNewCategory] = useState(false)
+  const { openModal, modalProps } = useContext(
+    ModalContext
+  ) as modalContextTypes
 
   const searchForCategories = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 0) {
@@ -27,6 +34,20 @@ export default function Categories() {
       el.name.toLocaleLowerCase().includes(e.target.value.toLowerCase())
     )
     setSearchCategories(arr)
+  }
+
+  const openCategory = () => {
+    openModal(
+      <div className="h-full border-2 border-solid border-red-700 px-4 py-4">
+        {' '}
+        content
+      </div>,
+      {
+        ...modalProps,
+        height: ' h-[60%]',
+        width: 'w-[50%]',
+      }
+    )
   }
 
   return (
@@ -80,6 +101,7 @@ export default function Categories() {
               <tr
                 key={i}
                 className="border-backgroundBorder hover:bg-background cursor-pointer transition-colors duration-300"
+                onClick={() => openCategory()}
               >
                 <td className="flex items-center space-x-4 px-4 py-4 text-start">
                   {el.name}

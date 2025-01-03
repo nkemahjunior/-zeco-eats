@@ -8,6 +8,7 @@ export default function MenuCategoryAndItems() {
   return (
     <div className="space-y-8">
       <div className="flex w-full space-x-4">
+        {/* TODO: replace with the input component */}
         <div className="has-[:focus]:border-secondary bg-background flex h-[2.5rem] w-full items-center space-x-2 rounded-lg border-2 border-solid border-transparent px-4 has-[:focus]:bg-white">
           <span>
             <CiSearch />

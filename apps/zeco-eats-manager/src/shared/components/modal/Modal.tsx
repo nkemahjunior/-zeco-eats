@@ -19,22 +19,22 @@ export default function Modal() {
       onClick={closeModal}
     >
       <div
-        className={`relative ${modalProps?.height} ${modalProps?.width}`}
+        className={`relative ${modalProps?.height} ${modalProps?.width} overflow-y-auto ${modalProps?.bg} ${modalProps?.className}`}
         onClick={(e: React.MouseEvent) => {
           e.stopPropagation()
         }}
       >
-        <div
+        {/* <div
           className={` ${modalProps?.bg} ${modalProps?.className} h-full w-full overflow-y-auto`}
-        >
-          {modalProps?.showCloseBtn && (
-            <div className={`flex w-full ${modalProps?.closeBtnPos}`}>
-              <CloseBtn />
-            </div>
-          )}
-          {modalContent}
-        </div>
+        > */}
+        {modalProps?.showCloseBtn && (
+          <div className={`flex w-full ${modalProps?.closeBtnPos}`}>
+            <CloseBtn />
+          </div>
+        )}
+        {modalContent}
       </div>
     </div>
+    // </div>
   )
 }

@@ -11,7 +11,7 @@ import EditItemCategories from './EditItemCategories'
 
 export default function EditItem() {
   return (
-    <div className="w-full space-y-4 px-8 py-4">
+    <div className="w-full space-y-4 border-2 border-solid border-red-700 px-8 py-4">
       <EditItemHeader />
       <Line />
 
