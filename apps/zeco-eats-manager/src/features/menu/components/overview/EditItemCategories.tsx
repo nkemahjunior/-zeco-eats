@@ -3,67 +3,10 @@ import Button from '@/shared/components/button/Button'
 import ItemCategories from './ItemCategories'
 import { CiSearch } from 'react-icons/ci'
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { BiPlus, BiX } from 'react-icons/bi'
 import { useCategories } from '../../hooks/useCategories'
 
 export default function EditItemCategories() {
-  // const [ItemCategoriesArr, setItemCategoriesArr] = useState([
-  //   'My Place Special',
-  //   'Vegies',
-  //   'Sauce',
-  //   'Snacks',
-  // ])
-
-  // const [searchCategories, setSearchCategories] = useState([
-  //   ...ItemCategoriesArr,
-  // ])
-
-  // const [hideNewCategoryInput, setHideNewCategoryInput] = useState(true)
-  // const [createNew, setCreateNew] = useState(false)
-  // const [newCategory, setNewCategory] = useState('')
-  // const categoryInputRef = useRef<HTMLInputElement | null>(null)
-
-  // useEffect(() => {
-  //   //using effect because the motherfucking input does not autofocus when rendering it conditionally
-  //   if (categoryInputRef.current) {
-  //     categoryInputRef.current.focus()
-  //   }
-  // }, [createNew, hideNewCategoryInput])
-
-  // const searchForCategories = (e: ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.value.length === 0) {
-  //     setSearchCategories([...ItemCategoriesArr])
-  //     return
-  //   }
-  //   const arr = searchCategories.filter((el) =>
-  //     el.toLocaleLowerCase().includes(e.target.value.toLowerCase())
-  //   )
-  //   setSearchCategories(arr)
-  // }
-
-  // const addItemToCategory = (newCategory: string) => {
-  //   if (newCategory.length <= 0) return
-  //   const arr = [...ItemCategoriesArr, newCategory]
-  //   setItemCategoriesArr(arr)
-  //   setSearchCategories([...ItemCategoriesArr, newCategory])
-  //   setHideNewCategoryInput(true)
-  //   if (createNew) setCreateNew(false)
-  // }
-
-  // const hideAddNewCategory = () => {
-  //   setHideNewCategoryInput(true)
-  //   setCreateNew(false)
-  // }
-
-  // const wantsToCreateNewCategory = () => {
-  //   setCreateNew(true)
-  // }
-
-  // const setNewCategoryOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setNewCategory(e.target.value)
-  // }
-
   const categoriesData = ['My Place Special', 'Vegies', 'Sauce', 'Snacks']
 
   const {
@@ -90,8 +33,6 @@ export default function EditItemCategories() {
           <ItemCategories
             key={i}
             category={el}
-            // ItemCategoriesArr={ItemCategoriesArr}
-            // setItemCategories={setItemCategoriesArr}
             deleteCategory={deleteCategoryFromItem}
           />
         ))}
