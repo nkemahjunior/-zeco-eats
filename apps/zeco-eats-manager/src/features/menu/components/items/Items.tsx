@@ -4,8 +4,21 @@ import ImageContainer from '@/shared/components/image/ImageContainer'
 import TextInput from '@/shared/components/inputs/TextInput'
 import TextInputWithIcon from '@/shared/components/inputs/TextInputWithIcon'
 import Heading from '@/shared/components/text/Heading'
-import { ChangeEvent, useState } from 'react'
+import {
+  ModalContext,
+  modalContextTypes,
+} from '@/shared/context/modal/ModalProvider'
+import { ChangeEvent, useContext, useState } from 'react'
 import { BiPlus, BiSave } from 'react-icons/bi'
+import EditItem from '../overview/EditItem'
+
+type item = {
+  name: string
+  price: string
+  image: string
+  menu: string
+  categories: string
+}
 
 const fakeItems = Array.from({ length: 5 }, (_, i) => {
   return {
@@ -22,6 +35,9 @@ export default function Items() {
   // const sortPrices = [100, 200, 300, 400, 500] //when real data comes, take min price and create sort prices by adding 50 or whatever to it
   const [searchItems, setSearchItems] = useState(fakeItems)
   const [toggleAddNewItem, setToggleAddNewItem] = useState(false)
+  const { openModal, modalProps } = useContext(
+    ModalContext
+  ) as modalContextTypes
 
   const searchForItems = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 0) {
@@ -32,6 +48,17 @@ export default function Items() {
       el.name.toLocaleLowerCase().includes(e.target.value.toLowerCase())
     )
     setSearchItems(arr)
+  }
+
+  const openCategory = (items: item) => {
+    openModal(<EditItem />, {
+      ...modalProps,
+      centerChildVer: false,
+      childPos: 'justify-end',
+      showCloseBtn: false,
+      height: ' h-full',
+      width: 'w-[20%]',
+    })
   }
 
   return (
@@ -86,7 +113,8 @@ export default function Items() {
           {searchItems.map((el, i) => (
             <tr
               key={i}
-              className="border-backgroundBorder hover:bg-background cursor-pointer border-b-[0px] border-solid transition-colors duration-300 last:border-b-0"
+              className="border-backgroundBorder hover:bg-background cursor-pointer transition-colors duration-300"
+              onClick={() => openCategory(el)}
             >
               <td className="px-4 py-4 text-start">
                 <ImageContainer
