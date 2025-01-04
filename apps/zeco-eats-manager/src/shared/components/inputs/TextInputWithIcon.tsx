@@ -16,7 +16,7 @@ interface fnProps {
 
 export default function TextInputWithIcon({
   id,
-  icon = <CiSearch />,
+  icon = <CiSearch size={20} />,
   attributes,
   events,
   placeHolder = 'Search..',
@@ -37,7 +37,7 @@ export default function TextInputWithIcon({
         placeholder={placeHolder}
         {...events}
         type="text"
-        className={`w-full bg-inherit outline-none`}
+        className={`w-full bg-inherit placeholder-black outline-none`}
       />
     </div>
   )
