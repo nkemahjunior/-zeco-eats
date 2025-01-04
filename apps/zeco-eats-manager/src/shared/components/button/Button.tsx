@@ -1,6 +1,7 @@
 interface fnProps {
   children: React.ReactNode
   roundedCorners?: string
+  textColor?: string
   color?: string
   hoverColor?: string
   py?: string
@@ -12,6 +13,7 @@ interface fnProps {
 export default function Button({
   children,
   roundedCorners = 'rounded-lg',
+  textColor = 'text-black',
   color = 'bg-background',
   hoverColor = 'hover:bg-backgroundShade1',
   py = 'py-3',
@@ -23,7 +25,7 @@ export default function Button({
   return (
     <button
       {...events}
-      className={`${className} ${roundedCorners} ${font} ${color} ${hoverColor} ${py} ${px} text-black transition-colors duration-300`}
+      className={`${className} ${roundedCorners} ${font} ${color} ${hoverColor} ${py} ${px} ${textColor} transition-colors duration-300`}
     >
       {children}
     </button>

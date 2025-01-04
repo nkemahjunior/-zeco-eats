@@ -1,7 +1,6 @@
 'use client'
 import { useContext } from 'react'
 import { usePreventScrolling } from '../../hooks/usePreventScrolling'
-import CloseBtn from './CloseBtn'
 import {
   ModalContext,
   modalContextTypes,
