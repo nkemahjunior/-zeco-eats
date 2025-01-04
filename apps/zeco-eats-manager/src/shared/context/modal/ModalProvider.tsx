@@ -1,5 +1,6 @@
 'use client'
 
+import { modalPropsType } from '@/shared/types/modalPropsType'
 import React, { createContext, useState } from 'react'
 
 export interface modalContextTypes {
@@ -11,17 +12,6 @@ export interface modalContextTypes {
   setModalProps: (arg: modalPropsType | undefined) => void
   openModal: (content: React.ReactNode, props?: modalPropsType) => void
   closeModal: () => void
-}
-
-interface modalPropsType {
-  childPos?: 'justify-start' | 'justify-end' | 'justify-center'
-  closeBtnPos?: 'justify-start' | 'justify-end' | 'justify-center'
-  showCloseBtn?: boolean
-  centerChildVer?: boolean
-  bg?: string
-  height?: string
-  width?: string
-  className?: string
 }
 
 export const ModalContext = createContext<modalContextTypes | null>(null)

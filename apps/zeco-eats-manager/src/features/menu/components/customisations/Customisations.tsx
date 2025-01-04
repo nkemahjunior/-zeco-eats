@@ -10,6 +10,7 @@ import {
 } from '@/shared/context/modal/ModalProvider'
 import { ChangeEvent, useContext, useState } from 'react'
 import { BiPlus } from 'react-icons/bi'
+import Customisation from './Customisation'
 
 export default function Customisations() {
   const { openModal, modalProps, closeModal } = useContext(
@@ -78,6 +79,19 @@ export default function Customisations() {
           </span>
           <span>Create customisation</span>
         </ButtonWithIcon>
+
+        <div className="space-y-6">
+          <Customisation />
+          <Customisation />
+          <Customisation />
+          <Customisation />
+
+          <Customisation />
+
+          <Customisation />
+          <Customisation />
+          <Customisation />
+        </div>
       </div>
     </div>
   )
