@@ -10,6 +10,7 @@ import { useContext } from 'react'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import CustomisationOptions from './CustomisationOptions'
 import CreateOption from './CreateOption'
+import CustomisationAddtoItem from './CustomisationAddToItem'
 
 export default function Customisation() {
   const { setModalUrlContent, modalUrlProps, setModalUrlProps } = useContext(
@@ -23,6 +24,7 @@ export default function Customisation() {
         {/* <CustomisationsMain /> */}
         {/* <CustomisationOptions/> */}
         {/* <CreateOption /> */}
+        <CustomisationAddtoItem />
       </div>
     )
     setModalUrlProps({
