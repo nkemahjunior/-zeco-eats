@@ -110,7 +110,7 @@ export default function Categories() {
           events={{ onClick: () => setToggleAddNewCategory((v) => !v) }}
         >
           <span className="font-medium text-white">
-            {toggleAddNewCategory ? <BiSave /> : <BiPlus />}
+            {toggleAddNewCategory ? <BiSave size={20} /> : <BiPlus size={20} />}
           </span>
           <span> {toggleAddNewCategory ? 'Save' : 'New category'}</span>
         </ButtonWithIcon>

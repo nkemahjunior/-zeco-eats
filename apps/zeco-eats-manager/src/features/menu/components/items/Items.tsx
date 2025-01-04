@@ -1,52 +1,114 @@
 'use client'
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
-// import CustomSelect from '@/shared/components/inputs/CustomSelect'
+import ImageContainer from '@/shared/components/image/ImageContainer'
+import TextInput from '@/shared/components/inputs/TextInput'
+import TextInputWithIcon from '@/shared/components/inputs/TextInputWithIcon'
 import Line from '@/shared/components/Line'
 import Heading from '@/shared/components/text/Heading'
-// import { useState } from 'react'
-import { BiPlus } from 'react-icons/bi'
-import { CiSearch } from 'react-icons/ci'
+import { ChangeEvent, useState } from 'react'
+import { BiPlus, BiSave } from 'react-icons/bi'
+
+const fakeItems = Array.from({ length: 5 }, (_, i) => {
+  return {
+    name: `Burger`,
+    price: '£12.02',
+    image: 'bla bla',
+    menu: `The place Monday Menu`,
+    categories: `Fries${i}`,
+  }
+})
 
 export default function Items() {
   // const [price, setPrice] = useState(0)
   // const sortPrices = [100, 200, 300, 400, 500] //when real data comes, take min price and create sort prices by adding 50 or whatever to it
+  const [searchItems, setSearchItems] = useState(fakeItems)
+  const [toggleAddNewItem, setToggleAddNewItem] = useState(false)
+
+  const searchForItems = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 0) {
+      setSearchItems(fakeItems)
+      return
+    }
+    const arr = searchItems.filter((el) =>
+      el.name.toLocaleLowerCase().includes(e.target.value.toLowerCase())
+    )
+    setSearchItems(arr)
+  }
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        {' '}
         <Heading text={`Items`} />
+
         <ButtonWithIcon
+          textColor="text-white"
           color="bg-secondary"
           hoverColor="hover:bg-secondaryTint"
-          width="w-fit"
-          className="px-4 text-white"
+          width="w-[9rem]"
+          events={{ onClick: () => setToggleAddNewItem((v) => !v) }}
         >
-          <span>
-            <BiPlus size={20} />
+          <span className="font-medium text-white">
+            {toggleAddNewItem ? <BiSave size={20} /> : <BiPlus size={20} />}
           </span>
-          <span>New item</span>
+          <span> {toggleAddNewItem ? 'Save' : 'New Item'}</span>
         </ButtonWithIcon>
       </div>
 
-      <Line />
+      <div className="flex items-center justify-between">
+        <TextInputWithIcon
+          id="searchItem"
+          placeHolder="Search"
+          width="w-[20%]"
+          className="placeholder:text-black"
+          events={{ onChange: searchForItems }}
+        />
 
-      <div className="flex">
-        <div className="bg-background has-[:focus]:border-secondary flex h-[2.5rem] w-full items-center space-x-2 rounded-lg border-2 border-solid border-transparent px-4 has-[:focus]:bg-white">
-          <label htmlFor="searchItem">
-            <CiSearch />
-          </label>
-
-          <input
-            id="searchItem"
-            type="text"
-            placeholder="Search category"
-            className="w-full bg-inherit outline-none"
-            //onChange={createNew ? setNewCategoryOnChange : searchForCategories}
+        {toggleAddNewItem && (
+          <TextInput
+            id="addNewItem"
+            placeHolder="Add new item"
+            width="w-[15%]"
           />
-        </div>
-
-        {/* <CustomSelect data={sortPrices} onchange={setPrice} /> */}
+        )}
       </div>
+
+      <table className="w-full table-auto">
+        <thead className="">
+          <tr className="border-backgroundBorder border-b border-solid">
+            <th className="px-4 py-2 text-start">Photo</th>
+            <th className="px-4 py-2 text-start">Name</th>
+            <th className="px-4 py-2 text-start">Price</th>
+            <th className="px-4 py-2 text-start">Menu</th>
+            <th className="px-4 py-2 text-start">Category</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {searchItems.map((el, i) => (
+            <tr
+              key={i}
+              className="border-backgroundBorder hover:bg-background cursor-pointer border-b-[0px] border-solid transition-colors duration-300 last:border-b-0"
+            >
+              <td className="px-4 py-4 text-start">
+                <ImageContainer
+                  src="/devImages/food1.webp"
+                  imageAlt=""
+                  height="h-[3.5rem]"
+                  width="w-[3.5rem]"
+                  roundedCorners="rounded-md"
+                />
+              </td>
+
+              <td className="px-4 py-4 text-start font-medium">{el.name}</td>
+
+              <td className="px-4 py-4 text-start">{el.price}</td>
+
+              <td className="px-4 py-4 text-start">{el.menu}</td>
+              <td className="px-4 py-4 text-start">{el.categories}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
