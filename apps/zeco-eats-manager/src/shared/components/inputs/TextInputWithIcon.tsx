@@ -3,6 +3,7 @@ import { CiSearch } from 'react-icons/ci'
 
 interface fnProps {
   id: string
+  icon?: React.ReactNode
   attributes?: InputHTMLAttributes<HTMLInputElement>
   events?: DOMAttributes<HTMLInputElement>
   placeHolder?: string
@@ -15,6 +16,7 @@ interface fnProps {
 
 export default function TextInputWithIcon({
   id,
+  icon = <CiSearch />,
   attributes,
   events,
   placeHolder = 'Search..',
@@ -28,9 +30,7 @@ export default function TextInputWithIcon({
     <div
       className={`has-[:focus]:border-secondary ${bg} flex ${width} ${height} items-center space-x-2 ${rounded} ${className} border-2 border-solid border-transparent px-4 has-[:focus]:bg-white`}
     >
-      <span className="block">
-        <CiSearch />
-      </span>
+      <span className="block">{icon}</span>
       <input
         id={id}
         {...attributes}
