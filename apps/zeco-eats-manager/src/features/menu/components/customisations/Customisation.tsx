@@ -21,10 +21,11 @@ export default function Customisation() {
   const openCustomisation = () => {
     setModalUrlContent(
       <div className="h-full px-6 py-8">
+        {/* TODO, open each based on param, we will surely use ids */}
         {/* <CustomisationsMain /> */}
         {/* <CustomisationOptions/> */}
         {/* <CreateOption /> */}
-        <CustomisationAddtoItem />
+        {/* <CustomisationAddtoItem /> */}
       </div>
     )
     setModalUrlProps({
