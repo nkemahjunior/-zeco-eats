@@ -50,7 +50,7 @@ const RenderNestedLinks = (
             <Link
               key={i + el}
               className="hover:bg-background block rounded-lg py-2"
-              href={textToLink(el)}
+              href={textToLink(`/${links.mainLink}/${el}`)}
               style={{ paddingLeft: `${padding + paddingIncrement}rem` }}
             >
               {el}

@@ -16,14 +16,22 @@ export default function SideNav() {
     <div className="h-full w-full space-y-4 border-0 border-solid border-red-700">
       <NavLink icon={<IoHomeOutline />} text="Home" />
       <NavLink icon={<IoStorefrontOutline />} text="Stores" />
-      <NavLink icon={<IoBasketOutline />} text="Orders" />
+      <NavLink
+        nestedLinks={{
+          icon: <IoBasketOutline />,
+          mainLink: 'Orders',
+          childLink: ['Manage', 'History'],
+          initialPaddingLeft: 0,
+          paddingIncrement: 1.5,
+        }}
+      />
       <NavLink
         nestedLinks={{
           icon: <BsBarChartLine />,
           mainLink: 'Performance',
           childLink: ['Sales'],
           initialPaddingLeft: 0,
-          paddingIncrement: 1,
+          paddingIncrement: 1.5,
         }}
       />
       <NavLink
@@ -32,7 +40,7 @@ export default function SideNav() {
           mainLink: 'Customers',
           childLink: ['My Reviews'],
           initialPaddingLeft: 0,
-          paddingIncrement: 1,
+          paddingIncrement: 1.5,
         }}
       />
       <NavLink
@@ -46,7 +54,7 @@ export default function SideNav() {
           mainLink: 'Payments',
           childLink: ['Payouts'],
           initialPaddingLeft: 0,
-          paddingIncrement: 1,
+          paddingIncrement: 1.5,
         }}
       />
       <NavLink
@@ -56,7 +64,7 @@ export default function SideNav() {
           mainLink: 'Settings',
           childLink: ['General', 'Holiday hours', 'Preparation times'],
           initialPaddingLeft: 0,
-          paddingIncrement: 1,
+          paddingIncrement: 1.5,
         }}
       />
     </div>
