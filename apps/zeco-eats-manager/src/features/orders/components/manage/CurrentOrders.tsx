@@ -16,6 +16,7 @@ import {
   RestaurantStatusContext,
   RestaurantStatusContextTypes,
 } from '@/shared/context/modal/RestaurantStatusProvider'
+import BusyTimer from './BusyTimer'
 
 const fakeOrders = Array.from({ length: 5 })
 export default function CurrentOrders() {
@@ -55,7 +56,11 @@ export default function CurrentOrders() {
             >
               <StatusDot status={restaurantStatus} />
               <span>{restaurantStatus.toUpperCase()}</span>
-              <span>{restaurantStatus === 'busy' && busyTime}</span>
+              <span>
+                {restaurantStatus === 'busy' && (
+                  <BusyTimer busyTime={busyTime} />
+                )}
+              </span>
               <span>
                 <PiCaretUpDownFill />
               </span>
