@@ -57,10 +57,12 @@ export default function CurrentOrders() {
               <StatusDot status={restaurantStatus} />
               <span>{restaurantStatus.toUpperCase()}</span>
               <span>
-                {restaurantStatus === 'busy' && (
-                  <BusyTimer busyTime={busyTime} />
-                )}
+                {restaurantStatus === 'busy' ||
+                  (restaurantStatus === 'paused' && (
+                    <BusyTimer busyTime={busyTime} />
+                  ))}
               </span>
+
               <span>
                 <PiCaretUpDownFill />
               </span>

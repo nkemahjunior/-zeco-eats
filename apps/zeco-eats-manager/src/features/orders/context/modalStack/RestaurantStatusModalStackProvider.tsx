@@ -44,6 +44,7 @@ const modals: RestaurantStatusModals = {
 
   statusPausedContent1: {
     parent: 'mainModal',
+    modalTitle: 'Pause time',
     content: <StatusPausedContent1 />,
   },
 }

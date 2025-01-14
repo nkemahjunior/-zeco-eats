@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 export default function BusyTimer({ busyTime }: { busyTime: number }) {
   const [time, setTime] = useState({
     min: busyTime,
-    sec: 5,
+    sec: 59,
   })
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function BusyTimer({ busyTime }: { busyTime: number }) {
         if (prevTime.sec === 0) {
           return {
             min: prevTime.min - 1,
-            sec: 5,
+            sec: 59,
           }
         }
         return {
