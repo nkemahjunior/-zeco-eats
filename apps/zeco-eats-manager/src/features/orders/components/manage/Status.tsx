@@ -1,13 +1,22 @@
+'use client'
 import RadioBtn from '@/shared/components/inputs/RadioBtn'
-import { StatusType } from '../../oderTypes'
+import {
+  RestaurantStatus,
+  RestaurantStatusModalName,
+} from '../../types/restaurantStatus/restaurantStatusTypes'
+import { useContext } from 'react'
+import {
+  RestaurantStatusModalStackContext,
+  RestaurantStatusProviderType,
+} from '../../context/modalStack/RestaurantStatusModalStackProvider'
 
 interface fnProps {
   icon: React.ReactNode
-  status: StatusType
+  status: RestaurantStatus
   desc: string
   id: string
-  activeStatus: StatusType
-  changeActiveStatus: (arg: StatusType) => void
+  // activeStatus: RestaurantStatus
+  // changeActiveStatus: (arg: RestaurantStatus) => void
 }
 
 export default function Status({
@@ -15,13 +24,29 @@ export default function Status({
   status,
   desc,
   id,
-  activeStatus,
-  changeActiveStatus,
+  // activeStatus,
+  // changeActiveStatus,
 }: fnProps) {
+  const { changeCurModal } = useContext(
+    RestaurantStatusModalStackContext
+  ) as RestaurantStatusProviderType
+
   return (
     <label
-      className={`flex items-center space-x-4 rounded-lg border border-solid p-4 ${activeStatus === status ? 'border-black' : 'border-backgroundBorder'}`}
-      onClick={() => changeActiveStatus(status)}
+      className={`flex cursor-pointer items-center space-x-4 rounded-lg border border-solid p-4 ${/*activeStatus === status ? 'border-black' : 'border-backgroundBorder'*/ ''}`}
+      onClick={() => {
+        const modalName: RestaurantStatusModalName =
+          status === 'open'
+            ? 'statusOpenContent1'
+            : status === 'busy'
+              ? 'statusBusyContent1'
+              : 'statusPausedContent1'
+        changeCurModal(modalName)
+      }}
+      // onClick={() => {
+      //   open
+      //   //changeActiveStatus(status)
+      // }}
       htmlFor={id}
     >
       <span className="inline-block w-[10%]">{icon}</span>

@@ -8,6 +8,7 @@ import ModalProvider from '@/shared/context/modal/ModalProvider'
 import Modal from '@/shared/components/modal/Modal'
 import ModalUrl from '@/shared/components/modal/ModalUrl'
 import ModalUrlProvider from '@/shared/context/modal/ModalUrlProvider'
+import RestaurantStatusProvider from '@/shared/context/modal/RestaurantStatusProvider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,22 +36,24 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} text-sm antialiased`}
       >
-        <ModalProvider>
-          <ModalUrlProvider>
-            <Modal />
-            <ModalUrl />
-            <div className="sticky top-0 z-[10] w-full space-y-4 bg-white pl-6 pr-28 pt-4">
-              <TopNav />
-              <Line />
-            </div>
+        <RestaurantStatusProvider>
+          <ModalProvider>
+            <ModalUrlProvider>
+              <Modal />
+              <ModalUrl />
+              <div className="sticky top-0 z-[10] w-full space-y-4 bg-white pl-6 pr-28 pt-4">
+                <TopNav />
+                <Line />
+              </div>
 
-            <div className="top-0h border-backgroundBorder fixed left-0 z-[9] h-screen w-[15rem] overflow-y-auto border-r-2 border-solid pl-6 pt-[1rem]">
-              <SideNav />
-            </div>
+              <div className="top-0h border-backgroundBorder fixed left-0 z-[9] h-screen w-[15rem] overflow-y-auto border-r-2 border-solid pl-6 pt-[1rem]">
+                <SideNav />
+              </div>
 
-            <div className="ml-[15rem] px-28 pt-[1rem]">{children}</div>
-          </ModalUrlProvider>
-        </ModalProvider>
+              <div className="ml-[15rem] px-28 pt-[1rem]">{children}</div>
+            </ModalUrlProvider>
+          </ModalProvider>
+        </RestaurantStatusProvider>
       </body>
     </html>
   )

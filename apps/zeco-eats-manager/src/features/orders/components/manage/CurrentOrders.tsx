@@ -1,7 +1,7 @@
 'use client'
 import TextInputWithIcon from '@/shared/components/inputs/TextInputWithIcon'
 import Heading from '@/shared/components/text/Heading'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import StatusDot from './StatusDot'
 import { PiCaretUpDownFill } from 'react-icons/pi'
 import OrderPreparingCard from './OrderPreparingCard'
@@ -11,24 +11,27 @@ import {
   modalContextTypes,
 } from '@/shared/context/modal/ModalProvider'
 import ChangeRestaurantStatusModal from './ChangeRestaurantStatusModal'
-import { StatusType } from '../../oderTypes'
+import RestaurantStatusModalStackProvider from '../../context/modalStack/RestaurantStatusModalStackProvider'
+import {
+  RestaurantStatusContext,
+  RestaurantStatusContextTypes,
+} from '@/shared/context/modal/RestaurantStatusProvider'
 
 const fakeOrders = Array.from({ length: 5 })
 export default function CurrentOrders() {
-  const [status, setStatus] = useState<StatusType>('open')
+  const { restaurantStatus, busyTime } = useContext(
+    RestaurantStatusContext
+  ) as RestaurantStatusContextTypes
 
   const { openModal, modalProps } = useContext(
     ModalContext
   ) as modalContextTypes
 
-  const updateStatus = (newStatus: StatusType) => setStatus(newStatus)
-
   const changeRestaurantStatus = () => {
     openModal(
-      <ChangeRestaurantStatusModal
-        updateStatus={updateStatus}
-        status={status}
-      />,
+      <RestaurantStatusModalStackProvider>
+        <ChangeRestaurantStatusModal />
+      </RestaurantStatusModalStackProvider>,
       {
         ...modalProps,
         height: 'h-[55%]',
@@ -50,8 +53,9 @@ export default function CurrentOrders() {
               className="bg-background hover:bg-backgroundShade2 flex h-[2.5rem] items-center justify-evenly gap-x-2 rounded-xl px-2"
               onClick={changeRestaurantStatus}
             >
-              <StatusDot status={status} />
-              <span>{status.toUpperCase()}</span>
+              <StatusDot status={restaurantStatus} />
+              <span>{restaurantStatus.toUpperCase()}</span>
+              <span>{restaurantStatus === 'busy' && busyTime}</span>
               <span>
                 <PiCaretUpDownFill />
               </span>
