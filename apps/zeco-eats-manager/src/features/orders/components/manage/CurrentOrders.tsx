@@ -10,45 +10,25 @@ import {
   ModalContext,
   modalContextTypes,
 } from '@/shared/context/modal/ModalProvider'
-import Status from './Status'
-import { GoIssueOpened } from 'react-icons/go'
-import { MdOutlineEventBusy } from 'react-icons/md'
-import { IoPauseSharp } from 'react-icons/io5'
-import CloseBtn from '@/shared/components/modal/CloseBtn'
+import ChangeRestaurantStatusModal from './ChangeRestaurantStatusModal'
+import { StatusType } from '../../oderTypes'
 
 const fakeOrders = Array.from({ length: 5 })
 export default function CurrentOrders() {
-  const [status, setStatus] = useState<'open' | 'busy' | 'paused'>('open')
+  const [status, setStatus] = useState<StatusType>('open')
+
   const { openModal, modalProps } = useContext(
     ModalContext
   ) as modalContextTypes
 
+  const updateStatus = (newStatus: StatusType) => setStatus(newStatus)
+
   const changeRestaurantStatus = () => {
     openModal(
-      <div className="h-full space-y-8 p-6">
-        <div className="flex items-center gap-x-16">
-          <CloseBtn />
-          <Heading className="text-center" text="Store status" />
-        </div>
-        <Status
-          icon={<GoIssueOpened size={20} />}
-          id="selectStatus"
-          status="Open"
-          desc="Allow your restaurant to be open to customers"
-        />
-        <Status
-          icon={<MdOutlineEventBusy size={20} />}
-          id="selectStatus"
-          status="Busy"
-          desc="Add more time to the standard ready time for your dishes"
-        />
-        <Status
-          icon={<IoPauseSharp size={20} />}
-          id="selectStatus"
-          status="Pause"
-          desc="Your restaurant will be unavailable to customers"
-        />
-      </div>,
+      <ChangeRestaurantStatusModal
+        updateStatus={updateStatus}
+        status={status}
+      />,
       {
         ...modalProps,
         height: 'h-[55%]',
