@@ -1,4 +1,4 @@
-export default function RadioBtn({ id }: { id: string }) {
+export default function RadioBtn({ id, name }: { id: string; name: string }) {
   return (
     <div
       // htmlFor={id}
@@ -6,6 +6,7 @@ export default function RadioBtn({ id }: { id: string }) {
     >
       <input
         id={id}
+        name={name}
         type="radio"
         className="border-secondary h-full w-full cursor-pointer appearance-none rounded-full border-2 border-solid bg-white transition-colors duration-300 checked:h-3 checked:w-3"
       />

@@ -19,9 +19,10 @@ export default function Status({
   changeActiveStatus,
 }: fnProps) {
   return (
-    <div
+    <label
       className={`flex items-center space-x-4 rounded-lg border border-solid p-4 ${activeStatus === status ? 'border-black' : 'border-backgroundBorder'}`}
       onClick={() => changeActiveStatus(status)}
+      htmlFor={id}
     >
       <span className="inline-block w-[10%]">{icon}</span>
 
@@ -31,8 +32,8 @@ export default function Status({
       </div>
 
       <span className="inline-block w-[10%]">
-        <RadioBtn id={id} />
+        <RadioBtn id={id} name="selectStatus" />
       </span>
-    </div>
+    </label>
   )
 }
