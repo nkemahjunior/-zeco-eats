@@ -1,4 +1,4 @@
-import MarketingNav from '@/features/marketing/MarketingNav'
+import MarketingNav from '@/features/marketing/components/MarketingNav'
 
 export default function MarketingLayout({
   children,
