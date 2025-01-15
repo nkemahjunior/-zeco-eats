@@ -7,7 +7,7 @@ import { useState } from 'react'
 import RatingCard from './RatingCard'
 import { LayoutGroup } from 'motion/react'
 
-const ratingLinesNums = Array.from({ length: 5 }, (_, i) => i + 1)
+const ratingLinesNums = [5, 4, 3, 2, 1]
 const fakeArr = Array.from({ length: 5 })
 export default function Reviews() {
   const [selectedRating, setSelectedRating] = useState('1+ stars')
