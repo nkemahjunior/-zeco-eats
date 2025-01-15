@@ -45,12 +45,12 @@ const fakeOrders = {
   ],
 }
 
-export default function OrderReadyCard() {
+export default function OrderHistoryCard() {
   const { openModal, modalProps } = useContext(
     ModalContext
   ) as modalContextTypes
 
-  const viewOrderDetails = () => {
+  const viewOrderHistoryDetails = () => {
     openModal(
       //Todo extract to component
       <div className="grid h-full grid-cols-[65fr,35fr] gap-x-4 p-4">
@@ -112,8 +112,9 @@ export default function OrderReadyCard() {
         </div>
 
         <div className="space-y-6 rounded-lg p-4">
-          <Heading2 text="Ready in 10 min" />
-          <div className="border-backgroundBorder h-[15rem] rounded-md border border-solid p-2">
+          <div className="space-y-2">
+            <p className="font-medium"> Delivery driver</p>
+
             <div className="flex space-x-2">
               <ImageContainer
                 imageAlt="picture of driver name"
@@ -122,14 +123,14 @@ export default function OrderReadyCard() {
                 height="h-10"
                 width="w-10"
               />
-              <div className="flex flex-col space-y-1">
-                <span className="font-medium">Riso Dan</span>
-                <span className="text-textTint block">Arriving in 12 min</span>
-              </div>
+
+              <span className="font-medium">Riso Dan</span>
             </div>
           </div>
+
           <div>
-            <Button px="w-full">Ready</Button>
+            <p className="font-medium"> Delivery date</p>
+            <p className="text-textTint"> 12 January 2024, 9:00 AM</p>
           </div>
         </div>
       </div>,
@@ -144,29 +145,26 @@ export default function OrderReadyCard() {
 
   return (
     <div
-      className="border-backgroundBorderBorder flex cursor-pointer items-center justify-between rounded-lg border border-solid bg-stone-50 p-4"
-      onClick={viewOrderDetails}
+      className="border-backgroundBorder hover:bg-backgroundShade1 flex cursor-pointer items-center justify-between rounded-lg border border-solid px-5 py-3 transition-colors duration-300"
+      onClick={viewOrderHistoryDetails}
     >
-      <div className="flex flex-col justify-center">
-        <span className="block">Driver&apos;s Name</span>
-        <div className="text-textTint space-x-1">
-          <span className="inline-block">00012</span>
-          <span className="inline-block">&middot;</span>
-          <span className="inline-block">2 items</span>
-        </div>
-      </div>
-      <div className="flex items-center gap-x-3">
-        <div>
-          <span className="text-primary block">Arriving now</span>
-          <span className="text-textTint block">Handoff order</span>
-        </div>
+      <div className="flex space-x-2">
         <ImageContainer
-          imageAlt="picture of driver name"
+          imageAlt="picture of customer ---"
           src="/devImages/pic.avif"
           roundedCorners="rounded-full"
           height="h-10"
           width="w-10"
         />
+        <div className="flex flex-col space-y-1">
+          <span className="font-medium">Lauren T</span>
+          <span className="text-textTint block">000002</span>
+        </div>
+      </div>
+
+      <div className="flex flex-col space-y-1">
+        <span className="font-medium">Delivered</span>
+        <span className="text-textTint block">55£</span>
       </div>
     </div>
   )

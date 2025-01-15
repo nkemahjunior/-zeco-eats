@@ -56,7 +56,6 @@ export default function CustomSelect({
     function detectClickOutside(e: MouseEvent) {
       if (ref.current && open && !ref.current.contains(e.target as Node)) {
         setOpen(false)
-        console.log('clicked outside')
       }
     }
     document.addEventListener('mousedown', detectClickOutside)
