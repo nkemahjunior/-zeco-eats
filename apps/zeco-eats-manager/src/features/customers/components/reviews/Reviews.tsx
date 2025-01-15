@@ -5,6 +5,7 @@ import RatingLine from './RatingLine'
 import CustomSelect from '@/shared/components/inputs/CustomSelect'
 import { useState } from 'react'
 import RatingCard from './RatingCard'
+import { LayoutGroup } from 'motion/react'
 
 const ratingLinesNums = Array.from({ length: 5 }, (_, i) => i + 1)
 const fakeArr = Array.from({ length: 5 })
@@ -68,9 +69,12 @@ export default function Reviews() {
       </div>
 
       <div className="w-[60%] space-y-6">
-        {fakeArr.map((_, i) => (
-          <RatingCard key={i} rating={i} />
-        ))}
+        <LayoutGroup>
+          {' '}
+          {fakeArr.map((_, i) => (
+            <RatingCard key={i} rating={i} />
+          ))}
+        </LayoutGroup>
       </div>
     </div>
   )

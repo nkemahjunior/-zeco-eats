@@ -4,7 +4,7 @@ import ImageContainer from '@/shared/components/image/ImageContainer'
 import Rating from '@/shared/components/ratings/Rating'
 import { clipText } from '@/shared/utils/clipText'
 import { useState } from 'react'
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 
 const text =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, incidunt omnis doloremque neque maiores perferendis quas eveniet laudantium inventore molestiae. two three four five six seven eight nine ten eleven twelve thirteen fourtheen Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, incidunt omnis doloremque neque maiores perferendis quas eveniet laudantium inventore molestiae. two three four five six seven eight nine ten eleven twelve thirteen fourtheen Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, incidunt omnis doloremque neque maiores perferendis quas eveniet laudantium inventore molestiae. two three four five six seven eight nine ten eleven twelve thirteen fourtheen'
@@ -18,7 +18,11 @@ export default function RatingCard({ rating }: { rating: number }) {
       layout
       transition={{ duration: 0.3 }}
     >
-      <div className="space-y-4">
+      <motion.div
+        className="space-y-4"
+        layout="position"
+        transition={{ duration: 0.3 }}
+      >
         <div className="flex items-center gap-x-4">
           <ImageContainer
             imageAlt="picture of customer ---"
@@ -33,29 +37,36 @@ export default function RatingCard({ rating }: { rating: number }) {
           <Rating rating={rating} />
           <span className="text-textTint">53 people liked</span>
         </div>
+      </motion.div>
 
-        <div
-          className="cursor-pointer"
-          onClick={() => setExpand((prev) => !prev)}
-        >
-          {expand ? text : clipText(text, 220)}
-        </div>
+      <motion.div
+        initial={{ opacity: 1 }}
+        animate={{
+          opacity: expand ? [0, 1] : 1,
+        }}
+        transition={{
+          opacity: { duration: 0.5, ease: 'linear' },
+        }}
+        className="cursor-pointer"
+        onClick={() => setExpand((prev) => !prev)}
+      >
+        {expand ? text : clipText(text, 220)}
+      </motion.div>
 
-        <div className="space-y-4">
-          <textarea
-            className="border-backgroundBorder h-20 w-full resize-none rounded-lg border border-solid px-4 py-4"
-            placeholder="reply"
-          />
-          <div className="flex items-center justify-end">
-            <Button
-              color="bg-secondary"
-              hoverColor="hover:bg-secondaryTint"
-              textColor="text-white"
-              px="px-16"
-            >
-              Reply
-            </Button>
-          </div>
+      <div className="space-y-4">
+        <textarea
+          className="border-backgroundBorder h-20 w-full resize-none rounded-lg border border-solid px-4 py-4"
+          placeholder="reply"
+        />
+        <div className="flex items-center justify-end">
+          <Button
+            color="bg-secondary"
+            hoverColor="hover:bg-secondaryTint"
+            textColor="text-white"
+            px="px-16"
+          >
+            Reply
+          </Button>
         </div>
       </div>
     </motion.div>
