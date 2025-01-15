@@ -9,6 +9,10 @@ export default function BusyTimer({ busyTime }: { busyTime: number }) {
   })
 
   useEffect(() => {
+    setTime({ min: busyTime, sec: 59 })
+  }, [busyTime])
+
+  useEffect(() => {
     const intervalId = setInterval(() => {
       setTime((prevTime) => {
         if (prevTime.sec === 0) {
