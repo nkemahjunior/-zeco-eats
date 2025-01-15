@@ -4,13 +4,29 @@ import ImageContainer from '@/shared/components/image/ImageContainer'
 import Rating from '@/shared/components/ratings/Rating'
 import { clipText } from '@/shared/utils/clipText'
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { motion } from 'motion/react'
 
 const text =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, incidunt omnis doloremque neque maiores perferendis quas eveniet laudantium inventore molestiae. two three four five six seven eight nine ten eleven twelve thirteen fourtheen Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, incidunt omnis doloremque neque maiores perferendis quas eveniet laudantium inventore molestiae. two three four five six seven eight nine ten eleven twelve thirteen fourtheen Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, incidunt omnis doloremque neque maiores perferendis quas eveniet laudantium inventore molestiae. two three four five six seven eight nine ten eleven twelve thirteen fourtheen'
 
+const opacityVariants = {
+  visible: {
+    opacity: [0, 1],
+    transition: {
+      opacity: { duration: 0.5, ease: 'linear' },
+    },
+  },
+  hidden: {
+    opacity: 1,
+    transition: {
+      opacity: { duration: 0.5, ease: 'linear' },
+    },
+  },
+}
+
 export default function RatingCard({ rating }: { rating: number }) {
-  const [expand, setExpand] = useState(false)
+  const [expandReview, setExpandReview] = useState(false)
+  const [expandReply, setExpandReply] = useState(false)
 
   return (
     <motion.div
@@ -40,17 +56,24 @@ export default function RatingCard({ rating }: { rating: number }) {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 1 }}
-        animate={{
-          opacity: expand ? [0, 1] : 1,
-        }}
-        transition={{
-          opacity: { duration: 0.5, ease: 'linear' },
-        }}
+        initial="hidden"
+        animate={expandReview ? 'visible' : 'hidden'}
+        variants={opacityVariants}
         className="cursor-pointer"
-        onClick={() => setExpand((prev) => !prev)}
+        onClick={() => setExpandReview((prev) => !prev)}
       >
-        {expand ? text : clipText(text, 220)}
+        {expandReview ? text : clipText(text, 220)}
+      </motion.div>
+
+      <motion.div
+        initial="hidden"
+        animate={expandReply ? 'visible' : 'hidden'}
+        variants={opacityVariants}
+        className="cursor-pointer space-y-2"
+        onClick={() => setExpandReply((prev) => !prev)}
+      >
+        <p className="font-medium">Your reply</p>
+        <p>{expandReply ? text : clipText(text, 220)}</p>
       </motion.div>
 
       <div className="space-y-4">
