@@ -8,6 +8,9 @@ import { PiCaretUpDownFill } from 'react-icons/pi'
 interface fnProps {
   data: string[]
   onchange: (arg: string) => void
+  width?: string
+  height?: string
+  className?: string
   //children: React.ReactNode
 }
 
@@ -31,7 +34,13 @@ const dropdownVariants: Variants = {
     },
   },
 }
-export default function CustomSelect({ data, onchange }: fnProps) {
+export default function CustomSelect({
+  data,
+  onchange,
+  width = 'w-[15rem]',
+  height = 'h-[12rem]',
+  className,
+}: fnProps) {
   const [open, setOpen] = useState(false)
   const [inputValue, setInputValue] = useState(data.at(0) || '')
   const ref = useRef<HTMLDivElement | null>(null)
@@ -75,7 +84,7 @@ export default function CustomSelect({ data, onchange }: fnProps) {
       // onBlur={handleBlur}
     >
       <ButtonWithIcon
-        width="w-[15rem]"
+        width={width}
         justify="justify-between"
         font="text-sm"
         className="border-backgroundBorder border-2 border-solid px-6"
@@ -99,7 +108,7 @@ export default function CustomSelect({ data, onchange }: fnProps) {
           <motion.ul
             aria-label="Dropdown menu"
             role="listbox"
-            className="bg-background shadow-secondary/10 absolute left-0 top-12 flex h-[12rem] w-[15rem] flex-col items-center gap-y-3 overflow-y-auto rounded-lg py-2 shadow-lg"
+            className={`bg-background shadow-secondary/10 absolute left-0 top-12 flex ${height} ${width} ${className} flex-col items-center gap-y-3 overflow-y-auto rounded-lg py-2 shadow-lg`}
             variants={dropdownVariants}
             initial="initial"
             animate="animate"
