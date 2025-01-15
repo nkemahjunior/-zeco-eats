@@ -5,8 +5,13 @@ import { AnimatePresence, motion, Variants } from 'framer-motion'
 import ButtonWithIcon from '../button/ButtonWithIcon'
 import { PiCaretUpDownFill } from 'react-icons/pi'
 
+interface dataItem {
+  display: string
+  value: string
+}
+
 interface fnProps {
-  data: { display: string; value: string }[]
+  data: dataItem[]
   onchange: (arg: string) => void
   width?: string
   height?: string
@@ -48,10 +53,10 @@ export default function CustomSelect({
   const [inputValue, setInputValue] = useState(data.at(0)?.display || '')
   const ref = useRef<HTMLDivElement | null>(null)
 
-  const updateInputValue = (value: string | undefined) => {
-    if (!value) return
-    setInputValue(value)
-    onchange(value)
+  const updateInputValue = (data: dataItem | undefined) => {
+    if (!data) return
+    setInputValue(data.display)
+    onchange(data.value)
     setOpen(false)
   }
 
@@ -125,7 +130,7 @@ export default function CustomSelect({
                 className="cursor-pointer hover:bg-gray-100"
                 onClick={(e: React.MouseEvent<HTMLSpanElement>) =>
                   //updateInputValue(e.currentTarget.dataset.value)
-                  updateInputValue(el.value)
+                  updateInputValue(el)
                 }
               >
                 {el.display}
