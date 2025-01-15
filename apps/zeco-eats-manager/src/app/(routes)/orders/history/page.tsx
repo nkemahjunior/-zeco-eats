@@ -1,9 +1,9 @@
-import OrdersUi from '@/features/orders/ui/OrdersUi'
+import OrderHistoryUi from '@/features/orders/ui/OrderHistoryUi'
 
 export default function Page() {
   return (
     <>
-      <OrdersUi />
+      <OrderHistoryUi />
     </>
   )
 }
