@@ -6,11 +6,12 @@ import ButtonWithIcon from '../button/ButtonWithIcon'
 import { PiCaretUpDownFill } from 'react-icons/pi'
 
 interface fnProps {
-  data: string[]
+  data: { display: string; value: string }[]
   onchange: (arg: string) => void
   width?: string
   height?: string
   className?: string
+  inheritWidth?: boolean
   //children: React.ReactNode
 }
 
@@ -38,11 +39,13 @@ export default function CustomSelect({
   data,
   onchange,
   width = 'w-[15rem]',
+  inheritWidth,
   height = 'h-[12rem]',
   className,
 }: fnProps) {
   const [open, setOpen] = useState(false)
-  const [inputValue, setInputValue] = useState(data.at(0) || '')
+  // const [inputValue, setInputValue] = useState(data.at(0) || '')
+  const [inputValue, setInputValue] = useState(data.at(0)?.display || '')
   const ref = useRef<HTMLDivElement | null>(null)
 
   const updateInputValue = (value: string | undefined) => {
@@ -76,7 +79,7 @@ export default function CustomSelect({
 
   return (
     <div
-      className="relative z-10 w-fit"
+      className={`relative z-10 w-fit ${inheritWidth ? 'w-full' : 'w-fit'}`}
       ref={ref}
 
       // tabIndex={0}
@@ -116,15 +119,16 @@ export default function CustomSelect({
             {data.map((el, i) => (
               <li
                 key={i}
-                data-value={el}
+                //data-value={el}
                 role="option"
-                aria-selected={inputValue === el}
+                aria-selected={inputValue === el.display}
                 className="cursor-pointer hover:bg-gray-100"
                 onClick={(e: React.MouseEvent<HTMLSpanElement>) =>
-                  updateInputValue(e.currentTarget.dataset.value)
+                  //updateInputValue(e.currentTarget.dataset.value)
+                  updateInputValue(el.value)
                 }
               >
-                {el}
+                {el.display}
               </li>
             ))}
           </motion.ul>

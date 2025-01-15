@@ -44,7 +44,7 @@ export default function QuickActions() {
           <span>
             <ClockIcon width={25} height={25} />
           </span>
-          <span>Edit store hours</span>
+          <span>Edit menu schedule</span>
           <span>
             <MdKeyboardArrowRight />
           </span>

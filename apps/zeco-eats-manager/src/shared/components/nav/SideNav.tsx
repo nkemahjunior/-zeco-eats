@@ -10,12 +10,13 @@ import {
   MdOutlineRestaurantMenu,
   MdOutlineSettings,
 } from 'react-icons/md'
+import { HiOutlineSpeakerphone } from 'react-icons/hi'
 
 export default function SideNav() {
   return (
     <div className="h-full w-full space-y-4 border-0 border-solid border-red-700">
       <NavLink icon={<IoHomeOutline />} text="Home" />
-      <NavLink icon={<IoStorefrontOutline />} text="Stores" />
+      {/* <NavLink icon={<IoStorefrontOutline />} text="Stores" /> */}
       <NavLink
         nestedLinks={{
           icon: <IoBasketOutline />,
@@ -30,6 +31,15 @@ export default function SideNav() {
           icon: <BsBarChartLine />,
           mainLink: 'Performance',
           childLink: ['Sales'],
+          initialPaddingLeft: 0,
+          paddingIncrement: 1.5,
+        }}
+      />
+      <NavLink
+        nestedLinks={{
+          icon: <HiOutlineSpeakerphone />,
+          mainLink: 'Marketing',
+          childLink: ['Boast store', 'Run Ad'],
           initialPaddingLeft: 0,
           paddingIncrement: 1.5,
         }}
@@ -57,7 +67,7 @@ export default function SideNav() {
           paddingIncrement: 1.5,
         }}
       />
-      <NavLink
+      {/* <NavLink
         nestedLinks={{
           //display all on one page , use #links
           icon: <MdOutlineSettings />,
@@ -66,7 +76,7 @@ export default function SideNav() {
           initialPaddingLeft: 0,
           paddingIncrement: 1.5,
         }}
-      />
+      /> */}
     </div>
   )
 }
