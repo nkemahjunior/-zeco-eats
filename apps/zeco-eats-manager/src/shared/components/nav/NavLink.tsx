@@ -73,7 +73,7 @@ export default function NavLink({ icon, text, nestedLinks, href }: fnProps) {
     )
   ) : (
     <Link
-      href={href ? `/${href}` : `/${textToLink(text || '')}`}
+      href={href ? `${href}` : `/${textToLink(text || '')}`}
       className="hover:bg-background flex items-center space-x-2 rounded-lg py-2 text-base font-medium"
     >
       <span>{icon}</span>

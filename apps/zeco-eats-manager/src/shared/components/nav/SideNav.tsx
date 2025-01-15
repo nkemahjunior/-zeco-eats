@@ -35,7 +35,11 @@ export default function SideNav() {
           paddingIncrement: 1.5,
         }}
       />
-      <NavLink icon={<HiOutlineSpeakerphone />} text="Marketing" />
+      <NavLink
+        icon={<HiOutlineSpeakerphone />}
+        text="Marketing"
+        href="/marketing/performance"
+      />
       <NavLink
         nestedLinks={{
           icon: <BsPeople />,
