@@ -35,15 +35,7 @@ export default function SideNav() {
           paddingIncrement: 1.5,
         }}
       />
-      <NavLink
-        nestedLinks={{
-          icon: <HiOutlineSpeakerphone />,
-          mainLink: 'Marketing',
-          childLink: ['Boast store', 'Run Ad'],
-          initialPaddingLeft: 0,
-          paddingIncrement: 1.5,
-        }}
-      />
+      <NavLink icon={<HiOutlineSpeakerphone />} text="Marketing" />
       <NavLink
         nestedLinks={{
           icon: <BsPeople />,
