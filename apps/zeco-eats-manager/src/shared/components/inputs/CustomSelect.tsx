@@ -84,7 +84,7 @@ export default function CustomSelect({
 
   return (
     <div
-      className={`relative z-10 w-fit ${inheritWidth ? 'w-full' : 'w-fit'}`}
+      className={`relative w-fit ${inheritWidth ? 'w-full' : 'w-fit'}`}
       ref={ref}
 
       // tabIndex={0}
@@ -94,7 +94,7 @@ export default function CustomSelect({
         width={width}
         justify="justify-between"
         font="text-sm"
-        className="border-backgroundBorder border-2 border-solid px-6"
+        className="border-backgroundBorder z-10 border-2 border-solid px-6"
         events={{ onClick: () => setOpen((v) => !v) }}
         ariaAttributes={{
           'aria-label': 'Toggle dropdown',
@@ -115,7 +115,7 @@ export default function CustomSelect({
           <motion.ul
             aria-label="Dropdown menu"
             role="listbox"
-            className={`bg-background shadow-secondary/10 absolute left-0 top-12 flex ${height} ${width} ${className} flex-col items-center gap-y-3 overflow-y-auto rounded-lg py-2 shadow-lg`}
+            className={`bg-background shadow-secondary/10 absolute left-0 top-12 flex ${height} ${width} ${className} z-[11] flex-col items-center gap-y-3 overflow-y-auto rounded-lg py-2 shadow-lg`}
             variants={dropdownVariants}
             initial="initial"
             animate="animate"
