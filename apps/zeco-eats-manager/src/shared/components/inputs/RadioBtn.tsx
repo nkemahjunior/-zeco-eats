@@ -1,4 +1,10 @@
-export default function RadioBtn({ id, name }: { id: string; name: string }) {
+export default function RadioBtn({
+  id = 'noID',
+  name,
+}: {
+  id?: string
+  name: string
+}) {
   return (
     <div
       // htmlFor={id}
