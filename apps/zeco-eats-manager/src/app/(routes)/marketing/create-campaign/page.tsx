@@ -1,3 +1,9 @@
+import CreateCampaignUi from '@/features/marketing/ui/CreateCampaignUi'
+
 export default function Page() {
-  return <div>create campaign</div>
+  return (
+    <>
+      <CreateCampaignUi />
+    </>
+  )
 }
