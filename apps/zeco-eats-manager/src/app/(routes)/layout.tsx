@@ -50,7 +50,7 @@ export default function RootLayout({
                 <SideNav />
               </div>
 
-              <div className="pb-[3rem ml-[15rem] px-28 pt-[1rem]">
+              <div className="ml-[15rem] px-28 pb-[3rem] pt-[1rem]">
                 {children}
               </div>
             </ModalUrlProvider>
