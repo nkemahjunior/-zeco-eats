@@ -1,15 +1,7 @@
 import NavLink from './NavLink'
-import {
-  IoBasketOutline,
-  IoHomeOutline,
-  IoStorefrontOutline,
-} from 'react-icons/io5'
+import { IoBasketOutline, IoHomeOutline } from 'react-icons/io5'
 import { BsBarChartLine, BsPeople } from 'react-icons/bs'
-import {
-  MdOutlinePayments,
-  MdOutlineRestaurantMenu,
-  MdOutlineSettings,
-} from 'react-icons/md'
+import { MdOutlinePayments, MdOutlineRestaurantMenu } from 'react-icons/md'
 import { HiOutlineSpeakerphone } from 'react-icons/hi'
 
 export default function SideNav() {
@@ -26,7 +18,7 @@ export default function SideNav() {
           paddingIncrement: 1.5,
         }}
       />
-      <NavLink
+      {/* <NavLink display it on home
         nestedLinks={{
           icon: <BsBarChartLine />,
           mainLink: 'Performance',
@@ -34,7 +26,7 @@ export default function SideNav() {
           initialPaddingLeft: 0,
           paddingIncrement: 1.5,
         }}
-      />
+      /> */}
       <NavLink
         icon={<HiOutlineSpeakerphone />}
         text="Marketing"
