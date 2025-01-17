@@ -50,7 +50,7 @@ export default function SideNav() {
         nestedLinks={{
           icon: <MdOutlinePayments />,
           mainLink: 'Payments',
-          childLink: ['Payouts'],
+          childLink: ['Payouts', 'Banking'],
           initialPaddingLeft: 0,
           paddingIncrement: 1.5,
         }}
