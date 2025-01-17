@@ -11,7 +11,7 @@ interface fnProps {
 export default function CampaignModalRow({ data, addToSelectedItem }: fnProps) {
   const [selectedItem, setSelectedItem] = useState(data.at(0))
   return (
-    <div className="flex">
+    <div className="flex items-center">
       <div className="w-full p-4">
         <div className="w-[90%]">
           {' '}

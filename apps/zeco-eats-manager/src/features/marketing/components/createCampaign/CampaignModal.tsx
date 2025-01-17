@@ -5,6 +5,11 @@ import { useState } from 'react'
 import CampaignModalRow from './CampaignModalRow'
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
 import { BiPlus } from 'react-icons/bi'
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
+import RadioBtn from '@/shared/components/inputs/RadioBtn'
+import { AnimatePresence, motion } from 'motion/react'
+import Accordion from '@/shared/components/Accordion'
+import Button from '@/shared/components/button/Button'
 
 export type Item = {
   id: number
@@ -26,12 +31,12 @@ export default function CampaignModal() {
     { id: 8, item: 'item 8', price: '£10' },
   ]
 
-  const [selectedRows, setSelectedRows] = useState([1])
+  const [selectedRows, setSelectedRows] = useState([{ id: Math.random() }])
   const [selectedItems, setSelectedItems] = useState<fakeItem | []>([])
   const [filteredData, setFilteredData] = useState(data)
 
   const addNewRow = () => {
-    setSelectedRows((prev) => [...prev, 1])
+    setSelectedRows((prev) => [...prev, { id: Math.random() }])
   }
 
   const addToSelectedItems = (newItem: Item) => {
@@ -83,6 +88,37 @@ export default function CampaignModal() {
         </ButtonWithIcon>
         <p>{selectedItems.length + 1} selected</p>
       </div>
+
+      <Accordion title="Audience">
+        <div className="text-textTint space-y-3">
+          <p>select which customers will see this ad</p>
+          <div className="space-y-3">
+            <div className="flex items-center gap-x-3">
+              <RadioBtn name="whoviewad" />
+              <p>New customers</p>
+            </div>
+            <div className="flex items-center gap-x-3">
+              <RadioBtn name="whoviewad" />
+              <p>All customers</p>
+            </div>
+          </div>
+        </div>
+      </Accordion>
+
+      {/* <Accordion title="Weekly spend">
+        <div className="text-textTint space-y-3">
+          <p>Set max spend</p>
+        </div>
+      </Accordion> */}
+
+      <Button
+        px="w-full"
+        color="bg-secondary"
+        hoverColor="hover:bg-secondaryTint"
+        textColor="text-white"
+      >
+        Create offer
+      </Button>
     </div>
   )
 }
