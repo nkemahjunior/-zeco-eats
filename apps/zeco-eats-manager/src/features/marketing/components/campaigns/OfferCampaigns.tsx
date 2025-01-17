@@ -18,7 +18,7 @@ export default function OfferCampaigns() {
           <span className="border-backgroundBorder inline-block w-full border border-y border-l border-solid p-4 font-medium">
             sales
           </span>
-          <span className="border-backgroundBorder inline-block w-full border border-y border-l border-solid p-4 font-medium">
+          <span className="border-backgroundBorder inline-block w-full rounded-tr-md border border-y border-l border-solid p-4 font-medium">
             Actions
           </span>
         </div>
