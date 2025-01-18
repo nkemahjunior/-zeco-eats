@@ -51,9 +51,9 @@ export default function OffersPerformance() {
       <div className="space-y-4">
         <Heading text="Offers" />
         <div className="border-backgroundBorder rounded-lg border border-solid">
-          <div className="border-backgroundBorder flex items-center justify-between border-b border-solid px-16 py-6">
+          <div className="border-backgroundBorder flex items-center justify-between border-b border-solid px-2 py-6 md:px-16">
             <div className="flex flex-col justify-center gap-y-1">
-              <span>Ad campaign</span>
+              <span>Offer campaign</span>
               <div className="flex items-center gap-x-1">
                 <CampaignStatusDot status="running" />
                 <span className="text-textTint">Running</span>
@@ -79,20 +79,24 @@ export default function OffersPerformance() {
             </div>
           </div>
 
-          <div className="grid h-[20rem] grid-cols-[40fr,60fr] gap-x-16 px-16 py-4">
+          <div className="grid h-[25rem] grid-cols-1 gap-x-4 gap-y-8 px-2 py-8 md:px-16 lg:h-[20rem] lg:grid-cols-[40fr,60fr] xl:gap-x-16">
             <div className="flex h-full items-center justify-between">
               <div className="space-y-2">
-                <span className="block text-6xl font-medium">100£</span>
+                <span className="block text-xl font-medium lg:text-2xl xl:text-6xl">
+                  100£
+                </span>
                 <span className="text-textTint block">Sales from ads</span>
               </div>
-              <div>
-                <span className="block text-6xl font-medium">60£</span>
+              <div className="space-y-2">
+                <span className="block text-xl font-medium lg:text-2xl xl:text-6xl">
+                  60£
+                </span>
                 <span className="text-textTint block">Money spent on ads</span>
               </div>
             </div>
 
             <div className="h-full w-full space-y-6">
-              <p className="text-center font-medium"> Sales from offers</p>
+              <p className="text-center font-medium"> Impressions</p>
               <ResponsiveContainer width="100%" height="80%">
                 <LineChart
                   data={testData}
