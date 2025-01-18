@@ -15,7 +15,7 @@ export default function Home() {
 
       <SummaryTopics />
 
-      <div className="grid grid-cols-[40fr,40fr,20fr] gap-x-20 border-0 border-solid border-green-700">
+      {/* <div className="grid grid-cols-[40fr,40fr,20fr] gap-x-20 border-0 border-solid border-green-700">
         <SalesChart />
         <SalesChart />
         <QuickActions />
@@ -23,9 +23,8 @@ export default function Home() {
 
       <div className="grid grid-cols-2 gap-x-16">
         <SalesChart />
-        {/* <SalesChart /> */}
         <BestSellingItemsTable />
-      </div>
+      </div> */}
     </div>
   )
 }
