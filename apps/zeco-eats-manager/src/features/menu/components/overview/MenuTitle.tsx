@@ -27,7 +27,7 @@ export default function MenuTitle() {
           value={headingText}
           onChange={handleInputChange}
           onBlur={handleBlur}
-          className="bg-background w-[20%] rounded-lg text-xl font-bold lg:text-2xl"
+          className="bg-background w-[60%] rounded-lg text-xl font-bold lg:text-2xl xl:w-[20%]"
           autoFocus
         />
       ) : (
@@ -36,6 +36,7 @@ export default function MenuTitle() {
           className="border-2 border-solid border-transparent"
         />
       )}
+
       {isEditing ? (
         <button className="bg-background rounded-lg px-4 py-2">Save</button>
       ) : (

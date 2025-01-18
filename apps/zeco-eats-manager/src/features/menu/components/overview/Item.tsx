@@ -31,7 +31,7 @@ export default function Item({ el }: fnProps) {
         <ItemTitle item={`Fried Rice${el}`} />
       </div>
 
-      <div className="bg-background rounded-lg px-8 py-4">£1200</div>
+      <div className="bg-background rounded-lg px-6 py-4 md:px-8">£1200</div>
     </div>
   )
 }

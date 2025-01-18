@@ -37,7 +37,7 @@ export default function SortableCategory({ el }: fnProps) {
       childPos: 'justify-end',
       showCloseBtn: false,
       height: ' h-full',
-      width: 'w-[20%]',
+      width: 'w-full md:w-[60%] xl:w-[40%] 2xl:w-[20%]',
     })
   }
 
@@ -58,7 +58,7 @@ export default function SortableCategory({ el }: fnProps) {
 
   return (
     <div
-      className={`border-backgroundBorder touch-none space-y-4 rounded-xl border-[1px] border-solid p-8`}
+      className={`border-backgroundBorder touch-none space-y-4 rounded-xl border-[1px] border-solid p-4 md:p-8`}
       ref={setNodeRef}
       style={{
         transform: CSS.Transform.toString(transform),
@@ -67,7 +67,7 @@ export default function SortableCategory({ el }: fnProps) {
       onClick={openModalAndSetContent}
     >
       <div className="flex items-center justify-between">
-        <div className="flex w-full items-center space-x-4">
+        <div className="flex w-full items-center space-x-2 md:space-x-4">
           <DragBtn attributes={attributes} listeners={listeners} />
           <CategoryTitle category="Special Dishes" itemsQty={3} i={el} />
         </div>
