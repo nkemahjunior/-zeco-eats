@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Line from '../Line'
 import SideNav from './SideNav'
 import TopNav from './TopNav'
 import { useDeviceType } from '@/shared/hooks/useDeviceType'
