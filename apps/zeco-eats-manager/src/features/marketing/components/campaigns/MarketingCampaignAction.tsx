@@ -3,7 +3,7 @@ import CustomSelect from '@/shared/components/inputs/CustomSelect'
 
 export default function MarketingCampaignAction() {
   return (
-    <div className="w-[90%]">
+    <div className="w-full lg:w-[90%]">
       <CustomSelect
         inheritWidth
         width="w-full"
