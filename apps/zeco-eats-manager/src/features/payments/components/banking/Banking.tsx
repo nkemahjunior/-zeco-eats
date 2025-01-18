@@ -15,27 +15,34 @@ export default function Banking() {
 
   const editPaymentFrequency = () => {
     openModal(
-      <div>
+      <div className="space-y-6">
         <Heading2 text="Payment frequency" />
-        <div>
+        <div className="flex items-center gap-x-2">
           <RadioBtn name="payfre" />
           <span>Daily</span>
         </div>
-        <div>
+        <div className="flex items-center gap-x-2">
           <RadioBtn name="payfre" />
           <span>Weekly</span>
         </div>
         <div className="flex items-center justify-end gap-x-4">
-          <Button events={{ onClick: closeModal }}>Cancel</Button>
-          <Button color="bg-secondary" hoverColor="hover:bg-secondaryTint">
+          <Button px="px-6" events={{ onClick: closeModal }}>
+            Cancel
+          </Button>
+          <Button
+            px="px-8"
+            color="bg-secondary"
+            hoverColor="hover:bg-secondaryTint"
+            textColor="text-white"
+          >
             Save
           </Button>
         </div>
       </div>,
       {
         ...modalProps,
-        height: 'h-[45%]',
-        width: 'w-[40%]',
+        height: 'h-fit',
+        width: 'w-[25%]',
         className: ' rounded-lg overflow-hidden  p-8',
       }
     )
@@ -50,9 +57,9 @@ export default function Banking() {
         <Heading2 text="Banking details" />
         <Button>Add</Button>
       </div>
-      <div>
+      <div className="space-y-4">
         <Heading2 text="Payment frequency" />
-        <div className="bg-backgroundShade2 flex items-center justify-between p-4">
+        <div className="bg-background flex items-center justify-between p-2">
           <span>weekly</span>
           <Button events={{ onClick: editPaymentFrequency }}>Edit</Button>
         </div>
