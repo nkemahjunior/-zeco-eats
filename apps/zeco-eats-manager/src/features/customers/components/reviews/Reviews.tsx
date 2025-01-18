@@ -15,7 +15,7 @@ export default function Reviews() {
     <div className="space-y-10">
       <Heading text="Customer reviews" />
 
-      <div className="flex w-[40%] items-center gap-x-8">
+      <div className="flex w-full items-center gap-x-8 xl:w-[40%]">
         <div className="flex flex-col justify-center space-y-1">
           <span className="inline-block text-5xl">4.3</span>
           <Rating rating={4.3} />
@@ -28,7 +28,7 @@ export default function Reviews() {
         </div>
       </div>
 
-      <div className="flex w-[60%] items-center gap-x-12">
+      <div className="flex w-full flex-col items-center gap-x-2 gap-y-4 md:flex-row md:gap-x-12 xl:w-[60%]">
         <CustomSelect
           inheritWidth
           width="w-full"
@@ -68,7 +68,7 @@ export default function Reviews() {
         />
       </div>
 
-      <div className="w-[60%] space-y-6">
+      <div className="w-full space-y-6 xl:w-[60%]">
         <LayoutGroup>
           {' '}
           {fakeArr.map((_, i) => (
