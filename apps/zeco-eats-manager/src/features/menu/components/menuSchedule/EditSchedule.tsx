@@ -59,8 +59,8 @@ export default function EditSchedule() {
         <div>
           <Button events={{ onClick: saveSchedule }}> Save</Button>
         </div>
-        <div className="border-backgroundBorder h-[20rem] w-full space-y-8 overflow-hidden rounded-xl border border-solid px-8 py-8">
-          <div className="flex items-center">
+        <div className="border-backgroundBorder h-[26rem] w-full space-y-8 overflow-x-auto rounded-xl border border-solid px-8 py-8 md:h-[20rem]">
+          <div className="flex w-[50rem] items-center md:w-full">
             {daysOfTheWeek.map((el, i) => (
               <span
                 key={i}
@@ -72,7 +72,7 @@ export default function EditSchedule() {
             ))}
           </div>
           <div>
-            <div className="flex items-center">
+            <div className="flex w-[50rem] items-center md:w-full">
               {createHours().map((hour, i) => (
                 <div
                   key={i}
@@ -87,7 +87,7 @@ export default function EditSchedule() {
                 </div>
               ))}
             </div>
-            <div className="flex items-center">
+            <div className="flex w-[50rem] items-center md:w-full">
               {createHours().map((el, i) => (
                 <div key={i} className="-ml-2 w-full">
                   <span>{el === 0 ? 12 : convert24HrTo12Hr(el)}</span>
@@ -100,7 +100,7 @@ export default function EditSchedule() {
           </div>
         </div>
       </div>
-      <div className="-mt-[6.5rem] flex items-center gap-x-20 px-8">
+      <div className="-mt-[12rem] flex w-full flex-wrap items-center gap-x-20 px-8 md:-mt-[6.5rem]">
         <div className="space-y-4">
           <Heading2 text="Start time" />
           <CustomSelect
