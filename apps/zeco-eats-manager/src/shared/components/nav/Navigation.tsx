@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import SideNav from './SideNav'
 import TopNav from './TopNav'
-import { useDeviceType } from '@/shared/hooks/useDeviceType'
 import { AnimatePresence, motion } from 'motion/react'
 
 export default function Navigation() {
