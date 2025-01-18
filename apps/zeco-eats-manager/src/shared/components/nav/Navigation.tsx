@@ -8,7 +8,6 @@ import { AnimatePresence, motion } from 'motion/react'
 
 export default function Navigation() {
   const [showSideNavMobile, setShowSideNavMobile] = useState(false)
-  const { isMobile, isLaptop, isDesktop } = useDeviceType()
 
   const toggleNavMobile = () => setShowSideNavMobile((v) => !v)
   return (
@@ -21,9 +20,9 @@ export default function Navigation() {
       </div>
 
       <AnimatePresence>
-        {isMobile && showSideNavMobile && (
+        {showSideNavMobile && (
           <div
-            className="fixed h-full w-full bg-black/10"
+            className="fixed h-full w-full bg-black/10 lg:hidden"
             onClick={() => setShowSideNavMobile(false)}
           >
             <motion.div
@@ -38,13 +37,11 @@ export default function Navigation() {
             </motion.div>
           </div>
         )}
-
-        {(isLaptop || isDesktop) && (
-          <div className="top-0h border-backgroundBorder fixed left-0 z-[9] h-screen w-[15rem] overflow-y-auto border-r-2 border-solid pl-6 pt-[1rem]">
-            <SideNav />
-          </div>
-        )}
       </AnimatePresence>
+
+      <div className="top-0h border-backgroundBorder fixed left-0 z-[9] hidden h-screen w-[15rem] overflow-y-auto border-r-2 border-solid pl-6 pt-[1rem] lg:block">
+        <SideNav />
+      </div>
     </nav>
   )
 }
