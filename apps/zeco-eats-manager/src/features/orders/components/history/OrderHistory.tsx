@@ -1,5 +1,4 @@
 'use client'
-import ImageContainer from '@/shared/components/image/ImageContainer'
 import CustomSelect from '@/shared/components/inputs/CustomSelect'
 import TextInputWithIcon from '@/shared/components/inputs/TextInputWithIcon'
 import { useState } from 'react'
@@ -12,21 +11,34 @@ export default function OrderHistory() {
 
   return (
     <div className="w-full space-y-8">
-      <div className="flex w-[65%] items-center gap-x-8">
-        <CustomSelect
-          data={['All orders', 'Today']}
-          onchange={(arg: string) => setOrderFilter(arg)}
-          height="h-[5rem]"
-        />
-        <CustomSelect
-          data={['Delivered', 'Failed Delivery', 'Delivery in progress']}
-          onchange={(arg: string) => setOrderFilter(arg)} //correct this
-          height="h-[7rem]"
-        />
+      <div className="w-full items-center space-y-4 xl:flex xl:w-[65%] xl:gap-x-8 xl:space-y-0">
+        <div className="flex w-full items-center gap-x-4">
+          <CustomSelect
+            inheritWidth
+            width="w-full"
+            data={[
+              { display: 'All orders', value: 'allOders' },
+              { display: 'Today', value: 'today' },
+            ]}
+            onchange={(arg: string) => setOrderFilter(arg)}
+            height="h-[5rem]"
+          />
+          <CustomSelect
+            inheritWidth
+            width="w-full"
+            data={[
+              { display: 'Delivered', value: 'delivered' },
+              { display: 'Failed Delivery', value: 'fDelivery' },
+              { display: 'Delivery in progress', value: 'dip' },
+            ]}
+            onchange={(arg: string) => setOrderFilter(arg)} //correct this
+            height="h-[7rem]"
+          />
+        </div>
         <TextInputWithIcon id="searchOrderHistory" />
       </div>
 
-      <div className="w-[65%] space-y-4">
+      <div className="w-full space-y-4 xl:w-[65%]">
         {fakeOrderHistory.map((el, i) => (
           <OrderHistoryCard key={i} />
         ))}

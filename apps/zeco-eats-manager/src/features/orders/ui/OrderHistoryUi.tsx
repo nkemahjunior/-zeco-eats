@@ -3,7 +3,7 @@ import OrderHistory from '../components/history/OrderHistory'
 
 export default function OrderHistoryUi() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 xl:space-y-8">
       <Heading text="Order History" />
       <OrderHistory />
     </div>

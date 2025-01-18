@@ -35,9 +35,9 @@ export default function CurrentOrders() {
       </RestaurantStatusModalStackProvider>,
       {
         ...modalProps,
-        height: 'h-full md:h-[45%] xl:h-[60%] 2xl:h-[55%]',
-        width: 'w-full md:w-[50%] xl:w-[35%] 2xl:w-[25%]',
-        className: ' md:rounded-lg overflow-hidden',
+        height: 'h-[70%] md:h-[45%] xl:h-[60%] 2xl:h-[55%]',
+        width: 'w-[94%] md:w-[50%] xl:w-[35%] 2xl:w-[25%]',
+        className: ' rounded-lg overflow-hidden',
       }
     )
   }

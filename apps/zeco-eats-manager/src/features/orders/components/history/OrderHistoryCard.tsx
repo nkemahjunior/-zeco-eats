@@ -53,8 +53,8 @@ export default function OrderHistoryCard() {
   const viewOrderHistoryDetails = () => {
     openModal(
       //Todo extract to component
-      <div className="grid h-full grid-cols-[65fr,35fr] gap-x-4 p-4">
-        <div className="space-y-6 overflow-y-auto rounded-lg p-4">
+      <div className="grid h-full grid-cols-1 gap-x-4 overflow-y-auto p-4 md:grid-cols-[65fr,35fr]">
+        <div className="space-y-6 rounded-lg p-4 md:overflow-y-auto">
           <div className="flex items-center gap-x-16">
             <CloseBtn />
             <Heading className="text-center" text={`CustomerName . 00002`} />
@@ -136,8 +136,8 @@ export default function OrderHistoryCard() {
       </div>,
       {
         ...modalProps,
-        height: 'h-[55%]',
-        width: 'w-[40%]',
+        height: 'h-[70%]   xl:h-[55%]',
+        width: 'w-[94%] md:w-[80%] lg:w-[75%] xl:w-[55%] 2xl:w-[40%]',
         className: ' rounded-lg overflow-hidden',
       }
     )
