@@ -28,12 +28,15 @@ export default function ScheduleChart() {
         <LinkButton href="schedule/edit">Edit Schedule</LinkButton>
       </div>
       <div className="w-full overflow-x-auto">
-        <table className="w-full">
-          <thead className="">
-            <tr className="">
+        <table className="w-[80rem] xl:w-full">
+          <thead className="w-full">
+            <tr className="w-full">
               <th className=""></th>
               {createHours().map((el, i) => (
-                <th key={i} className={`text-textTint pb-2 text-start`}>
+                <th
+                  key={i}
+                  className={`text-textTint w-[50rem] pb-2 text-start`}
+                >
                   <div className="-ml-4">
                     <span>{el === 0 ? 12 : convert24HrTo12Hr(el)}</span>
                     <span className="pl-1">
