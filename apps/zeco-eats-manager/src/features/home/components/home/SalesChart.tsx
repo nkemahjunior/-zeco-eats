@@ -60,7 +60,7 @@ export default function SalesChart() {
         </div>
       </div>
 
-      <div className="border-backgroundBorder h-[25rem] w-full rounded-xl border-[1px] border-solid p-2 2xl:p-8">
+      <div className="border-backgroundBorder h-[18rem] w-full rounded-xl border-[1px] border-solid p-2 xl:h-[25rem] 2xl:p-8">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={testData}
@@ -109,7 +109,7 @@ export default function SalesChart() {
             />
             <Legend
               verticalAlign="top"
-              height={36}
+              height={60}
               iconType="rect"
               iconSize={10}
             />
