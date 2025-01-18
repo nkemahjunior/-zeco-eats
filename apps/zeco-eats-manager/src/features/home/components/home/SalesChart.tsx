@@ -60,7 +60,7 @@ export default function SalesChart() {
         </div>
       </div>
 
-      <div className="border-backgroundBorder h-[25rem] w-full rounded-xl border-[1px] border-solid p-8">
+      <div className="border-backgroundBorder h-[25rem] w-full rounded-xl border-[1px] border-solid p-2 2xl:p-8">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={testData}

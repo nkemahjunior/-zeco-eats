@@ -57,16 +57,22 @@ export default function BestSellingItemsTable() {
           <p>Last 30 days</p>
         </div>
       </div>
-      <div className="border-backgroundBorder w-full rounded-xl border-[1px] border-solid py-4">
+      <div className="border-backgroundBorder w-full overflow-x-auto rounded-xl border-[1px] border-solid py-4">
         <table className="w-full table-auto">
           <thead className="">
             <tr>
-              <th className="text-textTint px-4 py-4 text-start">Item</th>
-              <th className="text-textTint px-4 py-4 text-start">
+              <th className="text-textTint text-nowrap px-4 py-4 text-start">
+                Item
+              </th>
+              <th className="text-textTint text-nowrap px-4 py-4 text-start">
                 Quantity sold
               </th>
-              <th className="text-textTint px-4 py-4 text-start">Sales</th>
-              <th className="text-textTint px-4 py-4 text-start">Reviews</th>
+              <th className="text-textTint text-nowrap px-4 py-4 text-start">
+                Sales
+              </th>
+              <th className="text-textTint text-nowrap px-4 py-4 text-start">
+                Reviews
+              </th>
             </tr>
           </thead>
 
@@ -74,7 +80,7 @@ export default function BestSellingItemsTable() {
             {bestSellingItemsData.map((el, i) => (
               <tr
                 key={i}
-                className="border-backgroundBorder hover:bg-background cursor-pointer border-b-[0px] border-solid transition-colors duration-300 last:border-b-0"
+                className="border-backgroundBorder hover:bg-background cursor-pointer text-nowrap border-b-[0px] border-solid transition-colors duration-300 last:border-b-0"
               >
                 <td className="flex items-center space-x-4 px-4 py-4 text-start">
                   <span className="relative block h-8 w-8 overflow-hidden rounded-full">

@@ -15,16 +15,18 @@ export default function Home() {
 
       <SummaryTopics />
 
-      {/* <div className="grid grid-cols-[40fr,40fr,20fr] gap-x-20 border-0 border-solid border-green-700">
+      <div className="grid grid-cols-1 gap-y-6 border-0 border-solid border-green-700 xl:grid-cols-[40fr,40fr,20fr] xl:gap-x-6 xl:gap-y-0 2xl:gap-x-20">
         <SalesChart />
         <SalesChart />
-        <QuickActions />
+        <div className="hidden xl:block">
+          <QuickActions />
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-16">
+      <div className="grid grid-cols-1 gap-x-16 gap-y-6 xl:grid-cols-2">
         <SalesChart />
         <BestSellingItemsTable />
-      </div> */}
+      </div>
     </div>
   )
 }
