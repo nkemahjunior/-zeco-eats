@@ -12,7 +12,10 @@ export default function QuickActions() {
       <Heading2 text="Quick Actions" />
 
       <div className="flex-col justify-center space-y-6">
-        <Link href="" className="flex items-center space-x-2">
+        <Link
+          href="/marketing/create-campaign"
+          className="flex items-center space-x-2"
+        >
           <span>
             <Boost width={25} height={25} />
           </span>
@@ -22,7 +25,10 @@ export default function QuickActions() {
           </span>
         </Link>
 
-        <Link href="" className="flex items-center space-x-2">
+        <Link
+          href="/marketing/create-campaign"
+          className="flex items-center space-x-2"
+        >
           <span>
             <Promotion width={25} height={25} />
           </span>
@@ -31,7 +37,7 @@ export default function QuickActions() {
             <MdKeyboardArrowRight />
           </span>
         </Link>
-        <Link href="" className="flex items-center space-x-2">
+        <Link href="/menu/items" className="flex items-center space-x-2">
           <span>
             <EditItem width={25} height={25} />
           </span>
@@ -40,7 +46,10 @@ export default function QuickActions() {
             <MdKeyboardArrowRight />
           </span>
         </Link>
-        <Link href="" className="flex items-center space-x-2">
+        <Link
+          href="/menu/schedule/edit"
+          className="flex items-center space-x-2"
+        >
           <span>
             <ClockIcon width={25} height={25} />
           </span>
