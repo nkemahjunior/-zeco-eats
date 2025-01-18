@@ -191,7 +191,7 @@ export default function Payouts() {
       </div>
 
       <div className="space-y-8">
-        <Heading2 text="Pay Breakdown" />
+        <Heading2 text="Daily payouts" />
         <div className="flex items-center gap-x-12">
           {Array.from({ length: 5 }).map((_, i) => (
             <DailyPayoutCard key={i} />
