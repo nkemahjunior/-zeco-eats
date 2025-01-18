@@ -11,7 +11,7 @@ export default function Navigation() {
   const toggleNavMobile = () => setShowSideNavMobile((v) => !v)
   return (
     <nav>
-      <div className="border-backgroundBorder sticky top-0 z-[10] w-full border-b border-solid bg-white py-3 lg:py-4 lg:pl-6 lg:pr-28">
+      <div className="border-backgroundBorder w-full border-b border-solid bg-white px-4 py-3 md:px-16 lg:px-8 lg:pl-6 2xl:lg:pr-28 2xl:lg:py-4">
         <TopNav
           toggleNavMobile={toggleNavMobile}
           showNavMobile={showSideNavMobile}
@@ -38,7 +38,7 @@ export default function Navigation() {
         )}
       </AnimatePresence>
 
-      <div className="top-0h border-backgroundBorder fixed left-0 z-[9] hidden h-screen w-[15rem] overflow-y-auto border-r-2 border-solid pl-6 pt-[1rem] lg:block">
+      <div className="top-0h border-backgroundBorder fixed left-0 z-[9] hidden h-screen overflow-y-auto border-r-2 border-solid pl-6 pt-[1rem] lg:block lg:w-[12rem] 2xl:w-[15rem]">
         <SideNav />
       </div>
     </nav>
