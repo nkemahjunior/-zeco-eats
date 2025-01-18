@@ -91,8 +91,9 @@ export default function Categories() {
       </div>,
       {
         ...modalProps,
-        height: ' min-h-[60%] max-h-[90%] ',
-        width: 'w-[30%]',
+        height: 'min-h-[60%] max-h-[90%] ',
+        width: ' w-[94%] md:w-[55%]  xl:w-[30%]',
+        className: ' rounded-lg md:rounded-none',
       }
     )
   }
@@ -115,11 +116,11 @@ export default function Categories() {
           <span> {toggleAddNewCategory ? 'Save' : 'New category'}</span>
         </ButtonWithIcon>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col-reverse items-center gap-x-4 gap-y-4 md:flex-row lg:justify-between">
         <TextInputWithIcon
           id="searchCategory"
           placeHolder="Search"
-          width="w-[20%]"
+          width="w-full lg:w-[60%] xl:w-[40%] 2xl:w-[20%]"
           className="placeholder:text-black"
           events={{ onChange: searchForCategories }}
         />
@@ -128,7 +129,7 @@ export default function Categories() {
           <TextInput
             id="addNewCategory"
             placeHolder="Add new category"
-            width="w-[15%]"
+            width="w-full lg:w-[60%] xl:w-[40%] 2xl:w-[15%]"
           />
         )}
       </div>
