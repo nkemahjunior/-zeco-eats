@@ -41,18 +41,18 @@ export default function RootLayout({
             <ModalUrlProvider>
               <Modal />
               <ModalUrl />
-              <div className="sticky top-0 z-[10] w-full space-y-4 bg-white pl-6 pr-28 pt-4">
+              <div className="sticky top-0 z-[10] w-full space-y-2 border-2 border-solid border-blue-700 bg-white pt-2 lg:space-y-4 lg:pl-6 lg:pr-28 lg:pt-4">
                 <TopNav />
                 <Line />
               </div>
 
-              <div className="top-0h border-backgroundBorder fixed left-0 z-[9] h-screen w-[15rem] overflow-y-auto border-r-2 border-solid pl-6 pt-[1rem]">
+              {/* <div className="top-0h border-backgroundBorder fixed left-0 z-[9] h-screen w-[15rem] overflow-y-auto border-r-2 border-solid pl-6 pt-[1rem]">
                 <SideNav />
-              </div>
+              </div> */}
 
-              <div className="ml-[15rem] px-28 pb-[3rem] pt-[1rem]">
+              {/* <div className="ml-[15rem] px-28 pb-[3rem] pt-[1rem]">
                 {children}
-              </div>
+              </div> */}
             </ModalUrlProvider>
           </ModalProvider>
         </RestaurantStatusProvider>
