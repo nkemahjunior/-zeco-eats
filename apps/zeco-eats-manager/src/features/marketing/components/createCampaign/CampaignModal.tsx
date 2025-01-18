@@ -5,9 +5,7 @@ import { useState } from 'react'
 import CampaignModalRow from './CampaignModalRow'
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
 import { BiPlus } from 'react-icons/bi'
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import RadioBtn from '@/shared/components/inputs/RadioBtn'
-import { AnimatePresence, motion } from 'motion/react'
 import Accordion from '@/shared/components/Accordion'
 import Button from '@/shared/components/button/Button'
 
@@ -45,7 +43,7 @@ export default function CampaignModal() {
   }
 
   return (
-    <div className="h-full w-full space-y-8 p-8">
+    <div className="h-full w-full space-y-8 overflow-y-auto px-4 py-4 md:p-8">
       <div className="flex items-center gap-x-12">
         <CloseBtn />
         <div className=" ">
@@ -56,13 +54,14 @@ export default function CampaignModal() {
 
       <div className="w-full">
         <div className="flex w-full items-center">
-          <span className="border-backgroundBorder block w-full rounded-tl-md border border-solid p-4">
+          <span className="border-backgroundBorder block w-full rounded-tl-md border border-solid p-2 md:p-4">
             Item
           </span>
-          <span className="border-backgroundBorder block w-full rounded-tr-md border border-solid p-4">
+          <span className="border-backgroundBorder block w-full rounded-tr-md border border-solid p-2 md:p-4">
             Price
           </span>
         </div>
+
         <div className="border-backgroundBorder w-full rounded-b-md border border-solid">
           {selectedRows.map((_, i) => (
             <CampaignModalRow
@@ -73,6 +72,7 @@ export default function CampaignModal() {
           ))}
         </div>
       </div>
+
       <div className="flex w-full items-center justify-between">
         <ButtonWithIcon
           width="w-fit"

@@ -32,7 +32,7 @@ const offers = [
 
 export default function CreateCampaign() {
   return (
-    <div className="space-y-16">
+    <div className="space-y-8 md:space-y-16">
       <div className="space-y-8">
         <Heading text="Ad campaign" />
 
@@ -54,7 +54,7 @@ export default function CreateCampaign() {
 
       <div className="space-y-8">
         <Heading text="Offers" />
-        <div className="flex items-center gap-x-8">
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-8">
           {offers.map((el, i) => (
             <CampaignCard key={i} title={el.name} icon={el.icon}>
               <div className="space-y-4n">

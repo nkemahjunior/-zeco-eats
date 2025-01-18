@@ -22,13 +22,19 @@ export default function CampaignCard({ title, children, icon }: fnProps) {
     openModal(<CampaignModal />, {
       ...modalProps,
       height: 'h-[75%]',
-      width: 'w-[30%]',
+      width: 'w-[94%] md:w-[80%] lg:w-[75%] xl:w-[55%] 2xl:w-[30%]',
       className: ' rounded-lg overflow-hidden',
     })
   }
+  /**      {
+        ...modalProps,
+        height: 'h-[70%]   xl:h-[55%]',
+        width: 'w-[94%] md:w-[80%] lg:w-[75%] xl:w-[55%] 2xl:w-[40%]',
+        className: ' rounded-lg overflow-hidden',
+      } */
   return (
     <div
-      className="border-backgroundBorder hover:bg-background w-[18rem] cursor-pointer space-y-4 rounded-lg border border-solid p-8 shadow-xl shadow-black/10 transition-colors duration-300"
+      className="border-backgroundBorder hover:bg-background w-[18rem] cursor-pointer space-y-4 rounded-lg border border-solid p-8 shadow-md shadow-black/10 transition-colors duration-300 md:shadow-xl"
       onClick={openCampaign}
     >
       <div className="flex items-center justify-between">
