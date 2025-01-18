@@ -1,15 +1,14 @@
-'use client'
-import { useState } from 'react'
 import Logo from '../Logo'
 
-export default function TopNav() {
-  const [showNavMobile, setShowNavMobile] = useState(false)
-  const toggleNavMobile = (show: boolean) => {
-    setShowNavMobile(show)
-  }
-
+export default function TopNav({
+  toggleNavMobile,
+  showNavMobile,
+}: {
+  toggleNavMobile: () => void
+  showNavMobile: boolean
+}) {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex w-full items-center justify-between">
       <Logo />
 
       <div>
@@ -18,10 +17,10 @@ export default function TopNav() {
         </button>
       </div>
 
-      <div className="border-backgroundBorder flex h-full w-16 items-center justify-center border-solid lg:hidden">
+      <div className="flex h-full w-fit items-center justify-center lg:hidden">
         <div
           className="z-20 cursor-pointer space-y-2"
-          onClick={() => toggleNavMobile(!showNavMobile)}
+          onClick={toggleNavMobile}
         >
           <span
             className={`block h-0.5 w-6 bg-black transition-transform duration-300 ${showNavMobile ? 'translate-y-2.5 rotate-45' : ''}`}

@@ -9,6 +9,7 @@ import Modal from '@/shared/components/modal/Modal'
 import ModalUrl from '@/shared/components/modal/ModalUrl'
 import ModalUrlProvider from '@/shared/context/modal/ModalUrlProvider'
 import RestaurantStatusProvider from '@/shared/context/modal/RestaurantStatusProvider'
+import Navigation from '@/shared/components/nav/Navigation'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -41,14 +42,7 @@ export default function RootLayout({
             <ModalUrlProvider>
               <Modal />
               <ModalUrl />
-              <div className="sticky top-0 z-[10] w-full space-y-2 border-2 border-solid border-blue-700 bg-white pt-2 lg:space-y-4 lg:pl-6 lg:pr-28 lg:pt-4">
-                <TopNav />
-                <Line />
-              </div>
-
-              {/* <div className="top-0h border-backgroundBorder fixed left-0 z-[9] h-screen w-[15rem] overflow-y-auto border-r-2 border-solid pl-6 pt-[1rem]">
-                <SideNav />
-              </div> */}
+              <Navigation />
 
               {/* <div className="ml-[15rem] px-28 pb-[3rem] pt-[1rem]">
                 {children}
