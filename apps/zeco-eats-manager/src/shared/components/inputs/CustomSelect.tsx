@@ -84,7 +84,7 @@ export default function CustomSelect({
 
   return (
     <div
-      className={`relative w-fit ${inheritWidth ? 'w-full' : 'w-fit'}`}
+      className={`relative ${inheritWidth ? 'w-full' : 'w-fit'}`}
       ref={ref}
 
       // tabIndex={0}
