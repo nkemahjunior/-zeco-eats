@@ -4,3 +4,11 @@ export interface PayoutStat {
   trendChange: string
   amount: string
 }
+
+interface PayoutInfo {
+  infoName: string
+  totalPrice: string
+  subInfo: [] | PayoutInfos
+}
+
+export type PayoutInfos = PayoutInfo[]
