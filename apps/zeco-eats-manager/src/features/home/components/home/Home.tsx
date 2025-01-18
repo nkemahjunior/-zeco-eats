@@ -7,7 +7,7 @@ import BestSellingItemsTable from './BestSellingItemsTable'
 
 export default function Home() {
   return (
-    <div className="space-y-8 pb-16">
+    <div className="space-y-8">
       <div>
         <p className="text-textTint">Good morning Chris</p>
         <Heading2 text="Today's Summary" />
