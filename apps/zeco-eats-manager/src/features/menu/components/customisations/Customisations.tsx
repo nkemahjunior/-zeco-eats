@@ -55,7 +55,7 @@ export default function Customisations() {
       </div>,
       {
         ...modalProps,
-        width: 'w-[20%]',
+        width: 'w-[94%] md:w-[55%] lg:w-[45%] xl:w-[35%]  2xl:w-[20%]',
         height: 'h-fit',
       }
     )
@@ -69,9 +69,12 @@ export default function Customisations() {
   return (
     <div className="w-full">
       <div className="w-full space-y-8">
-        <TextInputWithIcon id="searchCustomisation" width="w-[40%]" />
+        <TextInputWithIcon
+          id="searchCustomisation"
+          width=" w-full md:w-[60%] xl:w-[40%]"
+        />
         <ButtonWithIcon
-          width="w-[17%]"
+          width="w-full md:w-[30%] 2xl:w-[17%]"
           events={{ onClick: createCustomisation }}
         >
           <span>

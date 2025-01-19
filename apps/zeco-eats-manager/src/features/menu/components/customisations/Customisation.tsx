@@ -40,7 +40,7 @@ export default function Customisation() {
 
   return (
     <div
-      className="hover:bg-background border-backgroundBorder flex w-[40%] cursor-pointer items-center justify-between rounded-lg border border-solid px-4 py-2 transition-colors duration-300"
+      className="hover:bg-background border-backgroundBorder flex w-full cursor-pointer items-center justify-between rounded-lg border border-solid px-4 py-2 transition-colors duration-300 md:w-[60%] xl:w-[40%]"
       onClick={openCustomisation}
     >
       <div className="flex flex-col justify-center space-y-2">
