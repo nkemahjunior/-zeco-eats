@@ -57,7 +57,7 @@ export default function Items() {
       childPos: 'justify-end',
       showCloseBtn: false,
       height: ' h-full',
-      width: 'w-[20%]',
+      width: 'w-full md:w-[60%] lg:w-[45%] xl:w-[35%]  2xl:w-[20%]',
     })
   }
 
@@ -80,11 +80,11 @@ export default function Items() {
         </ButtonWithIcon>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col-reverse items-center gap-x-4 gap-y-4 md:flex-row lg:justify-between">
         <TextInputWithIcon
           id="searchItem"
           placeHolder="Search"
-          width="w-[20%]"
+          width="w-full lg:w-[60%] xl:w-[40%] 2xl:w-[20%]"
           className="placeholder:text-black"
           events={{ onChange: searchForItems }}
         />
@@ -93,49 +93,51 @@ export default function Items() {
           <TextInput
             id="addNewItem"
             placeHolder="Add new item"
-            width="w-[15%]"
+            width="w-full lg:w-[60%] xl:w-[40%] 2xl:w-[15%]"
           />
         )}
       </div>
 
-      <table className="w-full table-auto">
-        <thead className="">
-          <tr className="border-backgroundBorder border-b border-solid">
-            <th className="px-4 py-2 text-start">Photo</th>
-            <th className="px-4 py-2 text-start">Name</th>
-            <th className="px-4 py-2 text-start">Price</th>
-            <th className="px-4 py-2 text-start">Menu</th>
-            <th className="px-4 py-2 text-start">Category</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {searchItems.map((el, i) => (
-            <tr
-              key={i}
-              className="border-backgroundBorder hover:bg-background cursor-pointer transition-colors duration-300"
-              onClick={() => openCategory(el)}
-            >
-              <td className="px-4 py-4 text-start">
-                <ImageContainer
-                  src="/devImages/food1.webp"
-                  imageAlt=""
-                  height="h-[3.5rem]"
-                  width="w-[3.5rem]"
-                  roundedCorners="rounded-md"
-                />
-              </td>
-
-              <td className="px-4 py-4 text-start font-medium">{el.name}</td>
-
-              <td className="px-4 py-4 text-start">{el.price}</td>
-
-              <td className="px-4 py-4 text-start">{el.menu}</td>
-              <td className="px-4 py-4 text-start">{el.categories}</td>
+      <div className="overflow-x-auto">
+        <table className="w-full table-auto text-nowrap">
+          <thead className="">
+            <tr className="border-backgroundBorder border-b border-solid">
+              <th className="px-4 py-2 text-start">Photo</th>
+              <th className="px-4 py-2 text-start">Name</th>
+              <th className="px-4 py-2 text-start">Price</th>
+              <th className="px-4 py-2 text-start">Menu</th>
+              <th className="px-4 py-2 text-start">Category</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {searchItems.map((el, i) => (
+              <tr
+                key={i}
+                className="border-backgroundBorder hover:bg-background cursor-pointer transition-colors duration-300"
+                onClick={() => openCategory(el)}
+              >
+                <td className="px-4 py-4 text-start">
+                  <ImageContainer
+                    src="/devImages/food1.webp"
+                    imageAlt=""
+                    height="h-[3.5rem]"
+                    width="w-[3.5rem]"
+                    roundedCorners="rounded-md"
+                  />
+                </td>
+
+                <td className="px-4 py-4 text-start font-medium">{el.name}</td>
+
+                <td className="px-4 py-4 text-start">{el.price}</td>
+
+                <td className="px-4 py-4 text-start">{el.menu}</td>
+                <td className="px-4 py-4 text-start">{el.categories}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
