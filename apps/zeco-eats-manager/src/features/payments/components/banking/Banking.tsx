@@ -42,7 +42,7 @@ export default function Banking() {
       {
         ...modalProps,
         height: 'h-fit',
-        width: 'w-[25%]',
+        width: 'w-[94%] md:w-[55%] lg:w-[45%] xl:w-[35%]  w-[25%]',
         className: ' rounded-lg overflow-hidden  p-8',
       }
     )
