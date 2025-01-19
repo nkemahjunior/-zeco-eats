@@ -129,7 +129,7 @@ export default function Payouts() {
     openModal(<SelectPayoutRange />, {
       ...modalProps,
       height: 'h-fit',
-      width: 'w-fit',
+      width: 'w-[94%] md:w-fit',
       className: ' rounded-lg overflow-hidden  p-8',
     })
   }
@@ -167,7 +167,7 @@ export default function Payouts() {
         </ButtonWithIcon>
       </div>
 
-      <div className="flex gap-x-4">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4">
         {stats.map((el, i) => (
           <PayoutStatCard
             key={i}
@@ -192,7 +192,7 @@ export default function Payouts() {
 
       <div className="space-y-8">
         <Heading2 text="Daily payouts" />
-        <div className="flex items-center gap-x-12">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-4 md:grid-cols-3 xl:gap-x-12 2xl:grid-cols-5">
           {Array.from({ length: 5 }).map((_, i) => (
             <DailyPayoutCard key={i} />
           ))}
