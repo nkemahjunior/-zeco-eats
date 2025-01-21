@@ -1,6 +1,5 @@
 'use client'
 
-import {} from '@/shared/context/modal/ModalProvider'
 import {
   ModalUrlContext,
   modalUrlContextTypes,
