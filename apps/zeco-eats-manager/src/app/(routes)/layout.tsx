@@ -7,6 +7,7 @@ import ModalUrl from '@/shared/components/modal/ModalUrl'
 import ModalUrlProvider from '@/shared/context/modal/ModalUrlProvider'
 import RestaurantStatusProvider from '@/shared/context/modal/RestaurantStatusProvider'
 import Navigation from '@/shared/components/nav/Navigation'
+import { Suspense } from 'react'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -38,7 +39,9 @@ export default function RootLayout({
           <ModalProvider>
             <ModalUrlProvider>
               <Modal />
-              <ModalUrl />
+              <Suspense fallback={<div>Loading modal url...</div>}>
+                <ModalUrl />
+              </Suspense>
               <div className="sticky top-0 z-[10] w-full bg-white">
                 <Navigation />
               </div>
