@@ -22,7 +22,9 @@
     ],
     "types": ["jest", "node"],
     "paths": {
-      "@/*": ["apps/zeco-eats-manager/src/*"]
+      "@/*": ["apps/zeco-eats-manager/src/*"],
+      "@zeco-eats-lib/utils/server": ["libs/utils/src/server.ts"],
+      "@zeco-eats-lib/utils/client": ["libs/utils/src/index.ts"]
     }
   },
   "include": [
