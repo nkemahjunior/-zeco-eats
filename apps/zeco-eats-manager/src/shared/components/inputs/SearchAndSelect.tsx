@@ -61,7 +61,7 @@ export default function SearchAndSelect({
         height="h-12"
         attributes={{ value: value }}
         events={{
-          onChange: () => setValue(value),
+          onChange: (e) => setValue(e.currentTarget.value),
           onFocus: () => setOpen(true),
         }}
         id={id}
