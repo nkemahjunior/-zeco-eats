@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import TextInput from './TextInput'
 
-interface searchData {
+interface SearchData {
   display: string
   id: string
 }
@@ -11,7 +11,7 @@ interface fnProps {
   id: string
   getSelectedValue: (arg: string) => void
   placeholder?: string
-  data: searchData[]
+  data: SearchData[]
   top?: string
   height?: string
   width?: string
@@ -34,6 +34,7 @@ export default function SearchAndSelect({
 }: fnProps) {
   const [value, setValue] = useState('')
   const [open, setOpen] = useState(false)
+  const [filteredData, setFilteredData] = useState<SearchData[]>(data)
   const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -49,7 +50,15 @@ export default function SearchAndSelect({
     }
   }, [open, ref])
 
-  const select = (el: searchData) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value)
+    const filtered = data.filter((item) =>
+      item.display.toLowerCase().includes(e.currentTarget.value.toLowerCase())
+    )
+    setFilteredData(filtered)
+  }
+
+  const select = (el: SearchData) => {
     setValue(el.display)
     getSelectedValue(el.id)
     setOpen(false)
@@ -61,7 +70,7 @@ export default function SearchAndSelect({
         height="h-12"
         attributes={{ value: value }}
         events={{
-          onChange: (e) => setValue(e.currentTarget.value),
+          onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange(e),
           onFocus: () => setOpen(true),
         }}
         id={id}
@@ -72,7 +81,7 @@ export default function SearchAndSelect({
       <ul
         className={`absolute ${top} z-[11] ${height} ${width} ${className} space-y-2 overflow-y-auto ${rounded} bg-white p-4 ${shadow} ${open ? 'block' : 'hidden'} `}
       >
-        {data.map((el, i) => (
+        {filteredData.map((el, i) => (
           <li
             key={i}
             onClick={() => select(el)}
