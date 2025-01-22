@@ -4,7 +4,7 @@ import TextInput from './TextInput'
 
 interface SearchData {
   display: string
-  id: string
+  data: any
 }
 
 interface fnProps {
@@ -60,7 +60,7 @@ export default function SearchAndSelect({
 
   const select = (el: SearchData) => {
     setValue(el.display)
-    getSelectedValue(el.id)
+    getSelectedValue(el.display)
     setOpen(false)
   }
 
