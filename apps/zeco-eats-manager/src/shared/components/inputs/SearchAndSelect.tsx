@@ -1,15 +1,18 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import TextInput from './TextInput'
+import { useDetectClickOutside } from '@zeco-eats-lib/utils-client'
 
 interface SearchData {
   display: string
+  styleDisplay?: React.ReactNode
   data: any
 }
 
 interface fnProps {
   id: string
-  getSelectedValue: (arg: string) => void
+  getSelectedValue: (arg: any) => void
+  filterCallback: (filter: string) => void
   placeholder?: string
   data: SearchData[]
   top?: string
@@ -23,6 +26,7 @@ interface fnProps {
 export default function SearchAndSelect({
   id,
   getSelectedValue,
+  filterCallback,
   data,
   placeholder,
   top = 'top-14',
@@ -34,33 +38,19 @@ export default function SearchAndSelect({
 }: fnProps) {
   const [value, setValue] = useState('')
   const [open, setOpen] = useState(false)
-  const [filteredData, setFilteredData] = useState<SearchData[]>(data)
+  //const [filteredData, setFilteredData] = useState<SearchData[]>(data)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    function detectClickOutside(e: MouseEvent) {
-      if (ref.current && open && !ref.current.contains(e.target as Node)) {
-        setOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', detectClickOutside)
-
-    return () => {
-      document.removeEventListener('mousedown', detectClickOutside)
-    }
-  }, [open, ref])
+  useDetectClickOutside(ref, () => setOpen(false), open)
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
-    const filtered = data.filter((item) =>
-      item.display.toLowerCase().includes(e.currentTarget.value.toLowerCase())
-    )
-    setFilteredData(filtered)
+    filterCallback(e.currentTarget.value)
   }
 
   const select = (el: SearchData) => {
     setValue(el.display)
-    getSelectedValue(el.display)
+    getSelectedValue(el)
     setOpen(false)
   }
 
@@ -79,15 +69,15 @@ export default function SearchAndSelect({
       />
 
       <ul
-        className={`absolute ${top} z-[11] ${height} ${width} ${className} space-y-2 overflow-y-auto ${rounded} bg-white p-4 ${shadow} ${open ? 'block' : 'hidden'} `}
+        className={`absolute ${top} z-[11] ${height} ${width} ${className} space-y-2 overflow-y-auto ${rounded} bg-white py-4 ${shadow} ${open ? 'block' : 'hidden'} `}
       >
-        {filteredData.map((el, i) => (
+        {data.map((el, i) => (
           <li
             key={i}
             onClick={() => select(el)}
-            className="hover:bg-backgroundShade2 cursor-pointer px-2 py-2"
+            className="hover:bg-backgroundShade2 cursor-pointer px-4 py-2"
           >
-            {el.display}
+            {el.styleDisplay ? el.styleDisplay : el.display}
           </li>
         ))}
       </ul>
