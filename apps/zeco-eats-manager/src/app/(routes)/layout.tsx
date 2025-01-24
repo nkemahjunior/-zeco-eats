@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '../globals.css'
-import TanstackQueryProvider from '@/shared/context/TanstackQueryProvider'
+import TanstackQueryProvider from '@/shared/api/tanstackQuery/TanstackQueryProvider'
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
