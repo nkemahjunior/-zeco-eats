@@ -4,6 +4,7 @@
   "sourceRoot": "apps/zeco-eats-manager",
   "projectType": "application",
   "tags": [],
+  "implicitDependencies": ["utils"],
   "// targets": "to see all targets run: nx show project zeco-eats-manager --web",
   "targets": {}
 }
