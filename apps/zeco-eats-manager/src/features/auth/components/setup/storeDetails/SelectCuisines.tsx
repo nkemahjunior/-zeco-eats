@@ -1,10 +1,13 @@
 'use client'
-import { cuisines, useDetectClickOutside } from '@zeco-eats-lib/utils-client'
+import { cuisineOptions } from '@/shared/api/queries/options/cuisineOptions'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useDetectClickOutside } from '@zeco-eats-lib/utils-client'
 import { useRef, useState } from 'react'
 import { HiX } from 'react-icons/hi'
 import { IoSearchOutline } from 'react-icons/io5'
 
 export default function SelectCuisines() {
+  const { data: cuisines } = useSuspenseQuery(cuisineOptions)
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
   const [selectedItems, setSelectedItems] = useState<string[] | []>([])
@@ -42,7 +45,7 @@ export default function SelectCuisines() {
           {selectedItems.map((el, i) => (
             <div
               key={i}
-              className="border-backgroundBorder flex items-center gap-x-1 rounded-md border border-solid p-2"
+              className="border-backgroundBorder bg-backgroundShade2 flex items-center gap-x-1 rounded-md border border-solid p-2"
             >
               <span>{el}</span>
               <span className="cursor-pointer" onClick={() => removeItem(el)}>
@@ -58,9 +61,9 @@ export default function SelectCuisines() {
             <li
               key={i}
               className="hover:bg-background cursor-pointer px-4 py-2"
-              onClick={() => addToSelectedItems(el)}
+              onClick={() => addToSelectedItems(el.cuisine_name)}
             >
-              {el}
+              {el.cuisine_name}
             </li>
           ))}
         </ul>
