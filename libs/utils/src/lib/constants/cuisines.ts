@@ -1,0 +1,15 @@
+export const cuisines = [
+  'Breakfast',
+  'Lunch',
+  'Supper',
+  'Bakery',
+  'Family Meals',
+  'BBQ',
+  'Fast Food',
+  'Dessert',
+  'Vegan',
+  'Soup',
+  'Fruit Juice',
+  'Coffee',
+  'Snacks',
+]

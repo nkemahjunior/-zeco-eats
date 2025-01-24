@@ -3,3 +3,4 @@
 export * from './lib/supabase/client'
 export * from './lib/hooks/useDetectClickOutside'
 export * from './lib/hooks/useDebounce'
+export * from './lib/constants/cuisines'
