@@ -1,4 +1,5 @@
 import Logo from '../Logo'
+import SignoutBtn from './SigninOutBtn'
 
 export default function TopNav({
   toggleNavMobile,
@@ -11,10 +12,8 @@ export default function TopNav({
     <div className="flex w-full items-center justify-between">
       <Logo />
 
-      <div>
-        <button className="bg-background hover:bg-backgroundShade2 hidden rounded-lg px-6 py-3 font-medium transition-colors duration-300 lg:block">
-          <span>Logout</span>
-        </button>
+      <div className="hidden lg:block">
+        <SignoutBtn />
       </div>
 
       <div className="flex h-full w-fit items-center justify-center lg:hidden">
