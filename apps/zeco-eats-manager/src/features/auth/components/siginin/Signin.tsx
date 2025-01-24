@@ -1,9 +1,29 @@
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
 import Heading from '@/shared/components/text/Heading'
-import { signIn } from '@zeco-eats-lib/utils-server'
+import { createSupabaseServer } from '@zeco-eats-lib/utils-server'
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
 import { FcGoogle } from 'react-icons/fc'
 
 export default function Signin() {
+  const signIn = async () => {
+    'use server'
+    const origin = (await headers()).get('origin')
+    const supabase = await createSupabaseServer()
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${origin}/api/auth/callback`,
+      },
+    })
+
+    if (error) {
+      console.log(error)
+    } else {
+      redirect(`${data.url}`) // use the redirect API for your server framework
+    }
+  }
+
   return (
     <form
       action={signIn}
