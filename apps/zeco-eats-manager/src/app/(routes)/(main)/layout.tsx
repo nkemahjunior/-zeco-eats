@@ -1,4 +1,3 @@
-import '../globals.css'
 import ModalProvider from '@/shared/context/modal/ModalProvider'
 import Modal from '@/shared/components/modal/Modal'
 import ModalUrl from '@/shared/components/modal/ModalUrl'
