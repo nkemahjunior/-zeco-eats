@@ -2,26 +2,28 @@ import { createGlobPatternsForDependencies } from '@nx/react/tailwind'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import type { Config } from 'tailwindcss'
+const sharedTailwindConfig = require('../../libs/main/tailwind.config')
 
 // Define __dirname for ESM
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const config: Config = {
-  // content: [
-  //   "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  //   "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-  //   "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-  //   "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  // ],
-
+  ...sharedTailwindConfig,
   content: [
+    ...(Array.isArray(sharedTailwindConfig.content)
+      ? sharedTailwindConfig.content
+      : []),
+
     join(
       __dirname,
       '{src,pages,components,app}/**/*!(*.stories|*.spec).{ts,tsx,html}'
     ),
+
     ...createGlobPatternsForDependencies(__dirname),
   ],
+
+  presets: [sharedTailwindConfig],
 
   theme: {
     extend: {
@@ -38,6 +40,7 @@ const config: Config = {
       },
     },
   },
+  //darkMode: ['class'],
   plugins: [],
 }
 export default config

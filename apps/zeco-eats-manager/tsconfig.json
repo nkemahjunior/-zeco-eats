@@ -23,8 +23,10 @@
     "types": ["jest", "node"],
     "paths": {
       "@/*": ["apps/zeco-eats-manager/src/*"],
-      "@zeco-eats-lib/utils-server": ["libs/utils/src/server.ts"],
-      "@zeco-eats-lib/utils-client": ["libs/utils/src/index.ts"]
+      "@zeco-eats-lib/utils-server": ["libs/main/src/server.ts"],
+      "@zeco-eats-lib/utils-client": ["libs/main/src/index.ts"],
+      "@shadcn/*": ["libs/main/src/lib/shadcn/*"],
+      "@libs-base/*": ["libs/main/*"]
     }
   },
   "include": [

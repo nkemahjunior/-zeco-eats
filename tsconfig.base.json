@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@zeco-eats/utils": ["libs/utils/src/index.ts"],
-      "@zeco-eats/utils/server": ["libs/utils/src/server.ts"]
+      "@shadcn/*": ["libs/main/src/lib/shadcn/*"],
+      "@libs-base/*": ["libs/main/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
