@@ -9,7 +9,6 @@ export const addRestaurantCuisines = async (
   const supabase = await createSupabaseServer()
 
   try {
-    // Step 1: Get the current user
     const {
       data: { user },
       error: authError,
@@ -18,7 +17,6 @@ export const addRestaurantCuisines = async (
       throw new Error('User not authenticated')
     }
 
-    // Step 2: Get the restaurant associated with the user
     const { data: restaurantData, error: restaurantError } = await supabase
       .from('restaurant')
       .select('id')
@@ -31,7 +29,6 @@ export const addRestaurantCuisines = async (
 
     const restaurantId = restaurantData.id
 
-    // Step 3: Insert selected cuisines into restaurant_cuisines table
     const insertPromises = selectedCuisines.map(async (cuisine) => {
       const { data: cuisineData, error: cuisineError } = await supabase
         .from('cuisines')
@@ -56,7 +53,6 @@ export const addRestaurantCuisines = async (
       }
     })
 
-    // Wait for all insert operations to complete
     await Promise.all(insertPromises)
   } catch (error) {
     throw new Error(`Error submitting cuisines: ${error}`)
