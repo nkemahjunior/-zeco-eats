@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '../globals.css'
+import '@shadcn/styles/global.css'
 import TanstackQueryProvider from '@/shared/api/tanstackQuery/TanstackQueryProvider'
+import { Toaster } from 'sonner'
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -28,7 +30,14 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} text-sm antialiased`}
       >
-        <TanstackQueryProvider>{children}</TanstackQueryProvider>
+        <TanstackQueryProvider>
+          <Toaster
+            position="top-right"
+            richColors
+            //closeButton
+          />
+          {children}
+        </TanstackQueryProvider>
       </body>
     </html>
   )
