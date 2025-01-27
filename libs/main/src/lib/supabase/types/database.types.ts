@@ -71,6 +71,7 @@ export type Database = {
           long: string | null
           min_order_price: string | null
           name: string | null
+          profile_pic: string | null
           user_id: string | null
         }
         Insert: {
@@ -83,6 +84,7 @@ export type Database = {
           long?: string | null
           min_order_price?: string | null
           name?: string | null
+          profile_pic?: string | null
           user_id?: string | null
         }
         Update: {
@@ -95,6 +97,7 @@ export type Database = {
           long?: string | null
           min_order_price?: string | null
           name?: string | null
+          profile_pic?: string | null
           user_id?: string | null
         }
         Relationships: []

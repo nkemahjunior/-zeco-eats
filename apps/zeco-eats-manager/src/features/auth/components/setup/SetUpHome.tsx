@@ -16,10 +16,10 @@ export default function SetupHome() {
           desc="Tell us more about your cuisine, phone number and pick up instructions"
         />
         <SetupCard
-          href="/setup/upload-menu"
+          href="/setup/upload-restaurant-profile"
           icon={<ImSpoonKnife size={20} />}
-          title="Upload menu"
-          desc="Submit a photo and we will build your menu for you"
+          title="Upload a picture"
+          desc="Submit a profile picture for your restaurant"
         />
         <SetupCard
           href="/setup/setup-payment"
