@@ -8,7 +8,8 @@
     "format": "prettier --write .",
     "lint": "eslint --cache apps/*",
     "lint-staged": "lint-staged",
-    "prepare": "husky"
+    "prepare": "husky",
+    "sync-db-types": "npx supabase gen types typescript --project-id \"ihydizyhbzwvaidfdunn\" --schema public > database.types.ts"
   },
   "private": true,
   "dependencies": {
