@@ -1,35 +1,11 @@
 'use server'
 
+import {
+  getRestaurantId,
+  getUser,
+} from '@/shared/api/queries/server/serverQueriesRestaurant'
 import { Tables } from '@zeco-eats-lib/utils-client'
 import { createSupabaseServer } from '@zeco-eats-lib/utils-server'
-
-const getUser = async () => {
-  const supabase = await createSupabaseServer()
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser()
-  if (authError || !user) {
-    throw new Error('User not authenticated')
-  }
-
-  return user
-}
-
-const getARestaurant = async (userId: string) => {
-  const supabase = await createSupabaseServer()
-  const { data: restaurantData, error: restaurantError } = await supabase
-    .from('restaurant')
-    .select('id')
-    .eq('user_id', userId)
-    .single()
-
-  if (restaurantError || !restaurantData) {
-    throw new Error('Restaurant not found for this user')
-  }
-
-  return restaurantData
-}
 
 export const addRestaurantCuisines = async (
   selectedCuisines: Tables<'cuisines'>[]
@@ -37,7 +13,7 @@ export const addRestaurantCuisines = async (
   try {
     const supabase = await createSupabaseServer()
     const user = await getUser()
-    const restaurantData = await getARestaurant(user.id)
+    const restaurantData = await getRestaurantId(user.id)
 
     const restaurantId = restaurantData.id
 
