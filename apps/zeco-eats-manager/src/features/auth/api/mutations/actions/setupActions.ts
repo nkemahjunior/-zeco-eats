@@ -51,7 +51,7 @@ export async function uploadRestaurantProfilePic(file: File) {
   try {
     const supabase = await createSupabaseServer()
     const user = await getUser()
-    const restaurantData = await getARestaurant(user.id)
+    const restaurantData = await getRestaurantId(user.id)
 
     const restaurantId = restaurantData.id
 
