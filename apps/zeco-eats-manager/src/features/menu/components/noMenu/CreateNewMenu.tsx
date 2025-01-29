@@ -3,25 +3,19 @@
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
 import TextInput from '@/shared/components/inputs/TextInput'
 import Heading2 from '@/shared/components/text/Heading2'
-import { useState } from 'react'
+import { useActionState } from 'react'
 import { FiBookOpen, FiPlus } from 'react-icons/fi'
 
 import React from 'react'
 import { LoadingSpinner } from '@zeco-eats-lib/utils-server'
+import { createMenuAction } from '../../api/mutations/actions/menuActions'
+import { useToastOnActionState } from '@/shared/hooks/useToastOnActionState'
 
 export default function CreateMenuPrompt() {
-  const [menuName, setMenuName] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [state, formAction, isPending] = useActionState(createMenuAction, null)
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    // Add your menu creation logic here
-    console.log('Creating menu:', menuName)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsSubmitting(false)
-    setMenuName('')
-  }
+  // Show toast when state updates
+  useToastOnActionState(state)
 
   return (
     <div className="flex h-[30rem] items-center justify-center p-4">
@@ -41,7 +35,7 @@ export default function CreateMenuPrompt() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="w-full space-y-6">
+        <form action={formAction} className="w-full space-y-6">
           <div className="space-y-4">
             <label htmlFor="menuName" className="block font-medium">
               Menu Name
@@ -49,6 +43,7 @@ export default function CreateMenuPrompt() {
             <TextInput
               height="h-[2.8rem]"
               id="menuName"
+              name="menuName"
               placeHolder="e.g., Seasonal Specialties, Signature Dishes, Craft Cocktails"
               className="placeholder-textTint"
             />
@@ -57,6 +52,7 @@ export default function CreateMenuPrompt() {
           <div className="flex w-full items-center justify-center">
             <ButtonWithIcon
               color="bg-secondary"
+              disableColor="bg-secondary/40"
               hoverColor="hover:bg-secondaryTint"
               textColor="text-white"
               justify="justify-center"
@@ -64,9 +60,9 @@ export default function CreateMenuPrompt() {
               roundedCorners="rounded-lg"
               width="w-1/2"
               height="h-[3rem]"
-              //events={{ onClick: handleSubmit, disabled: isSubmitting }}
+              disable={isPending}
             >
-              {isSubmitting ? (
+              {isPending ? (
                 <>
                   <LoadingSpinner />
                   <span>Creating Menu...</span>
