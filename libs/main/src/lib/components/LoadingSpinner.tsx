@@ -1,9 +1,13 @@
 import { ImSpinner8 } from 'react-icons/im'
 
-export function LoadingSpinner() {
+interface fnProps {
+  size?: number
+}
+
+export function LoadingSpinner({ size = 10 }: fnProps) {
   return (
     <span className="block w-fit animate-spin">
-      <ImSpinner8 size={10} />
+      <ImSpinner8 size={size} />
     </span>
   )
 }
