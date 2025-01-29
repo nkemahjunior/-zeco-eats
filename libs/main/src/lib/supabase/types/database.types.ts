@@ -132,6 +132,100 @@ export type Database = {
           },
         ]
       }
+      restaurant_items: {
+        Row: {
+          created_at: string
+          id: number
+          item_name: string | null
+          price: number | null
+          restaurant_id: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          item_name?: string | null
+          price?: number | null
+          restaurant_id?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          item_name?: string | null
+          price?: number | null
+          restaurant_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'restaurant_items_restaurant_id_fkey'
+            columns: ['restaurant_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      restaurant_menu_items: {
+        Row: {
+          created_at: string
+          item_id: number
+          menu_id: number
+        }
+        Insert: {
+          created_at?: string
+          item_id: number
+          menu_id: number
+        }
+        Update: {
+          created_at?: string
+          item_id?: number
+          menu_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'restaurant_menu_items_item_id_fkey'
+            columns: ['item_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant_items'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'restaurant_menu_items_menu_id_fkey'
+            columns: ['menu_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant_menus'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      restaurant_menus: {
+        Row: {
+          created_at: string
+          id: number
+          name: string | null
+          restaurant_id: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name?: string | null
+          restaurant_id?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string | null
+          restaurant_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'restaurant_menus_restaurant_id_fkey'
+            columns: ['restaurant_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       restaurant_reviews: {
         Row: {
           created_at: string
