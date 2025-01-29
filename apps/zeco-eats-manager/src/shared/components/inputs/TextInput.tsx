@@ -2,6 +2,7 @@ import { DOMAttributes, InputHTMLAttributes } from 'react'
 
 interface fnProps {
   id: string
+  name?: string
   attributes?: InputHTMLAttributes<HTMLInputElement>
   events?: DOMAttributes<HTMLInputElement>
   placeHolder?: string
@@ -14,10 +15,12 @@ interface fnProps {
   bg?: string
   focusBorderColor?: string
   focusBg?: string
+  disable?: boolean
 }
 
 export default function TextInput({
   id,
+  name,
   attributes,
   events,
   placeHolder = '',
@@ -30,15 +33,18 @@ export default function TextInput({
   bg = 'bg-background',
   focusBorderColor = 'focus:border-secondary',
   focusBg = 'focus:bg-white',
+  disable = false,
 }: fnProps) {
   return (
     <input
+      disabled={disable}
       id={id}
+      name={name}
       {...attributes}
       placeholder={placeHolder}
       {...events}
       type="text"
-      className={`${focusBorderColor} ${focusBg} ${width} ${height} ${rounded} border-2 border-solid border-transparent ${bg} ${px} ${className} ${placeHolderColor}`}
+      className={`${focusBorderColor} ${disable ? `pointer-events-none` : 'pointer-events-auto'} ${focusBg} ${width} ${height} ${rounded} border-2 border-solid border-transparent ${bg} ${px} ${className} ${placeHolderColor}`}
     />
   )
 }

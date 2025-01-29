@@ -11,6 +11,8 @@ interface fnProps {
   gapX?: string
   className?: string
   events?: React.DOMAttributes<HTMLButtonElement>
+  disable?: boolean
+  disableColor?: string
   ariaAttributes?: React.HtmlHTMLAttributes<HTMLButtonElement>
 }
 export default function ButtonWithIcon({
@@ -26,14 +28,17 @@ export default function ButtonWithIcon({
   className = ' ',
   gapX = 'gap-x-2',
   events,
+  disableColor = '',
+  disable = false,
   ariaAttributes,
 }: fnProps) {
   return (
     <button
+      disabled={disable}
       role=""
       {...ariaAttributes}
       {...events}
-      className={`${className} ${roundedCorners} ${font} ${color} ${hoverColor} ${height} ${width} flex items-center ${justify} ${gapX} ${textColor} transition-colors duration-300`}
+      className={`${className} ${disable ? `${disableColor} pointer-events-none` : `${color} pointer-events-auto`} ${roundedCorners} ${font} ${hoverColor} ${height} ${width} flex items-center ${justify} ${gapX} ${textColor} transition-colors duration-300`}
     >
       {children}
     </button>
