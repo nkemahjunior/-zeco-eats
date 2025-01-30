@@ -53,6 +53,10 @@ export default function CustomSelect({
   const [inputValue, setInputValue] = useState(data.at(0)?.display || '')
   const ref = useRef<HTMLDivElement | null>(null)
 
+  useEffect(() => {
+    onchange(data.at(0)?.value || '')
+  }, [data, onchange])
+
   const updateInputValue = (data: dataItem | undefined) => {
     if (!data) return
     setInputValue(data.display)
@@ -91,6 +95,7 @@ export default function CustomSelect({
       // onBlur={handleBlur}
     >
       <ButtonWithIcon
+        attributes={{ type: 'button' }}
         width={width}
         justify="justify-between"
         font="text-sm"
