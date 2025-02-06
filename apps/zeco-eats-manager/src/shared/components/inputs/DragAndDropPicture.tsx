@@ -10,9 +10,14 @@ import { FaCloudArrowUp } from 'react-icons/fa6'
 interface fnProps {
   onSelect: (img: File) => void
   onRemove: () => void
+  disable: boolean
 }
 
-const DragAndDropPicture: React.FC<fnProps> = ({ onSelect, onRemove }) => {
+const DragAndDropPicture: React.FC<fnProps> = ({
+  onSelect,
+  onRemove,
+  disable,
+}) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [dragActive, setDragActive] = useState(false)
 
@@ -64,7 +69,12 @@ const DragAndDropPicture: React.FC<fnProps> = ({ onSelect, onRemove }) => {
               objectFit="cover"
               roundedCorners="rounded-lg"
             />
-            <ButtonWithIcon width="w-[6rem]" events={{ onClick: removeImage }}>
+            <ButtonWithIcon
+              width="w-[6rem]"
+              events={{ onClick: removeImage }}
+              disable={disable}
+              disableTextColor="text-stone-200"
+            >
               <span>
                 <BiTrash />
               </span>
