@@ -14,6 +14,7 @@ interface fnProps {
   disable?: boolean
   disableColor?: string
   ariaAttributes?: React.HtmlHTMLAttributes<HTMLButtonElement>
+  attributes?: React.ButtonHTMLAttributes<HTMLButtonElement>
 }
 export default function ButtonWithIcon({
   children,
@@ -31,10 +32,12 @@ export default function ButtonWithIcon({
   disableColor = '',
   disable = false,
   ariaAttributes,
+  attributes,
 }: fnProps) {
   return (
     <button
       disabled={disable}
+      {...attributes}
       role=""
       {...ariaAttributes}
       {...events}

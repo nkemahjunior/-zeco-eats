@@ -8,7 +8,10 @@ interface fnProps {
   px?: string
   font?: string
   className?: string
+  disable?: boolean
+  disableColor?: string
   events?: React.DOMAttributes<HTMLButtonElement>
+  attributes?: React.ButtonHTMLAttributes<HTMLButtonElement>
 }
 export default function Button({
   children,
@@ -20,12 +23,17 @@ export default function Button({
   px = 'px-4',
   font = 'font-medium',
   className = ' ',
+  disableColor = '',
+  disable = false,
   events,
+  attributes,
 }: fnProps) {
   return (
     <button
+      disabled={disable}
+      {...attributes}
       {...events}
-      className={`${className} ${roundedCorners} ${font} ${color} ${hoverColor} ${py} ${px} ${textColor} transition-colors duration-300`}
+      className={`${className} ${roundedCorners} ${font} ${disable ? `${disableColor} pointer-events-none` : `${color} pointer-events-auto`} ${color} ${hoverColor} ${py} ${px} ${textColor} transition-colors duration-300`}
     >
       {children}
     </button>
