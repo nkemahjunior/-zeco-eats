@@ -55,6 +55,7 @@ export default function CustomSelect({
 
   useEffect(() => {
     onchange(data.at(0)?.value || '')
+    setInputValue(data.at(0)?.display || '')
   }, [data, onchange])
 
   const updateInputValue = (data: dataItem | undefined) => {
