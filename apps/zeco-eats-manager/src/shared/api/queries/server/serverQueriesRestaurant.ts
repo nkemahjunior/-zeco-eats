@@ -14,16 +14,15 @@ export const getUser = async (): Promise<User> => {
   return user
 }
 
-export const getRestaurantId = async (
-  userId: string
-): Promise<{
+export const getRestaurantId = async (): Promise<{
   id: number
 }> => {
+  const user = await getUser()
   const supabase = await createSupabaseServer()
   const { data: restaurantData, error: restaurantError } = await supabase
     .from('restaurant')
     .select('id')
-    .eq('user_id', userId)
+    .eq('user_id', user.id)
     .single()
 
   if (restaurantError || !restaurantData) {
