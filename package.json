@@ -9,7 +9,7 @@
     "lint": "eslint --cache apps/*",
     "lint-staged": "lint-staged",
     "prepare": "husky",
-    "sync-db-types": "npx supabase gen types typescript --project-id \"ihydizyhbzwvaidfdunn\" --schema public > database.types.ts"
+    "sync-db-types": "npx supabase gen types typescript --project-id \"ihydizyhbzwvaidfdunn\" --schema public > libs/main/src/lib/supabase/types/database.types.ts"
   },
   "private": true,
   "dependencies": {

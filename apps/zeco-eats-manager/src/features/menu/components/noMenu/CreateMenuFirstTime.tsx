@@ -52,7 +52,7 @@ export default function CreateMenuFirstTime() {
       <div className="w-1/2 space-y-8">
         <div className="flex flex-col items-center justify-center space-y-4">
           <div className="bg-backgroundShade2 w-fit rounded-full p-6">
-            <FiBookOpen className="text-secondary h-16 w-16" />
+            <FiBookOpen className="text-secondary h-8 w-8" />
           </div>
 
           <div className="flex flex-col items-center justify-center space-y-3">

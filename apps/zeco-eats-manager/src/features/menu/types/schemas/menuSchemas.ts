@@ -35,4 +35,26 @@ export const menuSchema = z
 
 export const categorySchema = z.object({
   name: z.string().min(1, 'Category name is required'),
+  menuId: z.number(),
+})
+
+export const itemSchema = z.object({
+  name: z.string().min(1, 'Item name is required'),
+  description: z.string().min(10, 'Description must be at least 10 characters'),
+  price: z
+    .string()
+    .min(1, 'Enter a valid number')
+    .refine((val) => !isNaN(parseFloat(val)), {
+      message: 'Enter a valid number',
+    })
+    .transform((val) => parseFloat(val)),
+  vat: z
+    .string()
+    .min(1, 'Enter a valid number')
+    .refine((val) => !isNaN(parseFloat(val)), {
+      message: 'Enter a valid number',
+    })
+    .transform((val) => parseFloat(val)),
+  menuId: z.number(),
+  categoryId: z.number(),
 })
