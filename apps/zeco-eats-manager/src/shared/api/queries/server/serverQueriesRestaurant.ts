@@ -8,7 +8,7 @@ export const getUser = async (): Promise<User> => {
     error: authError,
   } = await supabase.auth.getUser()
   if (authError || !user) {
-    throw new Error('User not authenticated')
+    throw authError
   }
 
   return user
@@ -26,7 +26,7 @@ export const getRestaurantId = async (): Promise<{
     .single()
 
   if (restaurantError || !restaurantData) {
-    throw new Error('Restaurant not found for this user')
+    throw restaurantError
   }
 
   return restaurantData
