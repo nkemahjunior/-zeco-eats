@@ -37,6 +37,7 @@ export default function CreateMenuFirstTime() {
   })
 
   const onSubmit = async (data: Menu) => {
+    router.prefetch('/menu/no-menu/first-category')
     const result = await createMenuAction(data)
     if (result.success) {
       toast.success('Menu created successfully')

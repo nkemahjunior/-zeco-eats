@@ -18,8 +18,10 @@ import {
 } from '../../api/queries/options/menuOptions'
 import { FormInput } from '@/shared/components/inputs/FormInput'
 import { createMenuItemAction } from '../../api/mutations/actions/menuActions'
+import { useRouter } from 'next/navigation'
 
 export default function CreateMenuItem() {
+  const router = useRouter()
   const { data: menuCategories } = useSuspenseQuery(
     restaurantMenuCategoriesOPtions
   )
@@ -52,17 +54,16 @@ export default function CreateMenuItem() {
   )
 
   const onSubmit = async (data: MenuItem) => {
-    try {
-      if (!selectedImage) {
-        toast.error('Please upload an image')
-        return
-      }
-      const res = await createMenuItemAction(data, selectedImage)
-      if (res.success) toast.success(res.msg)
-      else toast.error(res.msg)
-    } catch (error) {
-      toast.error('error, refresh and try again')
+    router.prefetch('/menu/overview')
+    if (!selectedImage) {
+      toast.error('Please upload an image')
+      return
     }
+    const res = await createMenuItemAction(data, selectedImage)
+    if (res.success) {
+      toast.success(res.msg)
+      router.push('/menu/overview')
+    } else toast.error(res.msg)
   }
 
   return (
@@ -159,7 +160,11 @@ export default function CreateMenuItem() {
           {/* Image Upload */}
           <div className="space-y-4">
             <label className="font-medium">Item Photo</label>
-            <DragAndDropPicture onSelect={onSelect} onRemove={onRemove} />
+            <DragAndDropPicture
+              onSelect={onSelect}
+              onRemove={onRemove}
+              disable={isSubmitting}
+            />
           </div>
 
           <div className="flex w-full items-center justify-center">

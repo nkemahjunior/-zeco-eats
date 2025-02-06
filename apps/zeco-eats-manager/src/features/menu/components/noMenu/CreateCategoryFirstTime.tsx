@@ -15,9 +15,11 @@ import { createCategoryAction } from '../../api/mutations/actions/menuActions'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import CustomSelectV2 from '@/shared/components/inputs/CustomSelectV2'
 import { restaurantMenusOptions } from '../../api/queries/options/menuOptions'
+import { useRouter } from 'next/navigation'
 
 export default function CreateCategoryFirstTime() {
   const { data: menus } = useSuspenseQuery(restaurantMenusOptions)
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -28,15 +30,14 @@ export default function CreateCategoryFirstTime() {
   })
 
   const onSubmit = async (data: Category) => {
-    try {
-      const result = await createCategoryAction(data)
-      if (result.success) {
-        toast.success('Category created successfully')
-      } else {
-        toast.error(result.msg)
-      }
-    } catch (error) {
-      toast.error('Failed to create category')
+    router.prefetch('/menu/no-menu/first-item')
+    const result = await createCategoryAction(data)
+
+    if (result.success) {
+      toast.success(result.msg)
+      router.push('first-item')
+    } else {
+      toast.error(result.msg)
     }
   }
 
