@@ -36,8 +36,11 @@ export async function createMenuAction(data: Menu): Promise<MutationResponse> {
       time: `${data.openTime}-${data.closeTime}`,
     })
 
-    if (error) throw new Error(error.message)
-    return { success: true, msg: 'Menu created successfully' }
+    if (error) throw error
+    return {
+      success: true,
+      msg: 'Menu created successfully',
+    }
   } catch (error) {
     console.error('Menu creation error:', error)
     return {
@@ -96,7 +99,7 @@ export async function createCategoryAction(
 export const createMenuItemAction = async (
   data: MenuItem,
   image: File
-): Promise<MutationResponse> => {
+): Promise<MutationResponse<{ menuId: number } | undefined>> => {
   let insertedItem: any = null
   let imageUrl: string | null = null
   const supabase = await createSupabaseServer()
@@ -156,6 +159,9 @@ export const createMenuItemAction = async (
     return {
       success: true,
       msg: 'Menu item created successfully',
+      data: {
+        menuId: data.menuId,
+      },
     }
   } catch (error) {
     console.error('Error creating menu item:', error)

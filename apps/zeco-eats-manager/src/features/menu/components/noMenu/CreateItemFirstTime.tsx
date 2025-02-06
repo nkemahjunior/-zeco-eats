@@ -54,7 +54,7 @@ export default function CreateMenuItem() {
   )
 
   const onSubmit = async (data: MenuItem) => {
-    router.prefetch('/menu/overview')
+    //router.prefetch(`/menu/${res.data?.menuId}/overview`)
     if (!selectedImage) {
       toast.error('Please upload an image')
       return
@@ -62,7 +62,7 @@ export default function CreateMenuItem() {
     const res = await createMenuItemAction(data, selectedImage)
     if (res.success) {
       toast.success(res.msg)
-      router.push('/menu/overview')
+      router.push(`/menu/${res.data?.menuId}/overview`)
     } else toast.error(res.msg)
   }
 
