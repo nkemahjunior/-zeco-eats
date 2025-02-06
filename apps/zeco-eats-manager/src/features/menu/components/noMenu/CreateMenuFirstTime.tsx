@@ -13,6 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { menuSchema } from '../../types/schemas/menuSchemas'
 import { Menu } from '../../types/MenuTypes'
+import { useRouter } from 'next/navigation'
 
 const days = [
   { display: 'Monday', value: '1' },
@@ -25,6 +26,7 @@ const days = [
 ]
 
 export default function CreateMenuFirstTime() {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -35,15 +37,12 @@ export default function CreateMenuFirstTime() {
   })
 
   const onSubmit = async (data: Menu) => {
-    try {
-      const result = await createMenuAction(data)
-      if (result.success) {
-        toast.success('Menu created successfully')
-      } else {
-        toast.error(result.msg)
-      }
-    } catch (error) {
-      toast.error('Failed to create menu')
+    const result = await createMenuAction(data)
+    if (result.success) {
+      toast.success('Menu created successfully')
+      router.push('first-category')
+    } else {
+      toast.error(result.msg)
     }
   }
 
