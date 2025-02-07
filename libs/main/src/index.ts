@@ -10,3 +10,6 @@ export * from './lib/hooks/useDebounce'
 
 //TOAST
 export * from './lib/utils/toastMsgs'
+
+//LOADING
+export * from './lib/components/Shimmer'

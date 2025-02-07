@@ -6,3 +6,4 @@ export * from './lib/supabase/supabaseMiddleware'
 
 // SERVER COMPONENTS
 export * from './lib/components/LoadingSpinner'
+export * from './lib/components/LoadingComponent'
