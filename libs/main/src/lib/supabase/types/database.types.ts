@@ -277,6 +277,7 @@ export type Database = {
       }
       restaurant_menus: {
         Row: {
+          active: boolean | null
           created_at: string
           id: number
           name: string | null
@@ -285,6 +286,7 @@ export type Database = {
           time: string | null
         }
         Insert: {
+          active?: boolean | null
           created_at?: string
           id?: number
           name?: string | null
@@ -293,6 +295,7 @@ export type Database = {
           time?: string | null
         }
         Update: {
+          active?: boolean | null
           created_at?: string
           id?: number
           name?: string | null
@@ -316,18 +319,21 @@ export type Database = {
           created_at: string
           item_id: number
           menu_id: number
+          restaurant_id: number | null
         }
         Insert: {
           category_id: number
           created_at?: string
           item_id: number
           menu_id: number
+          restaurant_id?: number | null
         }
         Update: {
           category_id?: number
           created_at?: string
           item_id?: number
           menu_id?: number
+          restaurant_id?: number | null
         }
         Relationships: [
           {
@@ -349,6 +355,13 @@ export type Database = {
             columns: ['menu_id']
             isOneToOne: false
             referencedRelation: 'restaurant_menus'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'restaurant_menus_categories_items_restaurant_id_fkey'
+            columns: ['restaurant_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant'
             referencedColumns: ['id']
           },
         ]
