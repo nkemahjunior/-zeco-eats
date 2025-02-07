@@ -1,10 +1,15 @@
+'use client'
 import NavLink from './NavLink'
 import { IoBasketOutline, IoHomeOutline } from 'react-icons/io5'
 import { BsBarChartLine, BsPeople } from 'react-icons/bs'
 import { MdOutlinePayments, MdOutlineRestaurantMenu } from 'react-icons/md'
 import { HiOutlineSpeakerphone } from 'react-icons/hi'
+import { useActiveMenuId } from '@/shared/api/queries/hooks/hooks'
+import SideNavLoading from './NavLinkLoading'
 
 export default function SideNav() {
+  const { data: menuId, isLoading } = useActiveMenuId()
+  if (isLoading) return <SideNavLoading />
   return (
     <div className="h-full w-full space-y-4 border-0 border-solid border-red-700">
       <NavLink icon={<IoHomeOutline />} text="Home" />
@@ -44,7 +49,7 @@ export default function SideNav() {
       <NavLink
         icon={<MdOutlineRestaurantMenu />}
         text="Menu"
-        href="/menu/overview"
+        href={`/menu/${menuId?.id}/overview`}
       />
       <NavLink
         nestedLinks={{
