@@ -3,6 +3,7 @@ import { Category, Menu, MenuItem } from '@/features/menu/types/MenuTypes'
 import { deleteFile, uploadFile } from '@/shared/api/mutations/mutations'
 import { getRestaurantId } from '@/shared/api/queries/server/serverQueriesRestaurant'
 import { MutationResponse } from '@/shared/types/apiTypes/MutationResponse'
+import { Tables } from '@zeco-eats-lib/utils-client'
 import { createSupabaseServer } from '@zeco-eats-lib/utils-server'
 
 const daysOfWeek = [
@@ -34,6 +35,7 @@ export async function createMenuAction(data: Menu): Promise<MutationResponse> {
         Number(data.openDayEnd)
       ),
       time: `${data.openTime}-${data.closeTime}`,
+      active: true,
     })
 
     if (error) throw error
@@ -149,6 +151,7 @@ export const createMenuItemAction = async (
           menu_id: data.menuId,
           category_id: data.categoryId,
           item_id: insertedItem.id,
+          restaurant_id: restaurant.id,
         },
       ])
 
@@ -190,6 +193,84 @@ export const createMenuItemAction = async (
     return {
       success: false,
       msg: 'An error occurred while creating the menu item',
+    }
+  }
+}
+
+export const updateMenuNameAction = async (
+  menuId: number,
+  newName: string
+): Promise<MutationResponse> => {
+  try {
+    const supabase = await createSupabaseServer()
+
+    const { error } = await supabase
+      .from('restaurant_menus')
+      .update({ name: newName })
+      .eq('id', menuId)
+
+    if (error) throw error
+
+    return { success: true, msg: 'Menu name updated successfully' }
+  } catch (error) {
+    console.error('Error updating menu name:', error)
+    return { success: false, msg: 'Failed to update menu name' }
+  }
+}
+
+export const updateMenuStatus = async (
+  active: boolean,
+  menuId: number
+): Promise<MutationResponse<{ active: boolean; name: string }>> => {
+  const supabase = await createSupabaseServer()
+  try {
+    const restaurant = await getRestaurantId()
+
+    if (!active) {
+      const { data: activeMenus, error: activeError } = await supabase
+        .from('restaurant_menus')
+        .select('id')
+        .eq('restaurant_id', restaurant.id)
+        .eq('active', true)
+
+      if (activeError) throw activeError
+
+      return {
+        success: false,
+        msg: 'At least one menu must remain active.',
+      }
+    }
+
+    const { data, error } = await supabase
+      .from('restaurant_menus')
+      .update({ active: active })
+      .eq('id', menuId)
+      .select(`name, active`)
+      .single()
+
+    if (error || !data.active || !data.name) {
+      throw error
+    }
+
+    const { error: error2 } = await supabase
+      .from('restaurant_menus')
+      .update({ active: false })
+      .neq('id', menuId)
+      .eq('restaurant_id', restaurant.id)
+
+    if (error2) throw error
+
+    return {
+      success: true,
+      msg: 'Menu name updated successfully',
+      data: { active: data.active, name: data.name },
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      success: false,
+      msg: 'Error changing menu status',
+      data: { active: false, name: '' },
     }
   }
 }
