@@ -10,14 +10,13 @@ export default function MenuOverviewUi() {
   const queryClient = getQueryClient()
   queryClient.prefetchQuery(restaurantMenusOptions)
   return (
-    <div className="space-y-8">
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        {' '}
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className="space-y-8">
         <MenuTitle />
         <MenuHours />
         <Line />
         <MenuCategoryAndItems />
-      </HydrationBoundary>
-    </div>
+      </div>
+    </HydrationBoundary>
   )
 }
