@@ -14,6 +14,7 @@ import { KEYrestaurantMenus } from '../../api/queries/options/menuOptions'
 import { invalidateQueries } from '@/shared/api/queries/invalidateQueries'
 import { KEYmenuIds } from '@/shared/api/queries/hooks/hooks'
 import { useRouter } from 'next/navigation'
+import { getQueryClient } from '@/shared/api/tanstackQuery/get-query-client'
 
 interface fnProps {
   menus: Tables<'restaurant_menus'>[]
@@ -24,6 +25,7 @@ export default function MenuTitles({ menus }: fnProps) {
   const [activeMenu, setActiveMenu] = useState(menus.find((el) => el.active))
   const { closeModal } = useContext(ModalContext) as modalContextTypes
   const router = useRouter()
+  const queryClient = getQueryClient()
 
   const setMenuActive = async (menu: Tables<'restaurant_menus'>) => {
     const previousActive = activeMenu
@@ -34,23 +36,24 @@ export default function MenuTitles({ menus }: fnProps) {
 
     setChangingStatus(true)
     const res = await updateMenuStatus(!menu.active, menu.id)
+
     if (res.success) {
-      toast.success(
-        `${res.data?.name} is now ${res.data?.active ? 'active' : 'not active'}`
-      )
-      await invalidateQueries(KEYrestaurantMenus, KEYmenuIds)
+      await invalidateQueries(KEYmenuIds /*, KEYrestaurantMenus*/)
+      queryClient.setQueryData(KEYrestaurantMenus, res.data)
+      toast.success(`${menu.name} is now active`)
       router.replace(`/menu/${menu.id}/overview`)
     } else {
       setActiveMenu(previousActive)
       toast.error(res.msg)
     }
+
     setChangingStatus(false)
     closeModal()
   }
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end pr-2 pt-2">
+      <div className="flex justify-end px-2 pt-2">
         <CloseBtn />
       </div>
       <ul>

@@ -1,7 +1,6 @@
 'use client'
 
 import { useContext, useState } from 'react'
-import Link from 'next/link'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { restaurantMenusOptions } from '@/features/menu/api/queries/options/menuOptions'
 import { RxCaretSort } from 'react-icons/rx'
@@ -12,7 +11,6 @@ import {
   ModalContext,
   modalContextTypes,
 } from '@/shared/context/modal/ModalProvider'
-import CloseBtn from '@/shared/components/modal/CloseBtn'
 import MenuTitles from './MenuTitles'
 
 export default function MenuTitle() {

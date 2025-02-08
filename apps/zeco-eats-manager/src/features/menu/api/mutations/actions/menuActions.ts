@@ -221,7 +221,7 @@ export const updateMenuNameAction = async (
 export const updateMenuStatus = async (
   active: boolean,
   menuId: number
-): Promise<MutationResponse<{ active: boolean; name: string }>> => {
+): Promise<MutationResponse<Tables<'restaurant_menus'>[]>> => {
   const supabase = await createSupabaseServer()
   try {
     const restaurant = await getRestaurantId()
@@ -245,32 +245,33 @@ export const updateMenuStatus = async (
       .from('restaurant_menus')
       .update({ active: active })
       .eq('id', menuId)
-      .select(`name, active`)
+      .select('*')
       .single()
 
-    if (error || !data.active || !data.name) {
+    if (error || !data) {
       throw error
     }
 
-    const { error: error2 } = await supabase
+    const { data: data2, error: error2 } = await supabase
       .from('restaurant_menus')
       .update({ active: false })
       .neq('id', menuId)
       .eq('restaurant_id', restaurant.id)
+      .select('*')
 
     if (error2) throw error
 
     return {
       success: true,
       msg: 'Menu name updated successfully',
-      data: { active: data.active, name: data.name },
+      data: [...data2, data],
     }
   } catch (error) {
     console.log(error)
     return {
       success: false,
       msg: 'Error changing menu status',
-      data: { active: false, name: '' },
+      data: undefined,
     }
   }
 }
