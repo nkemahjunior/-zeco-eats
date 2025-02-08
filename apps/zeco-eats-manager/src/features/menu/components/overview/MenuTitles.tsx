@@ -15,6 +15,7 @@ import { invalidateQueries } from '@/shared/api/queries/invalidateQueries'
 import { KEYmenuIds } from '@/shared/api/queries/hooks/hooks'
 import { useRouter } from 'next/navigation'
 import { getQueryClient } from '@/shared/api/tanstackQuery/get-query-client'
+import Heading2 from '@/shared/components/text/Heading2'
 
 interface fnProps {
   menus: Tables<'restaurant_menus'>[]
@@ -52,20 +53,18 @@ export default function MenuTitles({ menus }: fnProps) {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-end px-2 pt-2">
+    <div className="space-y-6">
+      <div className="flex items-center justify-between px-2 pt-4">
+        <div>
+          <Heading2 text="Change menu status" />
+          <p className="text-textTint"> Atleast one menu must be active</p>
+        </div>
         <CloseBtn />
       </div>
-      <ul>
+      <ul className="space-y-4">
         {menus.map((menu) => (
-          <li
-            key={menu.id}
-            className="flex items-center justify-between border-b px-4 py-2 last:border-none"
-          >
-            <Link
-              href={`/menu/${menu.id}/overview`}
-              className="block hover:bg-gray-200"
-            >
+          <li key={menu.id} className="flex items-center justify-between px-4">
+            <Link href={`/menu/${menu.id}/overview`} className="block">
               {menu.name}
             </Link>
 
