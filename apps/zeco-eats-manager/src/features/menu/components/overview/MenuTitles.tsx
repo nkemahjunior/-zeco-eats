@@ -5,11 +5,7 @@ import { Tables } from '@zeco-eats-lib/utils-client'
 import Link from 'next/link'
 import { updateMenuStatus } from '../../api/mutations/actions/menuActions'
 import { toast } from 'sonner'
-import { useContext, useState } from 'react'
-import {
-  ModalContext,
-  modalContextTypes,
-} from '@/shared/context/modal/ModalProvider'
+import { useState } from 'react'
 import { KEYrestaurantMenus } from '../../api/queries/options/menuOptions'
 import { invalidateQueries } from '@/shared/api/queries/invalidateQueries'
 import { KEYmenuIds } from '@/shared/api/queries/hooks/hooks'
@@ -24,7 +20,6 @@ interface fnProps {
 export default function MenuTitles({ menus }: fnProps) {
   const [changingStatus, setChangingStatus] = useState(false)
   const [activeMenu, setActiveMenu] = useState(menus.find((el) => el.active))
-  const { closeModal } = useContext(ModalContext) as modalContextTypes
   const router = useRouter()
   const queryClient = getQueryClient()
 
@@ -49,13 +44,12 @@ export default function MenuTitles({ menus }: fnProps) {
     }
 
     setChangingStatus(false)
-    closeModal()
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between px-2 pt-4">
-        <div>
+        <div className="space-y-1">
           <Heading2 text="Change menu status" />
           <p className="text-textTint"> Atleast one menu must be active</p>
         </div>
