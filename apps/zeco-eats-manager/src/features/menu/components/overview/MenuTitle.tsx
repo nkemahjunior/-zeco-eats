@@ -2,7 +2,10 @@
 
 import { useContext, useState } from 'react'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { restaurantMenusOptions } from '@/features/menu/api/queries/options/menuOptions'
+import {
+  KEYrestaurantMenus,
+  restaurantMenusOptions,
+} from '@/features/menu/api/queries/options/menuOptions'
 import { RxCaretSort } from 'react-icons/rx'
 import { RiPencilFill } from 'react-icons/ri'
 import Heading from '@/shared/components/text/Heading'
@@ -12,14 +15,25 @@ import {
   modalContextTypes,
 } from '@/shared/context/modal/ModalProvider'
 import MenuTitles from './MenuTitles'
+import { useMenuId } from '../../hooks/menuHooks'
+import { updateMenuNameAction } from '../../api/mutations/actions/menuActions'
+import { toast } from 'sonner'
+import { getQueryClient } from '@/shared/api/tanstackQuery/get-query-client'
+import { Tables } from '@zeco-eats-lib/utils-client'
 
 export default function MenuTitle() {
+  const queryClient = getQueryClient()
   const { data: menus } = useSuspenseQuery(restaurantMenusOptions)
+
+  const curMenuId = useMenuId()
   const { modalProps, openModal } = useContext(
     ModalContext
   ) as modalContextTypes
+
   const [isEditing, setIsEditing] = useState(false)
-  const [headingText, setHeadingText] = useState('San Siro Menu')
+  const [curMenuName, setCurMenuName] = useState(
+    menus.find((el) => el.id === curMenuId)?.name
+  )
 
   const openMenus = () => {
     openModal(<MenuTitles menus={menus} />, {
@@ -36,36 +50,54 @@ export default function MenuTitle() {
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setHeadingText(e.target.value)
+    setCurMenuName(e.target.value)
 
-  const handleBlur = () => setIsEditing(false)
+  //const handleBlur = () => setIsEditing(false)
 
-  // const updateMenuName = async () => {
+  const updateMenuName = async () => {
+    if (!curMenuName) return
+    const prevName = curMenuName
+    setIsEditing(false)
 
-  // }
+    const res = await updateMenuNameAction(curMenuId, curMenuName)
+    if (res.success) {
+      toast.success(res.msg)
+      setCurMenuName(curMenuName)
+      queryClient.setQueryData(
+        KEYrestaurantMenus,
+        (oldData: Tables<'restaurant_menus'>[]) =>
+          oldData.map((menu) =>
+            menu.id === curMenuId ? { ...menu, name: curMenuName } : menu
+          )
+      )
+    } else {
+      toast.error(res.msg)
+      setCurMenuName(prevName)
+    }
+  }
 
   return (
     <div className="relative flex w-full items-center space-x-4">
       {isEditing ? (
         <input
           type="text"
-          value={headingText}
+          value={curMenuName || ''}
           onChange={handleInputChange}
-          onBlur={handleBlur}
-          className="bg-background w-[60%] rounded-lg text-xl font-bold lg:text-2xl xl:w-[20%]"
+          //onBlur={handleBlur}
+          className="bg-background w-[60%] rounded-lg px-4 py-2 text-xl font-bold lg:text-2xl xl:w-[20%]"
           autoFocus
         />
       ) : (
         <div className="w-48">
           <Heading
-            text={headingText}
-            className="border-2 border-solid border-transparent"
+            text={curMenuName || ''}
+            className="border-2 border-solid border-transparent py-2"
           />
         </div>
       )}
 
       {isEditing ? (
-        <button className="bg-background rounded-lg px-4 py-2">Save</button>
+        <Button events={{ onClick: updateMenuName }}>Save</Button>
       ) : (
         <button
           onClick={handleEditClick}
