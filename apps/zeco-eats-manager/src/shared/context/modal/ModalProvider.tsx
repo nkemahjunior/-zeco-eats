@@ -1,7 +1,8 @@
 'use client'
 
 import { modalPropsType } from '@/shared/types/modalPropsType'
-import React, { createContext, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import React, { createContext, useEffect, useState } from 'react'
 
 export interface modalContextTypes {
   open: boolean
@@ -45,6 +46,12 @@ export default function ModalProvider({
     setModalProps({ ...modalProps })
     setOpen(false)
   }
+
+  const pathname = usePathname()
+  useEffect(() => {
+    if (open) closeModal()
+  }, [pathname])
+
   return (
     <ModalContext.Provider
       value={{
