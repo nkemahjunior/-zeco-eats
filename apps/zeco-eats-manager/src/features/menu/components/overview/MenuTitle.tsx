@@ -87,24 +87,6 @@ export default function MenuTitle() {
       >
         <RxCaretSort size={20} />
       </Button>
-
-      {/* Dropdown Menu */}
-      {/* {dropdownOpen && menus.length > 0 && (
-        <div className="absolute left-0 top-12 z-10 min-h-20 w-56 rounded-lg bg-white shadow-md">
-          <ul>
-            {menus.map((menu) => (
-              <li key={menu.id} className="border-b last:border-none">
-                <Link
-                  href={`/menu/${menu.id}/overview`}
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                >
-                  {menu.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
     </div>
   )
 }
