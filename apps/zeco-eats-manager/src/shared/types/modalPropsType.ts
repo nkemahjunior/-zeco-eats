@@ -7,4 +7,5 @@ export interface modalPropsType {
   height?: string
   width?: string
   className?: string
+  contentEntryDirection?: 'normal' | 'top' | 'bottom' | 'right' | 'left'
 }
