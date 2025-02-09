@@ -6,42 +6,24 @@ import DragBtn from './DragBtn'
 import CategoryTitle from './CategoryTitle'
 import { DndContext, DragEndEvent } from '@dnd-kit/core'
 import Item from './Item'
-import { MouseEvent, useContext, useState } from 'react'
+import { MouseEvent, useState } from 'react'
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
-import {
-  ModalContext,
-  modalContextTypes,
-} from '@/shared/context/modal/ModalProvider'
-import EditItem from './EditItem'
+import { MenuCategorieItem } from '../../types/MenuTypes'
 
 interface fnProps {
-  el: string
+  category: MenuCategorieItem
 }
 
-export default function SortableCategory({ el }: fnProps) {
+export default function SortableCategory({ category }: fnProps) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
-      id: el,
+      id: category.category.id.toString(),
     })
 
   const [close, setClose] = useState(false)
-  const { openModal, modalProps } = useContext(
-    ModalContext
-  ) as modalContextTypes
-
-  const openModalAndSetContent = () => {
-    if (close) return
-    openModal(<EditItem />, {
-      ...modalProps,
-      centerChildVer: false,
-      childPos: 'justify-end',
-      showCloseBtn: false,
-      height: ' h-full',
-      width: 'w-full md:w-[60%] xl:w-[40%] 2xl:w-[20%]',
-    })
-  }
-
-  const [items, setItems] = useState(['1', '2', '3', '4', '5'])
+  const [items, setItems] = useState(
+    category.items.map((el) => el.id.toString())
+  )
 
   const reorderItems = (e: DragEndEvent) => {
     const over = e.over
@@ -64,12 +46,14 @@ export default function SortableCategory({ el }: fnProps) {
         transform: CSS.Transform.toString(transform),
         transition: transition,
       }}
-      onClick={openModalAndSetContent}
     >
       <div className="flex items-center justify-between">
         <div className="flex w-full items-center space-x-2 md:space-x-4">
           <DragBtn attributes={attributes} listeners={listeners} />
-          <CategoryTitle category="Special Dishes" itemsQty={3} i={el} />
+          <CategoryTitle
+            category={category.category.name || ''}
+            itemsQty={category.items.length}
+          />
         </div>
 
         <button
@@ -96,8 +80,8 @@ export default function SortableCategory({ el }: fnProps) {
         <DndContext onDragEnd={reorderItems}>
           <SortableContext items={items}>
             <div className="space-y-4">
-              {items.map((ell, i) => (
-                <Item key={i} el={ell} />
+              {category.items.map((item, i) => (
+                <Item key={i} item={item} />
               ))}
             </div>
           </SortableContext>

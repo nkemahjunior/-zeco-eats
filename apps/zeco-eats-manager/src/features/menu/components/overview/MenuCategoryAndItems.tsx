@@ -1,14 +1,30 @@
-import { CiSearch } from 'react-icons/ci'
-import { IoAddOutline } from 'react-icons/io5'
 import SortableCategories from './SortableCategories'
-import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
-import Button from '@/shared/components/button/Button'
+import { Suspense } from 'react'
+import Heading2 from '@/shared/components/text/Heading2'
+import CategoryItemsSkeleton from '../Skeletons/CategorieItemsSkeleton'
 
 export default function MenuCategoryAndItems() {
   return (
     <div className="space-y-8">
-      <div className="w-full space-y-4 md:flex md:space-x-4 md:space-y-0">
-        {/* TODO: replace with the input component */}
+      <div className="space-y-2">
+        <Heading2 text="Categories and items" />
+        <p className="text-textTint">
+          Arrange categories and items in the order you want customers to see
+          them. Click an item to edit it.
+        </p>
+      </div>
+
+      <div className="md:mr-[12rem]">
+        <Suspense fallback={<CategoryItemsSkeleton />}>
+          <SortableCategories />
+        </Suspense>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * <div className="w-full space-y-4 md:flex md:space-x-4 md:space-y-0">
         <div className="has-[:focus]:border-secondary bg-background flex h-[2.5rem] w-full items-center space-x-2 rounded-lg border-2 border-solid border-transparent px-4 has-[:focus]:bg-white">
           <span>
             <CiSearch />
@@ -33,10 +49,4 @@ export default function MenuCategoryAndItems() {
           </Button>
         </div>
       </div>
-
-      <div className="md:mr-[12rem]">
-        <SortableCategories />
-      </div>
-    </div>
-  )
-}
+ */
