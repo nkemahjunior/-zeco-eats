@@ -2,7 +2,7 @@
 
 import { modalPropsType } from '@/shared/types/modalPropsType'
 import { usePathname } from 'next/navigation'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 export interface modalContextTypes {
   open: boolean
@@ -17,6 +17,18 @@ export interface modalContextTypes {
 
 export const ModalContext = createContext<modalContextTypes | null>(null)
 
+const defaultModalProps: modalPropsType = {
+  childPos: 'justify-center',
+  closeBtnPos: 'justify-end',
+  showCloseBtn: true,
+  height: 'h-[50%]',
+  width: 'w-[60%]',
+  centerChildVer: true,
+  bg: 'bg-white',
+  className: '',
+  contentEntryDirection: 'normal',
+}
+
 export default function ModalProvider({
   children,
 }: {
@@ -24,16 +36,9 @@ export default function ModalProvider({
 }) {
   const [open, setOpen] = useState(false)
   const [modalContent, setModalContent] = useState<React.ReactNode>(null)
-  const [modalProps, setModalProps] = useState<modalPropsType | undefined>({
-    childPos: 'justify-center',
-    closeBtnPos: 'justify-end',
-    showCloseBtn: true,
-    height: 'h-[50%]',
-    width: 'w-[60%]',
-    centerChildVer: true,
-    bg: 'bg-white',
-    className: '',
-  })
+  const [modalProps, setModalProps] = useState<modalPropsType | undefined>(
+    defaultModalProps
+  )
 
   const openModal = (content: React.ReactNode, modalProps?: modalPropsType) => {
     setModalContent(content)
@@ -43,7 +48,7 @@ export default function ModalProvider({
 
   const closeModal = () => {
     setModalContent(null)
-    setModalProps({ ...modalProps })
+    setModalProps(defaultModalProps)
     setOpen(false)
   }
 
@@ -68,4 +73,9 @@ export default function ModalProvider({
       {children}
     </ModalContext.Provider>
   )
+}
+
+export function useModal() {
+  const context = useContext(ModalContext) as modalContextTypes
+  return context
 }
