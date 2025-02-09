@@ -33,7 +33,7 @@ export default function Button({
       disabled={disable}
       {...attributes}
       {...events}
-      className={`${className} ${roundedCorners} ${font} ${disable ? `${disableColor} pointer-events-none` : `${color} pointer-events-auto`} ${color} ${hoverColor} ${py} ${px} ${textColor} transition-colors duration-300`}
+      className={`${className} ${roundedCorners} ${font} ${disable ? `${disableColor} pointer-events-none cursor-not-allowed` : `${color} pointer-events-auto cursor-auto`} ${color} ${hoverColor} ${py} ${px} ${textColor} transition-colors duration-300`}
     >
       {children}
     </button>
