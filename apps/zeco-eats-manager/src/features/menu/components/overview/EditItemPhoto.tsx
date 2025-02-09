@@ -1,12 +1,12 @@
 import Button from '@/shared/components/button/Button'
 import ImageContainer from '@/shared/components/image/ImageContainer'
 
-export default function EditItemPhoto() {
+export default function EditItemPhoto({ imageUrl }: { imageUrl: string }) {
   return (
     <div className="w-full space-y-4">
       {' '}
       <ImageContainer
-        src="/devImages/food1.webp"
+        src={imageUrl}
         imageAlt=""
         height="h-[10rem]"
         width="w-full"

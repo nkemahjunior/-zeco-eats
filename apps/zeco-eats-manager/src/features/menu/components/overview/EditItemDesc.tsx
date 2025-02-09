@@ -2,10 +2,8 @@
 import { ChangeEvent, useState } from 'react'
 import EditOptionParent from './EditOptionParent'
 
-export default function EditItemDesc() {
-  const [desc, setDesc] = useState(
-    `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam veritatis accusamus quaerat enim provident sint inventore, vel voluptates molestias expedita.`
-  )
+export default function EditItemDesc({ description }: { description: string }) {
+  const [desc, setDesc] = useState(description)
   return (
     <EditOptionParent>
       <label htmlFor="itemDesc" className="font-medium">

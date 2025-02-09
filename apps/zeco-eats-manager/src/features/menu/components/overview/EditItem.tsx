@@ -8,8 +8,13 @@ import EditItemSoldOut from './EditItemSoldOut'
 import EditItemSaveBtn from './EditItemSaveBtn'
 import EditItemHeader from './EditItemHeader'
 import EditItemCategories from './EditItemCategories'
+import { Tables } from '@zeco-eats-lib/utils-client'
 
-export default function EditItem() {
+export default function EditItem({
+  item,
+}: {
+  item: Tables<'restaurant_items'>
+}) {
   return (
     <div className="w-full space-y-4 px-8 py-4">
       <EditItemHeader />
@@ -20,22 +25,22 @@ export default function EditItem() {
           <EditItemInput
             id="itemName"
             label="Name"
-            initialState={`Fried Rice`}
+            initialState={item.name || ''}
             className="space-y-2"
           />
         </EditOptionParent>
 
-        <EditItemPhoto />
-        <EditItemDesc />
+        <EditItemPhoto imageUrl={item.image_url || 'placeholder photo'} />
+        <EditItemDesc description={item.desc || ''} />
         <EditItemSoldOut />
         <Line />
 
-        <EditItemCategories />
+        <EditItemCategories item={item} />
 
         <EditItemInput
           id="itemPrice"
           label="Price"
-          initialState={`£122`}
+          initialState={item.price?.toString() || ''}
           className="flex items-center justify-between"
           inputWidth="w-[10rem]"
         />
@@ -43,7 +48,7 @@ export default function EditItem() {
         <EditItemInput
           id="itemVat"
           label="VAT"
-          initialState={`£1`}
+          initialState={item.vat?.toString() || ''}
           className="flex items-center justify-between"
           inputWidth="w-[10rem]"
         />
