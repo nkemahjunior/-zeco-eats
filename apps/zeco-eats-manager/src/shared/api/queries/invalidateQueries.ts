@@ -7,7 +7,7 @@ export const invalidateQueries = async (...queryKeyGroups: string[][]) => {
     await queryClient.invalidateQueries({
       queryKey: queryKeys,
       exact: true,
-      refetchType: 'all',
+      //refetchType: 'all',
     })
   }
 }
