@@ -5,12 +5,30 @@ import { CiSearch } from 'react-icons/ci'
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
 import { BiPlus, BiX } from 'react-icons/bi'
 import { useCategories } from '../../hooks/useCategories'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import {
+  restaurantCategoriesOptions,
+  restaurantMenuCategoriesItemsOptions,
+} from '../../api/queries/options/menuOptions'
+import { useMenuId } from '../../hooks/menuHooks'
+import { Tables } from '@zeco-eats-lib/utils-client'
 
-export default function EditItemCategories() {
-  const categoriesData = ['My Place Special', 'Vegies', 'Sauce', 'Snacks']
+export default function EditItemCategories({
+  item,
+}: {
+  item: Tables<'restaurant_items'>
+}) {
+  const menuId = useMenuId()
+  const { data: allCategories } = useSuspenseQuery(restaurantCategoriesOptions)
+  const { data: itemCategoriesArr } = useSuspenseQuery(
+    restaurantMenuCategoriesItemsOptions(menuId)
+  )
+
+  const itemCategories = itemCategoriesArr.filter((el) =>
+    el.items.some((elm) => elm.id === item.id)
+  )
 
   const {
-    ItemCategoriesArr,
     deleteCategoryFromItem,
     setHideNewCategoryInput,
     hideNewCategoryInput,
@@ -20,20 +38,23 @@ export default function EditItemCategories() {
     setNewCategoryOnChange,
     searchForCategories,
     addItemToCategory,
+    addItemToExistingCategory,
     newCategory,
     searchCategories,
     wantsToCreateNewCategory,
-  } = useCategories(categoriesData)
+    isMutating,
+  } = useCategories(allCategories, item)
 
   return (
     <div className="space-y-2">
       <p className="font-medium">Categories</p>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-3">
-        {ItemCategoriesArr.map((el, i) => (
+        {itemCategories.map((el, i) => (
           <ItemCategories
             key={i}
             category={el}
             deleteCategory={deleteCategoryFromItem}
+            disable={isMutating}
           />
         ))}
 
@@ -45,6 +66,7 @@ export default function EditItemCategories() {
           }}
           px="px-3"
           py="py-2"
+          disable={isMutating}
         >
           {hideNewCategoryInput ? <BiPlus size={20} /> : <BiX size={20} />}
         </Button>
@@ -88,11 +110,11 @@ export default function EditItemCategories() {
                 <ul className="divide-backgroundBorder divide-y-2 rounded-lg px-2">
                   {searchCategories.map((el, i) => (
                     <li
-                      className={`py-3 ${ItemCategoriesArr.includes(el) ? 'pointer-events-none cursor-not-allowed text-stone-600' : 'pointer-events-auto cursor-pointer'}`}
+                      className={`py-3 ${itemCategories.some((elm) => elm.category.id === el.id) || isMutating ? 'pointer-events-none cursor-not-allowed text-stone-600' : 'pointer-events-auto cursor-pointer'}`}
                       key={i}
-                      onClick={() => addItemToCategory(el)}
+                      onClick={() => addItemToExistingCategory(el)}
                     >
-                      {el}
+                      {el.name}
                     </li>
                   ))}
                 </ul>

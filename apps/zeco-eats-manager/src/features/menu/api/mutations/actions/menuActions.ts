@@ -275,3 +275,56 @@ export const updateMenuStatus = async (
     }
   }
 }
+
+export async function deleteCategoryFromItemAction(
+  menuId: number,
+  categoryId: number,
+  itemId: number
+): Promise<MutationResponse> {
+  try {
+    const supabase = await createSupabaseServer()
+    const { error } = await supabase
+      .from('restaurant_menus_categories_items')
+      .delete()
+      .match({ menu_id: menuId, category_id: categoryId, item_id: itemId })
+
+    if (error) {
+      throw error
+    }
+
+    return { success: true, msg: 'category removed' }
+  } catch (error) {
+    console.error('Error deleting menu category item:', error)
+    return { success: false, msg: 'Failed to remove category' }
+  }
+}
+
+export async function addItemToCategoryAction(
+  menuId: number,
+  categoryId: number,
+  itemId: number
+): Promise<MutationResponse> {
+  try {
+    const supabase = await createSupabaseServer()
+    const restaurant = await getRestaurantId()
+    const { error } = await supabase
+      .from('restaurant_menus_categories_items')
+      .insert([
+        {
+          menu_id: menuId,
+          category_id: categoryId,
+          item_id: itemId,
+          restaurant_id: restaurant.id, // Ensure this column exists in your table
+        },
+      ])
+
+    if (error) {
+      throw error
+    }
+
+    return { success: true, msg: 'Item added to category' }
+  } catch (error) {
+    console.error('Error adding item to category:', error)
+    return { success: false, msg: 'Failed to remove category' }
+  }
+}
