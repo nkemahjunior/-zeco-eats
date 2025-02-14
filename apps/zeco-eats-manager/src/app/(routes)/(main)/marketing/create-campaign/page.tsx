@@ -1,4 +1,4 @@
-import CreateCampaignUi from '@/app/(routes)/features/marketing/ui/CreateCampaignUi'
+import CreateCampaignUi from '@/features/marketing/ui/CreateCampaignUi'
 
 export default function Page() {
   return (

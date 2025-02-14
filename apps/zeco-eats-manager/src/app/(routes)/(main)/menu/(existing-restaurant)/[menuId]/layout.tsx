@@ -1,5 +1,5 @@
-import { restaurantMenusOptions } from '@/app/(routes)/features/menu/api/queries/options/menuOptions'
-import MenuNav from '@/app/(routes)/features/menu/components/nav/MenuNav'
+import { restaurantMenusOptions } from '@/features/menu/api/queries/options/menuOptions'
+import MenuNav from '@/features/menu/components/nav/MenuNav'
 import { getQueryClient } from '@/shared/api/tanstackQuery/get-query-client'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'

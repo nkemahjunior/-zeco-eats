@@ -1,4 +1,4 @@
-import PayoutsUi from '@/app/(routes)/features/payments/ui/PayoutsUI'
+import PayoutsUi from '@/features/payments/ui/PayoutsUI'
 
 export default function Page() {
   return (

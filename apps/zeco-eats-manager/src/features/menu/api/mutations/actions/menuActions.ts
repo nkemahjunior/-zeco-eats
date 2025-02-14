@@ -1,9 +1,5 @@
 'use server'
-import {
-  Category,
-  Menu,
-  MenuItem,
-} from '@/app/(routes)/features/menu/types/MenuTypes'
+import { Category, Menu, MenuItem } from '@/features/menu/types/MenuTypes'
 import { deleteFile, uploadFile } from '@/shared/api/mutations/mutations'
 import { getRestaurantId } from '@/shared/api/queries/server/serverQueriesRestaurant'
 import { MutationResponse } from '@/shared/types/apiTypes/MutationResponse'

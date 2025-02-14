@@ -1,4 +1,4 @@
-import SetupNav from '@/app/(routes)/features/auth/components/setup/SetUpNav'
+import SetupNav from '@/features/auth/components/setup/SetUpNav'
 
 export default function SetupLayout({
   children,

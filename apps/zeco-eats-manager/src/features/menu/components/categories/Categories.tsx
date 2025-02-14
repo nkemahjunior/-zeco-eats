@@ -11,9 +11,12 @@ import Heading2 from '@/shared/components/text/Heading2'
 import {
   ModalContext,
   modalContextTypes,
+  useModal,
 } from '@/shared/context/modal/ModalProvider'
 import { ChangeEvent, useContext, useState } from 'react'
 import { BiPlus, BiSave } from 'react-icons/bi'
+import CategoryItemModal from './CategorieItemModal'
+import CreateCategoryModal from './CreateCategoryModal'
 
 type item = {
   name: string
@@ -37,10 +40,8 @@ const fakeCategories = Array.from({ length: 5 }, (_, i) => {
 
 export default function Categories() {
   const [searchCategories, setSearchCategories] = useState(fakeCategories)
-  const [toggleAddNewCategory, setToggleAddNewCategory] = useState(false)
-  const { openModal, modalProps } = useContext(
-    ModalContext
-  ) as modalContextTypes
+  // const [toggleAddNewCategory, setToggleAddNewCategory] = useState(false)
+  const { openModal, modalProps } = useModal()
 
   const searchForCategories = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 0) {
@@ -54,48 +55,21 @@ export default function Categories() {
   }
 
   const openCategory = (categoryName: string, items: item[]) => {
-    openModal(
-      <div className="h-full space-y-4 px-4 py-4">
-        <div className="sticky top-0 z-[1] space-y-2 bg-white py-2">
-          <div className="flex w-full items-center justify-end">
-            <CloseBtn />
-          </div>
+    openModal(<CategoryItemModal />, {
+      ...modalProps,
+      height: 'min-h-[60%] max-h-[90%] ',
+      width: ' w-[94%] md:w-[55%]  xl:w-[30%]',
+      className: ' rounded-lg md:rounded-none',
+    })
+  }
 
-          <div className="space-y-4">
-            <Heading2 text={categoryName} />
-          </div>
-          <Line />
-        </div>
-
-        <div className="space-y-6">
-          {items.map((el) => (
-            <div key={el.name} className="flex items-center justify-between">
-              <div className="flex gap-x-4">
-                <ImageContainer
-                  src="/devImages/food1.webp"
-                  imageAlt=""
-                  height="h-20"
-                  width="w-20"
-                  roundedCorners="rounded-md"
-                />
-
-                <div className="flex flex-col gap-y-4">
-                  <span>{el.name}</span>
-                  <span>{el.price}</span>
-                </div>
-              </div>
-              <Button>Remove</Button>
-            </div>
-          ))}
-        </div>
-      </div>,
-      {
-        ...modalProps,
-        height: 'min-h-[60%] max-h-[90%] ',
-        width: ' w-[94%] md:w-[55%]  xl:w-[30%]',
-        className: ' rounded-lg md:rounded-none',
-      }
-    )
+  const createCategory = () => {
+    openModal(<CreateCategoryModal />, {
+      ...modalProps,
+      height: ' h-fit',
+      width: ' w-[94%] md:w-[45%]  xl:w-[25%]',
+      className: ' rounded-lg ',
+    })
   }
 
   return (
@@ -108,12 +82,12 @@ export default function Categories() {
           color="bg-secondary"
           hoverColor="hover:bg-secondaryTint"
           width="w-[9rem]"
-          events={{ onClick: () => setToggleAddNewCategory((v) => !v) }}
+          events={{ onClick: () => createCategory() }}
         >
-          <span className="font-medium text-white">
-            {toggleAddNewCategory ? <BiSave size={20} /> : <BiPlus size={20} />}
-          </span>
-          <span> {toggleAddNewCategory ? 'Save' : 'New category'}</span>
+          <>
+            <BiPlus size={20} />
+            <span>New category</span>
+          </>
         </ButtonWithIcon>
       </div>
       <div className="flex flex-col-reverse items-center gap-x-4 gap-y-4 md:flex-row lg:justify-between">
@@ -124,14 +98,6 @@ export default function Categories() {
           className="placeholder:text-black"
           events={{ onChange: searchForCategories }}
         />
-
-        {toggleAddNewCategory && (
-          <TextInput
-            id="addNewCategory"
-            placeHolder="Add new category"
-            width="w-full lg:w-[60%] xl:w-[40%] 2xl:w-[15%]"
-          />
-        )}
       </div>
 
       <div>

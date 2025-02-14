@@ -2,7 +2,7 @@
 
 import { MdOutlineLogout } from 'react-icons/md'
 import ButtonWithIcon from '../button/ButtonWithIcon'
-import { useSignout } from '@/app/(routes)/features/auth/dataFetching/hooks/useSignout'
+import { useSignout } from '@/features/auth/dataFetching/hooks/useSignout'
 import { LoadingSpinner } from '@zeco-eats-lib/utils-server'
 
 export default function SignoutBtn() {

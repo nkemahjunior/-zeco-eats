@@ -1,5 +1,5 @@
 'use client'
-import { addRestaurantCuisines } from '@/app/(routes)/features/auth/api/mutations/actions/setupActions'
+import { addRestaurantCuisines } from '@/features/auth/api/mutations/actions/setupActions'
 import { cuisineOptions } from '@/shared/api/queries/options/cuisineOptions'
 import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
 import { useSuspenseQuery } from '@tanstack/react-query'

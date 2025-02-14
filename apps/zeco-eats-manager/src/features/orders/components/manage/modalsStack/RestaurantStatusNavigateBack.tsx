@@ -3,7 +3,7 @@
 import {
   RestaurantStatusModalStackContext,
   RestaurantStatusProviderType,
-} from '@/app/(routes)/features/orders/context/modalStack/RestaurantStatusModalStackProvider'
+} from '@/features/orders/context/modalStack/RestaurantStatusModalStackProvider'
 import { useContext } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 

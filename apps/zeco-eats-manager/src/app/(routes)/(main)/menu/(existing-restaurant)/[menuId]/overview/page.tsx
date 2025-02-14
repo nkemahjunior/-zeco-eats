@@ -1,4 +1,4 @@
-import MenuOverviewUi from '@/app/(routes)/features/menu/ui/MenuOverviewUi'
+import MenuOverviewUi from '@/features/menu/ui/MenuOverviewUi'
 
 export default async function Page({
   params,
