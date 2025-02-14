@@ -15,7 +15,6 @@ import MenuHoursSkeleton from '../components/Skeletons/MenuHoursSkeleton'
 
 export default function MenuOverviewUi({ menuId }: { menuId: string }) {
   const queryClient = getQueryClient()
-  queryClient.prefetchQuery(restaurantMenusOptions)
   queryClient.prefetchQuery(
     restaurantMenuCategoriesItemsOptions(Number(menuId))
   )

@@ -1,3 +1,13 @@
+export const daysOfTheWeek = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+]
+
 export const createHours = () => {
   let initialHour = 0
 
@@ -19,20 +29,33 @@ export const convert24HrTo12Hr = (hour: number) => {
 export const createTimePoints = (
   initialHour: number,
   length: number
-): string[] => {
-  if (initialHour === 24) return [`24:00:00`] // next day 12 am. 00:00 will mean 12 am same day when converted by date object
+): {
+  display: string
+  value: string
+}[] => {
+  if (initialHour === 24)
+    return [
+      {
+        display: `24:00:00`,
+        value: `24:00:00`,
+      },
+    ] // next day 12 am. 00:00 will mean 12 am same day when converted by date object
   let initialMin = 0
   //6 points in 3hr gap
   return Array.from({ length: length }, () => {
     const time = `${initialHour < 10 ? `0${initialHour}` : initialHour}:${initialMin < 10 ? `0${initialMin}` : initialMin}:00`
     initialHour = initialMin === 0 ? initialHour : initialHour + 1
     initialMin = initialMin === 0 ? 30 : 0
-    return time
+    //return time
+
+    return {
+      display: time,
+      value: time,
+    }
   })
 }
 
 export function getDayOfWeek(dayNumber: number): string {
-  console.log('---------', dayNumber)
   switch (dayNumber) {
     case 1:
       return 'Monday'
@@ -50,6 +73,27 @@ export function getDayOfWeek(dayNumber: number): string {
       return 'Sunday'
     default:
       throw new Error('Invalid day number. Please pass a valid number.')
+  }
+}
+
+export function getDayNumber(dayName: string): number {
+  switch (dayName.toLowerCase()) {
+    case 'monday':
+      return 1
+    case 'tuesday':
+      return 2
+    case 'wednesday':
+      return 3
+    case 'thursday':
+      return 4
+    case 'friday':
+      return 5
+    case 'saturday':
+      return 6
+    case 'sunday':
+      return 7
+    default:
+      throw new Error('Invalid day name. Please pass a valid day.')
   }
 }
 
@@ -75,9 +119,9 @@ export const colorTimePoint = (
   const timePoint = new Date(`1970-01-01T${timePointTime}`)
 
   return (
-    (timePoint >= startTime && timePoint <= endTime) ||
+    timePoint >= startTime && timePoint <= endTime /*||
     (timePoint >= startTime &&
       endTime.getHours() === 0 &&
-      endTime.getMinutes() === 0)
+      endTime.getMinutes() === 0)*/
   )
 }

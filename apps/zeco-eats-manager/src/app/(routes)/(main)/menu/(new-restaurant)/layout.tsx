@@ -1,4 +1,4 @@
-import DummyMenuNav from '@/features/menu/components/nav/DummyMenuNav'
+import DummyMenuNav from '@/app/(routes)/features/menu/components/nav/DummyMenuNav'
 
 export default async function NewRestaurantLayout({
   children,

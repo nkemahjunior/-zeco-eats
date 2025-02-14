@@ -1,6 +1,7 @@
-import { restaurantMenusOptions } from '@/features/menu/api/queries/options/menuOptions'
-import MenuNav from '@/features/menu/components/nav/MenuNav'
+import { restaurantMenusOptions } from '@/app/(routes)/features/menu/api/queries/options/menuOptions'
+import MenuNav from '@/app/(routes)/features/menu/components/nav/MenuNav'
 import { getQueryClient } from '@/shared/api/tanstackQuery/get-query-client'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 interface fnProps {
@@ -18,10 +19,15 @@ export default async function ExistingRestaurantLayout({
   const menus = await queryClient.fetchQuery(restaurantMenusOptions)
   if (!menus || menus.length < 1) redirect('/menu/no-menu/first-menu')
 
+  queryClient.prefetchQuery(restaurantMenusOptions)
+
   return (
-    <div className="space-y-8">
-      <MenuNav menuId={menuId} />
-      {children}
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      {' '}
+      <div className="space-y-8">
+        <MenuNav menuId={menuId} />
+        {children}
+      </div>
+    </HydrationBoundary>
   )
 }

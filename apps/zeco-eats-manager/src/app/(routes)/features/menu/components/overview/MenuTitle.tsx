@@ -5,7 +5,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import {
   KEYrestaurantMenus,
   restaurantMenusOptions,
-} from '@/features/menu/api/queries/options/menuOptions'
+} from '@/app/(routes)/features/menu/api/queries/options/menuOptions'
 import { RxCaretSort } from 'react-icons/rx'
 import { RiPencilFill } from 'react-icons/ri'
 import Heading from '@/shared/components/text/Heading'

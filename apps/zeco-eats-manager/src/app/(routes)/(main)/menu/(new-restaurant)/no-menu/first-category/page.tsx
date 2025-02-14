@@ -1,4 +1,4 @@
-import FirstTimeCategoryUi from '@/features/menu/ui/FirstTimeCategoryUi'
+import FirstTimeCategoryUi from '@/app/(routes)/features/menu/ui/FirstTimeCategoryUi'
 
 export default function Page() {
   return (

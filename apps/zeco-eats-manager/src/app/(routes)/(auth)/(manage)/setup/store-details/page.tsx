@@ -1,4 +1,4 @@
-import SetupStoreDetailsUi from '@/features/auth/ui/setup/SetupStoreDetailsUi'
+import SetupStoreDetailsUi from '@/app/(routes)/features/auth/ui/setup/SetupStoreDetailsUi'
 
 export default function Page() {
   return (

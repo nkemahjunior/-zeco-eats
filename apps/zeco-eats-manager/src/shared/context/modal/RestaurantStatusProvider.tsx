@@ -1,5 +1,5 @@
 'use client'
-import { RestaurantStatus } from '@/features/orders/types/restaurantStatus/restaurantStatusTypes'
+import { RestaurantStatus } from '@/app/(routes)/features/orders/types/restaurantStatus/restaurantStatusTypes'
 import { createContext, useState } from 'react'
 
 export interface RestaurantStatusContextTypes {

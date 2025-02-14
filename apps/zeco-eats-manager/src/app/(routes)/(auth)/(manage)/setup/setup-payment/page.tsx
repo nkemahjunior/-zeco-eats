@@ -1,4 +1,4 @@
-import SetupPaymentUi from '@/features/auth/ui/setup/SetupPaymentUi'
+import SetupPaymentUi from '@/app/(routes)/features/auth/ui/setup/SetupPaymentUi'
 
 export default function Page() {
   return (

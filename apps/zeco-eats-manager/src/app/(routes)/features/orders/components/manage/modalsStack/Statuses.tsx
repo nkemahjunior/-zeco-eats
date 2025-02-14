@@ -5,7 +5,7 @@ import { IoPauseSharp } from 'react-icons/io5'
 import { MdOutlineEventBusy } from 'react-icons/md'
 import Status from '../Status'
 import { useState } from 'react'
-import { RestaurantStatus } from '@/features/orders/types/restaurantStatus/restaurantStatusTypes'
+import { RestaurantStatus } from '@/app/(routes)/features/orders/types/restaurantStatus/restaurantStatusTypes'
 
 interface fnProps {
   updateStatus: (arg: RestaurantStatus) => void

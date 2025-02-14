@@ -11,8 +11,8 @@ export default function MenuHours() {
     <div>
       <p className="font-medium">Menu hours</p>
       <div className="text-textTint flex items-center space-x-2">
-        <span>{activeMenu?.open_days?.replace('-', ' - ')}</span>
-        <span>{activeMenu?.time?.replace('-', ' - ')}</span>
+        <span>{activeMenu?.open_days}</span>
+        <span>{activeMenu?.time}</span>
       </div>
     </div>
   )

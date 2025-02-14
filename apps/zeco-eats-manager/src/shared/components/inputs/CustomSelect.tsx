@@ -11,12 +11,14 @@ interface dataItem {
 }
 
 interface fnProps {
-  data: dataItem[]
+  data: dataItem[] // memoized the data before passing it
   onchange: (arg: string) => void
   width?: string
   height?: string
   className?: string
   inheritWidth?: boolean
+  initialValue?: string
+  initialDisplay?: string
   //children: React.ReactNode
 }
 
@@ -47,16 +49,18 @@ export default function CustomSelect({
   inheritWidth,
   height = 'h-[12rem]',
   className,
+  initialValue,
+  initialDisplay,
 }: fnProps) {
   const [open, setOpen] = useState(false)
   // const [inputValue, setInputValue] = useState(data.at(0) || '')
-  const [inputValue, setInputValue] = useState(data.at(0)?.display || '')
+  const [inputValue, setInputValue] = useState('')
   const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    onchange(data.at(0)?.value || '')
-    setInputValue(data.at(0)?.display || '')
-  }, [data, onchange])
+    onchange(initialValue || data.at(0)?.value || '')
+    setInputValue(initialDisplay || data.at(0)?.display || '')
+  }, [data])
 
   const updateInputValue = (data: dataItem | undefined) => {
     if (!data) return

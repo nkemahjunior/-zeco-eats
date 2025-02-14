@@ -1,4 +1,4 @@
-import ManageOrdersUi from '@/features/orders/ui/ManageOrdersUi'
+import ManageOrdersUi from '@/app/(routes)/features/orders/ui/ManageOrdersUi'
 
 export default function Page() {
   return (

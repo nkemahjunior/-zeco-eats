@@ -1,4 +1,4 @@
-import MenuCategoriesUi from '@/features/menu/ui/MenuCategoriesUi'
+import MenuCategoriesUi from '@/app/(routes)/features/menu/ui/MenuCategoriesUi'
 
 export default function Page() {
   return (

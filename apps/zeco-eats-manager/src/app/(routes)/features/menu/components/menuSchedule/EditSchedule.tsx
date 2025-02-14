@@ -5,11 +5,20 @@ import {
   convert24HrTo12Hr,
   createHours,
   createTimePoints,
+  getDayNumber,
   getDayOfWeek,
 } from '../../utils/menuUtils'
 import CustomSelect from '@/shared/components/inputs/CustomSelect'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Button from '@/shared/components/button/Button'
+import { editMenuSchedule } from '../../api/mutations/actions/menuActions'
+import { useMenuId } from '../../hooks/menuHooks'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
+import ButtonWithIcon from '@/shared/components/button/ButtonWithIcon'
+import { LoadingSpinner } from '@zeco-eats-lib/utils-server'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { restaurantMenusOptions } from '../../api/queries/options/menuOptions'
 
 const daysOfTheWeek = [
   'Monday',
@@ -22,10 +31,23 @@ const daysOfTheWeek = [
 ]
 
 export default function EditSchedule() {
-  const [selectedStartTime, setSelectedStartTime] = useState('')
-  const [selectedEndTime, setSelectedEndTime] = useState('')
+  const menuId = useMenuId()
+  const { data: menus } = useSuspenseQuery(restaurantMenusOptions)
+  const curMenu = menus.find((el) => el.id === menuId)
 
-  const [selectedDays, setSelectedDays] = useState<Set<number>>(new Set())
+  const [selectedStartTime, setSelectedStartTime] = useState(
+    curMenu?.time?.split(' - ')[0] || ''
+  )
+  const [selectedEndTime, setSelectedEndTime] = useState(
+    curMenu?.time?.split(' - ')[1] || ''
+  )
+
+  const [selectedDays, setSelectedDays] = useState<Set<number>>(
+    new Set(curMenu?.open_days?.split(', ').map(getDayNumber))
+  )
+
+  const [saving, setSaving] = useState(false)
+  const router = useRouter()
 
   const addToSelectedDays = (day: number) => {
     setSelectedDays((prevSelectedDays) => {
@@ -39,25 +61,51 @@ export default function EditSchedule() {
     })
   }
 
-  const saveSchedule = () => {
-    if (selectedDays.size < 1) return console.log(' choose a day and time')
-    const schedule = [...selectedDays].map((el) => {
-      return {
-        day: getDayOfWeek(el),
-        startTime: selectedStartTime,
-        endTime: selectedEndTime,
-      }
-    })
+  const saveSchedule = async () => {
+    setSaving(true)
+    if (selectedDays.size < 1) {
+      toast.error('Select a day')
+      setSaving(false)
+      return
+    }
+    const schedule = [...selectedDays].map((el) => getDayOfWeek(el)).join(', ')
 
-    console.log(' the schedule ', schedule)
+    const res = await editMenuSchedule(
+      selectedStartTime,
+      selectedEndTime,
+      schedule,
+      menuId
+    )
+
+    if (res.success) {
+      toast.success(res.msg)
+      router.push(`/menu/${menuId}/schedule`)
+    } else toast.error(res.msg)
+
+    setSaving(false)
   }
+
+  const timePointsSelect = useMemo(() => createTimePoints(0, 49), [])
 
   return (
     <div className="h-auto w-full">
       {' '}
       <div className="w-full space-y-12">
         <div>
-          <Button events={{ onClick: saveSchedule }}> Save</Button>
+          <ButtonWithIcon
+            disable={saving}
+            width="w-[8rem]"
+            events={{ onClick: saveSchedule }}
+          >
+            {saving ? (
+              <>
+                <span>Saving</span>
+                <LoadingSpinner />
+              </>
+            ) : (
+              'Save'
+            )}
+          </ButtonWithIcon>
         </div>
         <div className="border-backgroundBorder h-[26rem] w-full space-y-8 overflow-x-auto rounded-xl border border-solid px-8 py-8 md:h-[20rem]">
           <div className="flex w-[50rem] items-center md:w-full">
@@ -81,7 +129,7 @@ export default function EditSchedule() {
                   {createTimePoints(hour, 6).map((timePoint, tpIdx) => (
                     <span
                       key={tpIdx}
-                      className={`block h-full w-full ${colorTimePoint(selectedStartTime, selectedEndTime, timePoint) && 'bg-primary'}`}
+                      className={`block h-full w-full ${colorTimePoint(selectedStartTime, selectedEndTime, timePoint.value) && 'bg-primary'}`}
                     ></span>
                   ))}
                 </div>
@@ -103,17 +151,20 @@ export default function EditSchedule() {
       <div className="-mt-[12rem] flex w-full flex-wrap items-center gap-x-20 px-8 md:-mt-[6.5rem]">
         <div className="space-y-4">
           <Heading2 text="Start time" />
+
           <CustomSelect
-            data={[{ display: 'put correct data', value: 'pcd' }]}
-            //data={createTimePoints(0, 49)}
+            data={timePointsSelect}
+            // initialDisplay={selectedStartTime}
+            // initialValue={selectedStartTime}
             onchange={(arg: string) => setSelectedStartTime(arg)}
           />
         </div>
         <div className="space-y-4">
           <Heading2 text="End time" />
           <CustomSelect
-            data={[{ display: 'put correct data', value: 'pcd' }]}
-            //data={createTimePoints(0, 49)}
+            data={timePointsSelect}
+            // initialDisplay={selectedEndTime}
+            // initialValue={selectedEndTime}
             onchange={(arg: string) => setSelectedEndTime(arg)}
           />
         </div>

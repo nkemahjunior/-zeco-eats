@@ -1,5 +1,9 @@
 'use server'
-import { Category, Menu, MenuItem } from '@/features/menu/types/MenuTypes'
+import {
+  Category,
+  Menu,
+  MenuItem,
+} from '@/app/(routes)/features/menu/types/MenuTypes'
 import { deleteFile, uploadFile } from '@/shared/api/mutations/mutations'
 import { getRestaurantId } from '@/shared/api/queries/server/serverQueriesRestaurant'
 import { MutationResponse } from '@/shared/types/apiTypes/MutationResponse'
@@ -19,7 +23,7 @@ const daysOfWeek = [
 function formatOpenDays(startDay: number, endDay: number): string {
   const start = daysOfWeek[startDay - 1]
   const end = daysOfWeek[endDay - 1]
-  return start === end ? start : `${start}-${end}`
+  return start === end ? start : `${start}, ${end}`
 }
 
 export async function createMenuAction(data: Menu): Promise<MutationResponse> {
@@ -34,7 +38,7 @@ export async function createMenuAction(data: Menu): Promise<MutationResponse> {
         Number(data.openDayStart),
         Number(data.openDayEnd)
       ),
-      time: `${data.openTime}-${data.closeTime}`,
+      time: `${data.openTime}:00-${data.closeTime}:00`,
       active: true,
     })
 
@@ -326,5 +330,31 @@ export async function addItemToCategoryAction(
   } catch (error) {
     console.error('Error adding item to category:', error)
     return { success: false, msg: 'Failed to remove category' }
+  }
+}
+
+export async function editMenuSchedule(
+  startTime: string,
+  endTime: string,
+  schedule: string,
+  menuId: number
+): Promise<MutationResponse> {
+  try {
+    const supabase = await createSupabaseServer()
+
+    const { error } = await supabase
+      .from('restaurant_menus')
+      .update({
+        open_days: schedule,
+        time: `${startTime} - ${endTime}`,
+      })
+      .eq('id', menuId)
+
+    if (error) throw error
+
+    return { success: true, msg: 'Menu schedule updated successfully' }
+  } catch (error) {
+    console.error('Error updating menu schedule:', error)
+    return { success: false, msg: 'Failed to update menu schedule' }
   }
 }

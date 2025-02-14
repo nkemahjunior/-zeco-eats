@@ -1,4 +1,4 @@
-import HomeUi from '@/features/home/ui/HomeUi'
+import HomeUi from '@/app/(routes)/features/home/ui/HomeUi'
 
 export default function Page() {
   return (

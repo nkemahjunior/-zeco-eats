@@ -1,27 +1,43 @@
+'use client'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useMenuId } from '../../hooks/menuHooks'
 import {
   colorTimePoint,
   convert24HrTo12Hr,
   createHours,
   createTimePoints,
+  daysOfTheWeek,
 } from '../../utils/menuUtils'
 
 import LinkButton from '@/shared/components/button/LinkButton'
+import { restaurantMenusOptions } from '../../api/queries/options/menuOptions'
 
-const fakeData = [
-  { day: 'Monday', startTime: '09:00:00', endTime: '12:30:00' },
-  { day: 'Tuesday', startTime: '10:00:00', endTime: '13:45:00' },
-  { day: 'Wednesday', startTime: '08:15:00', endTime: '11:00:00' },
-  { day: 'Thursday', startTime: '14:00:00', endTime: '17:30:00' },
-  { day: 'Friday', startTime: '13:00:00', endTime: '16:15:00' },
-  { day: 'Saturday', startTime: '00:00:00', endTime: '10:45:00' },
-  { day: 'Sunday', startTime: '11:00:00', endTime: '24:00:00' },
-]
-
-//   const extractTime = (time: string) => {
-//     return time.split(":"); // [hours, min, sec]
-//   };
+interface ChartData {
+  day: string
+  startTime: string
+  endTime: string
+}
 
 export default function ScheduleChart() {
+  const menuId = useMenuId()
+  const { data: menus } = useSuspenseQuery(restaurantMenusOptions)
+  const curMenu = menus.find((el) => el.id === menuId)
+
+  const startTime = curMenu?.time?.split(' - ')[0]
+  const endTime = curMenu?.time?.split(' - ')[1]
+
+  const menuDays = curMenu?.open_days
+    ?.split(', ')
+    .map((day) => day.toLocaleLowerCase())
+
+  const menuDaysSet = new Set<string>(menuDays)
+
+  const chartData: ChartData[] = daysOfTheWeek.map((day) => ({
+    day: day.toUpperCase(),
+    startTime: menuDaysSet.has(day.toLocaleLowerCase()) ? startTime || '' : '',
+    endTime: menuDaysSet.has(day.toLocaleLowerCase()) ? endTime || '' : '',
+  }))
+
   return (
     <div className="w-full space-y-12">
       <div>
@@ -49,7 +65,7 @@ export default function ScheduleChart() {
           </thead>
 
           <tbody className="bg-background w-full">
-            {fakeData.map((restauHrs, i) => (
+            {chartData?.map((restauHrs, i) => (
               <tr
                 key={i}
                 className="border-backgroundBorder hover:bg-background relative cursor-pointer border-b-[0px] border-solid transition-colors duration-300 last:border-b-0"
@@ -69,14 +85,14 @@ export default function ScheduleChart() {
                       {createTimePoints(hour, 6).map((timePoint, tpIdx) => (
                         <span
                           key={tpIdx}
-                          className={`inline-block h-full w-full ${colorTimePoint(restauHrs.startTime, restauHrs.endTime, timePoint) && 'bg-primary'}`}
+                          className={`inline-block h-full w-full ${colorTimePoint(restauHrs.startTime || '', restauHrs.endTime || '', timePoint.value) && 'bg-primary'}`}
                         ></span>
                       ))}
                     </div>
 
                     {hour === 24 && (
                       <div className="text-secondary font-medium">
-                        {restauHrs.startTime} - {restauHrs.endTime}
+                        {restauHrs?.startTime} - {restauHrs?.endTime}
                       </div>
                     )}
                   </td>
