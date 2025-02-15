@@ -22,6 +22,25 @@ export async function getRestaurantMenus(): Promise<
   return data
 }
 
+export async function getRestaurantItems(): Promise<
+  Tables<'restaurant_items'>[]
+> {
+  const supabase = await createSupabaseServer()
+  const restaurant = await getRestaurantId()
+
+  const { data, error } = await supabase
+    .from('restaurant_items')
+    .select('*')
+    .eq('restaurant_id', restaurant.id)
+
+  if (error) {
+    console.error('Error fetching items:', error)
+    throw error
+  }
+
+  return data
+}
+
 export async function getRestaurantMenusAndCategories() {
   const supabase = await createSupabaseServer()
   const restaurant = await getRestaurantId()

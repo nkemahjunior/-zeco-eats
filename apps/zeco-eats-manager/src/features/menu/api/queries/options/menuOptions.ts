@@ -1,6 +1,7 @@
 import { queryOptions } from '@tanstack/react-query'
 import {
   getRestaurantCategories,
+  getRestaurantItems,
   getRestaurantMenuCategoriesItems,
   getRestaurantMenus,
   getRestaurantMenusAndCategories,
@@ -10,6 +11,12 @@ export const KEYrestaurantMenus = ['restaurant-menus']
 export const restaurantMenusOptions = queryOptions({
   queryKey: KEYrestaurantMenus,
   queryFn: getRestaurantMenus,
+})
+
+export const KEYrestaurantItems = ['restaurant-items']
+export const restaurantItemsOptions = queryOptions({
+  queryKey: KEYrestaurantItems,
+  queryFn: getRestaurantItems,
 })
 
 export const restaurantMenuCategoriesOPtions = queryOptions({
