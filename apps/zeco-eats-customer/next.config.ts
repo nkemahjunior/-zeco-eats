@@ -51,6 +51,16 @@ const nextConfig = {
 
     return config
   },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ihydizyhbzwvaidfdunn.supabase.co',
+        pathname: '/storage/v1/object/public/zeco-eats/**',
+      },
+    ],
+  },
 }
 
 const plugins = [
