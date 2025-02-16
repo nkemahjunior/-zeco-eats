@@ -1,40 +1,35 @@
-'use client'
+import { getQueryClient } from '@/shared/api/tanstackQuery/get-query-client'
 import Carousel from '@/shared/components/carousel/Carousel'
-import { EmblaOptionsType } from 'embla-carousel'
-import { useEffect, useState } from 'react'
-import PopularRestaurantLargeScreen from './PopularRestaurantsLargeScreen'
 import Heading from '@/shared/components/text/Heading'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+import PopularRestaurantLargeScreen from './PopularRestaurantsLargeScreen'
+import { popularRestaurantsOptions } from '../../api/options/options'
+import { Suspense } from 'react'
+import PopularRestaurantsCardLoading from '../skeletons/PopularRestaurantsCardLoading'
 
 export default function PopularRestaurantsSection() {
-  const OPTIONS: EmblaOptionsType = { loop: true, slidesToScroll: 'auto' }
-  const SLIDE_COUNT = 5
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
-
-  const [isMobile, setIsMobile] = useState(true)
-  useEffect(() => {
-    function checkScreenWidth() {
-      if (window.screen.width < 768) {
-        setIsMobile(true)
-      } else {
-        setIsMobile(false)
-      }
-      //window.screen.width < 768 ? setIsMobile(true) : setIsMobile(false)
-    }
-    checkScreenWidth()
-    window.addEventListener('resize', checkScreenWidth)
-    return () => window.removeEventListener('resize', checkScreenWidth)
-  }, [])
+  const queryClient = getQueryClient()
+  queryClient.prefetchQuery(popularRestaurantsOptions)
 
   return (
     <section className="mx-sm mt-Ysm md:mx-md lg:mx-lg lg:mt-Ylg xl:mx-xl 2xl:mx-xxl 2xl:mt-YXl">
       <div className="mb-Ysm lg:mb-Ylg 2xl:mb-YXl">
         <Heading text="ZecoEats Popular Restaurants" />
       </div>
-      {isMobile ? (
-        <Carousel slides={SLIDES} options={OPTIONS} />
-      ) : (
-        <PopularRestaurantLargeScreen />
-      )}
+
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Suspense fallback={<PopularRestaurantsCardLoading />}>
+          {' '}
+          {/* Mobile Carousel */}
+          <div className="block md:hidden">
+            <Carousel />
+          </div>
+          {/* Desktop Grid */}
+          <div className="hidden md:block">
+            <PopularRestaurantLargeScreen />
+          </div>
+        </Suspense>
+      </HydrationBoundary>
     </section>
   )
 }
