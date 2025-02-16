@@ -4,6 +4,7 @@ import { poppins } from '@/shared/fonts/fonts'
 import NavBar from '../../src/shared/components/navbar/NavBar'
 import FooterSection from '@/shared/components/footer/FooterSection'
 import React from 'react'
+import TanstackQueryProvider from '@/shared/api/tanstackQuery/TanstackQueryProvider'
 
 export const metadata: Metadata = {
   title: 'zeco eats',
@@ -16,9 +17,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} text-sm antialiased`}>
-        <NavBar />
-        {children}
-        <FooterSection />
+        <TanstackQueryProvider>
+          <NavBar />
+          {children}
+          <FooterSection />
+        </TanstackQueryProvider>
       </body>
     </html>
   )
