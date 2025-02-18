@@ -60,44 +60,129 @@ export type Database = {
         }
         Relationships: []
       }
+      customisation_options: {
+        Row: {
+          created_at: string
+          id: number
+          max_qty: number | null
+          min_qty: number | null
+          name: string | null
+          price: string | null
+          restaurant_id: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          max_qty?: number | null
+          min_qty?: number | null
+          name?: string | null
+          price?: string | null
+          restaurant_id?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          max_qty?: number | null
+          min_qty?: number | null
+          name?: string | null
+          price?: string | null
+          restaurant_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'customisation_options_restaurant_id_fkey'
+            columns: ['restaurant_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      customisations: {
+        Row: {
+          created_at: string
+          id: number
+          max_price: string | null
+          min_price: string | null
+          name: string | null
+          restaurant_id: number | null
+          type: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          max_price?: string | null
+          min_price?: string | null
+          name?: string | null
+          restaurant_id?: number | null
+          type?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          max_price?: string | null
+          min_price?: string | null
+          name?: string | null
+          restaurant_id?: number | null
+          type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'customisations_restaurant_id_fkey'
+            columns: ['restaurant_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       restaurant: {
         Row: {
-          avg_cook_time: string | null
           created_at: string
+          delivery_fee: number | null
           id: number
           image: string | null
           lat: string | null
           location: string | null
           long: string | null
+          max_avg_cook_time: number | null
+          min_avg_cook_time: number | null
           min_order_price: string | null
           name: string | null
           profile_pic: string | null
+          rating: number | null
           user_id: string | null
         }
         Insert: {
-          avg_cook_time?: string | null
           created_at?: string
+          delivery_fee?: number | null
           id?: number
           image?: string | null
           lat?: string | null
           location?: string | null
           long?: string | null
+          max_avg_cook_time?: number | null
+          min_avg_cook_time?: number | null
           min_order_price?: string | null
           name?: string | null
           profile_pic?: string | null
+          rating?: number | null
           user_id?: string | null
         }
         Update: {
-          avg_cook_time?: string | null
           created_at?: string
+          delivery_fee?: number | null
           id?: number
           image?: string | null
           lat?: string | null
           location?: string | null
           long?: string | null
+          max_avg_cook_time?: number | null
+          min_avg_cook_time?: number | null
           min_order_price?: string | null
           name?: string | null
           profile_pic?: string | null
+          rating?: number | null
           user_id?: string | null
         }
         Relationships: []
