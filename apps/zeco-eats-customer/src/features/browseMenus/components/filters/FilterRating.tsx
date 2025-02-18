@@ -77,7 +77,6 @@ export default function FilterRating() {
         closeModal={setOpen}
         modalIsOpen={open}
         expandLeft="-left-4"
-        zIndex="z-[8]"
       />
     </>
   )

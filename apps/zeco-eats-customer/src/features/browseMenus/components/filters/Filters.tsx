@@ -13,7 +13,7 @@ export default function Filters() {
         <FilterUnder30Min />
         <FilterHighestRated />
         <FilterRating />
-        <FilterPrice />
+        {/* <FilterPrice /> */}
       </div>
       <ResultsAndReset />
 

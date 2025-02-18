@@ -1,28 +1,54 @@
 import CardTitle from '@/shared/components/text/CardTitle'
+import { Shimmer } from '@zeco-eats-lib/utils-client'
 import Image from 'next/image'
+import { useState } from 'react'
 
-export default function DishCard() {
+interface DishCardProps {
+  name: string
+  image: string
+  minAvgCookTime: number
+  maxAvgCookTime: number
+  rating: number
+}
+
+export default function DishCard({
+  name,
+  image,
+  minAvgCookTime,
+  maxAvgCookTime,
+  rating,
+}: DishCardProps) {
+  const [isLoading, setIsLoading] = useState(true)
+
   return (
     <div className="w-full space-y-4 border-0 border-solid border-purple-600">
       <div className="relative h-[8rem] w-full overflow-hidden rounded-lg border-0 border-solid border-red-600">
+        {isLoading && (
+          <Shimmer className="absolute left-0 top-0 h-full w-full rounded-lg" />
+        )}
         <Image
-          alt="food's image"
-          src={'/devImages/food1.webp'}
+          alt={`Image of ${name}`}
+          src={image}
           fill
           quality={100}
           style={{
             objectFit: 'cover',
+            display: isLoading ? 'none' : 'block',
           }}
+          onLoad={() => setIsLoading(false)}
         />
       </div>
       <div className="flex w-full items-center justify-between border-0 border-solid border-green-600">
         <div className="space-y-1">
-          {/* <p className="text-lg font-medium capitalize">Master wings</p> */}
-          <CardTitle text="Master wings" />
-          <p className="text-stone-400">20-30 min</p>
+          <CardTitle text={name} />
+          <p className="text-stone-400">
+            {minAvgCookTime}-{maxAvgCookTime} min
+          </p>
         </div>
 
-        <div className="rounded-full bg-backgroundShade2 p-2 text-xs">4.0</div>
+        <div className="rounded-full bg-backgroundShade2 p-2 text-xs">
+          {rating}
+        </div>
       </div>
     </div>
   )

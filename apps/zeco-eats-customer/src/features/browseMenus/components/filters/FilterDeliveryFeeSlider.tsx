@@ -6,6 +6,7 @@ import DisplaySelectedPrice from './DisplaySelectedPrice'
 import DeliveryPrices from './DeleveryPrices'
 import SliderLine from './SliderLine'
 import SliderBall from './SliderBall'
+import { useBrowseMenus } from '../../context/BrowseMenusContext'
 
 export default function FilterDeliveryFeeSlider({
   modlaIsOpen,
@@ -16,6 +17,8 @@ export default function FilterDeliveryFeeSlider({
   modalPosition: number
   modalPadding: number
 }) {
+  const { applyFilter, resetFilter } = useBrowseMenus()
+
   const [selectedValue, setSelectedValue] = useState('1')
   const [isGrabbing, setIsGrabbing] = useState(false)
   const [sliderBallPosition, setSliderBallPosition] = useState(0)
@@ -126,6 +129,11 @@ export default function FilterDeliveryFeeSlider({
     setIsGrabbing(false)
   }
 
+  const reset = () => {
+    setSliderBallPosition(slidePositions[0])
+    resetFilter('deliveryFee')
+  }
+
   return (
     <div className="space-y-6">
       <DisplaySelectedPrice selectedValue={selectedValue} />
@@ -188,10 +196,16 @@ export default function FilterDeliveryFeeSlider({
       </div>
 
       <div className="flex flex-col-reverse space-y-2 lg:flex-row lg:justify-end lg:space-x-4 lg:space-y-0">
-        <button className="h-[3rem] w-full rounded-lg font-medium text-black transition-colors duration-300 hover:bg-backgroundShade2 lg:w-[7rem]">
+        <button
+          className="h-[3rem] w-full rounded-lg font-medium text-black transition-colors duration-300 hover:bg-backgroundShade2 lg:w-[7rem]"
+          onClick={reset}
+        >
           <span>Reset</span>
         </button>
-        <button className="h-[3rem] w-full rounded-lg bg-secondary font-medium text-white transition-colors duration-300 hover:bg-secondaryTint lg:w-[7rem]">
+        <button
+          className="h-[3rem] w-full rounded-lg bg-secondary font-medium text-white transition-colors duration-300 hover:bg-secondaryTint lg:w-[7rem]"
+          onClick={() => applyFilter('deliveryFee', Number(selectedValue))}
+        >
           <span>Apply</span>
         </button>
       </div>
