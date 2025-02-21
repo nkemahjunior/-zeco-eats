@@ -1,6 +1,7 @@
 'use client'
 import Heading from '@/shared/components/text/Heading'
 import PopularCategoriesCard from './PopularCategoriesCard'
+import Link from 'next/link'
 
 const popularCategories = [
   {
@@ -50,12 +51,16 @@ export default function PopularCategoriesSection() {
 
       <div className="grid grid-cols-2 gap-x-1 gap-y-4 md:grid-cols-3 md:gap-x-2 lg:gap-x-6 xl:gap-x-14 2xl:grid-cols-6 2xl:gap-x-4">
         {popularCategories.map((category, index) => (
-          <PopularCategoriesCard
+          <Link
             key={index}
-            name={category.name}
-            image={category.image}
-            numRestaurants={category.numRestaurants}
-          />
+            href={`/browse/?cuisine=${category.name.replaceAll(' ', '+')}`}
+          >
+            <PopularCategoriesCard
+              name={category.name}
+              image={category.image}
+              numRestaurants={category.numRestaurants}
+            />
+          </Link>
         ))}
       </div>
     </section>
