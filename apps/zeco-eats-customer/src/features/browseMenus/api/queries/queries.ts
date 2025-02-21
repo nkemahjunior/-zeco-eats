@@ -36,6 +36,9 @@ export const getRestaurants = async (
   // Apply cuisine filter
   if (cuisine) {
     const cuisineU = cuisine.toLocaleLowerCase()
+
+    console.log('----------------------------------')
+    console.log(cuisineU)
     query = query.or(
       `cuisine1.eq.${cuisineU},cuisine2.eq.${cuisineU},cuisine3.eq.${cuisineU}`
     )

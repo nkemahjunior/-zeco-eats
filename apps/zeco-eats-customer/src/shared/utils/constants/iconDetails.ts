@@ -19,7 +19,7 @@ export const foodCategoriesIcons = [
   { Icon: Bakery, name: 'Bakery' },
   { Icon: FamilyMeals, name: 'Family Meals' },
   { Icon: BBQ, name: 'BBQ' },
-  { Icon: FastFood, name: 'Fast Food' },
+  { Icon: FastFood, name: 'Fast Foods' },
   { Icon: Dessert, name: 'Dessert' },
   { Icon: Vegan, name: 'Vegan' },
   { Icon: Soup, name: 'Soup' },

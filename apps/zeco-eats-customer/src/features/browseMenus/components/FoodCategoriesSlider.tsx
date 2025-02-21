@@ -6,9 +6,9 @@ import '@/features/browseMenus/styles/foodCategoriesSliderStyle.css'
 
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import { useState } from 'react'
-import { FoodCategoryName } from '../types/browseMenuTypes'
 import { foodCategoriesIcons } from '@/shared/utils/constants/iconDetails'
 import { useBrowseMenus } from '../context/BrowseMenusContext'
+import { FoodCategoryName } from '@/shared/types/sharedTypes'
 
 // Colors for backgrounds
 const colors = [
