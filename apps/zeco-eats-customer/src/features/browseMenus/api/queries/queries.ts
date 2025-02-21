@@ -21,8 +21,7 @@ export const getRestaurants = async (
   let query = supabase
     .from('restaurant')
     .select('*', { count: 'exact' })
-    //.range((page - 1) * limit, page * limit - 1)
-    .range(0, page * limit - 1)
+    .range((page - 1) * limit, page * limit - 1)
 
   // Apply delivery fee filter if selected
   if (deliveryFee !== null) {
