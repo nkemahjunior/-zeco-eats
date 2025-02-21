@@ -1,8 +1,8 @@
 'use client'
 
 import { useBrowseMenus } from '../../context/BrowseMenusContext'
+import DishCardSkeleton from '../skeletons/DishCardSkeleton'
 import DishCard from './DishCard'
-import { Shimmer } from '@zeco-eats-lib/utils-client'
 
 // Component Using the Context
 export default function Dishes() {
@@ -15,7 +15,7 @@ export default function Dishes() {
     return (
       <div className="grid grid-cols-1 gap-y-6 md:grid-cols-3 md:gap-x-4 lg:grid-cols-4">
         {Array.from({ length: 8 }).map((_, index) => (
-          <Shimmer key={index} className="h-[12rem] w-full rounded-lg" />
+          <DishCardSkeleton key={index} />
         ))}
       </div>
     )
@@ -37,7 +37,7 @@ export default function Dishes() {
 
         {isFetching &&
           Array.from({ length: 4 }).map((_, index) => (
-            <Shimmer key={index} className="h-[12rem] w-full rounded-lg" />
+            <DishCardSkeleton key={index} />
           ))}
       </div>
 
@@ -56,18 +56,3 @@ export default function Dishes() {
     </div>
   )
 }
-
-// const [isMobile, setIsMobile] = useState(true)
-// useEffect(() => {
-//   function checkScreenWidth() {
-//     if (window.screen.width < 768) {
-//       setIsMobile(true)
-//     } else {
-//       setIsMobile(false)
-//     }
-//     // window.screen.width < 768 ? setIsMobile(true) : setIsMobile(false)
-//   }
-//   checkScreenWidth()
-//   window.addEventListener('resize', checkScreenWidth)
-//   return () => window.removeEventListener('resize', checkScreenWidth)
-// }, [isMobile])

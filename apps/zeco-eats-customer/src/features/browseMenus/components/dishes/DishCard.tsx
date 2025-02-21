@@ -1,7 +1,7 @@
 import CardTitle from '@/shared/components/text/CardTitle'
-import { Shimmer } from '@zeco-eats-lib/utils-client'
 import Image from 'next/image'
 import { useState } from 'react'
+import ImageSkeleton from '../skeletons/ImageSkeleton'
 
 interface DishCardProps {
   name: string
@@ -23,9 +23,7 @@ export default function DishCard({
   return (
     <div className="w-full space-y-4 border-0 border-solid border-purple-600">
       <div className="relative h-[8rem] w-full overflow-hidden rounded-lg border-0 border-solid border-red-600">
-        {isLoading && (
-          <Shimmer className="absolute left-0 top-0 h-full w-full rounded-lg" />
-        )}
+        {isLoading && <ImageSkeleton />}
         <Image
           alt={`Image of ${name}`}
           src={image}
