@@ -139,6 +139,9 @@ export type Database = {
       restaurant: {
         Row: {
           created_at: string
+          cuisine1: string | null
+          cuisine2: string | null
+          cuisine3: string | null
           delivery_fee: number | null
           id: number
           image: string | null
@@ -155,6 +158,9 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          cuisine1?: string | null
+          cuisine2?: string | null
+          cuisine3?: string | null
           delivery_fee?: number | null
           id?: number
           image?: string | null
@@ -171,6 +177,9 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          cuisine1?: string | null
+          cuisine2?: string | null
+          cuisine3?: string | null
           delivery_fee?: number | null
           id?: number
           image?: string | null
