@@ -7,7 +7,6 @@ import { BrowseMenusProvider } from '../context/BrowseMenusContext'
 export default function BrowseDishes() {
   return (
     <BrowseMenusProvider>
-      {' '}
       <div className="mx-sm md:mx-md lg:mx-lg xl:mx-xl 2xl:mx-[14rem]">
         <FoodCategoriesSlider />
         <Filters />

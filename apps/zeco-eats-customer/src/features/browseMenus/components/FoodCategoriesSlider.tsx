@@ -3,22 +3,26 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import { usePrevNextButtons } from '@/shared/components/carousel/EmblaCarouselArrowBtns'
 import '@/features/browseMenus/styles/foodCategoriesSliderStyle.css'
-import Breakfast from '../icons/breakfast-svgrepo-com.svg'
-import BBQ from '../icons/bbq-chi-ken-svgrepo-com.svg'
-import Bakery from '../icons/bread-svgrepo-com.svg'
-import FastFood from '../icons/fast-food-svgrepo-com.svg'
-import Vegan from '../icons/salad-svgrepo-com.svg'
-import Supper from '../icons/supper-restaurant-svgrepo-com.svg'
-import Launch from '../icons/food-svgrepo-com.svg'
-import FamilyMeals from '../icons/fried-chicken-meal-svgrepo-com.svg'
-import Dessert from '../icons/pumpkin-food-fall-svgrepo-com.svg'
-import Coffee from '../icons/coffee-svgrepo-com.svg'
-import FruitJuice from '../icons/juice-svgrepo-com.svg'
-import Soup from '../icons/soup-svgrepo-com.svg'
-import Snack from '../icons/popcorn-svgrepo-com.svg'
+
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
+import { useState } from 'react'
+import { FoodCategoryName } from '../types/browseMenuTypes'
+import { foodCategoriesIcons } from '@/shared/utils/constants/iconDetails'
+import { useBrowseMenus } from '../context/BrowseMenusContext'
+
+// Colors for backgrounds
+const colors = [
+  'bg-red-200',
+  'bg-yellow-200',
+  'bg-green-200',
+  'bg-blue-200',
+  'bg-pink-200',
+  'bg-purple-200',
+]
 
 export default function FoodCategoriesSlider() {
+  const { applyFilter } = useBrowseMenus()
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     slidesToScroll: 'auto',
@@ -31,21 +35,12 @@ export default function FoodCategoriesSlider() {
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi)
 
-  const foodCategoriesIcons = [
-    { Icon: Breakfast, name: 'Breakfast' },
-    { Icon: Launch, name: 'Lunch' },
-    { Icon: Supper, name: 'Supper' },
-    { Icon: Bakery, name: 'Bakery' },
-    { Icon: FamilyMeals, name: 'Family Meals' },
-    { Icon: BBQ, name: 'BBQ' },
-    { Icon: FastFood, name: 'Fast Food' },
-    { Icon: Dessert, name: 'Dessert' },
-    { Icon: Vegan, name: 'Vegan' },
-    { Icon: Soup, name: 'Soup' },
-    { Icon: FruitJuice, name: 'Fruit Juice' },
-    { Icon: Coffee, name: 'Coffee' },
-    { Icon: Snack, name: 'Snacks' },
-  ]
+  const [activeIcon, setActiveIcon] = useState<FoodCategoryName | null>(null)
+
+  const iconClicked = (name: FoodCategoryName) => {
+    setActiveIcon(name)
+    applyFilter('cuisine', name)
+  }
 
   return (
     <div className="embla relative">
@@ -55,8 +50,17 @@ export default function FoodCategoriesSlider() {
             <div
               className="embla__slide flex cursor-pointer flex-col items-center space-y-2"
               key={i}
+              onClick={() => iconClicked(el.name)}
             >
-              <el.Icon width={35} height={35} />
+              <div
+                className={`rounded-full p-3 transition-colors duration-300 ${colors[i % colors.length]}`}
+              >
+                <div
+                  className={` ${activeIcon === el.name ? 'rotate-[95deg]' : ''} transition-transform duration-300`}
+                >
+                  <el.Icon width={35} height={35} />
+                </div>
+              </div>
               <p className="text-xs font-medium"> {el.name}</p>
             </div>
           ))}

@@ -6,7 +6,6 @@ import React, {
   useEffect,
   useState,
   ReactNode,
-  useCallback,
   useMemo,
 } from 'react'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
@@ -14,6 +13,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Tables } from '@zeco-eats-lib/utils-client'
 import { getRestaurantsQueryOptions } from '../api/options/options'
 import { BrowseRestaurantsFilter } from '../api/queries/queries'
+import { FoodCategoryName } from '../types/browseMenuTypes'
 
 // Context Type
 interface BrowseMenusContextType {
@@ -58,6 +58,7 @@ export const BrowseMenusProvider = ({ children }: { children: ReactNode }) => {
     under30Min: false,
     sortHighestRated: false,
     rating: null as number | null,
+    cuisine: null as FoodCategoryName | null,
   })
 
   // Pagination Functions
@@ -96,6 +97,7 @@ export const BrowseMenusProvider = ({ children }: { children: ReactNode }) => {
       under30Min: false,
       sortHighestRated: false,
       rating: null,
+      cuisine: null,
     })
     setPage(1)
     router.push(pathname) // Clear all params
@@ -109,6 +111,7 @@ export const BrowseMenusProvider = ({ children }: { children: ReactNode }) => {
       under30Min: sp.get('under30Min') === 'true',
       sortHighestRated: sp.get('sortHighestRated') === 'true',
       rating: sp.get('rating') ? Number(sp.get('rating')) : null,
+      cuisine: sp.get('cuisine') as FoodCategoryName,
     })
   }, [searchParams])
 

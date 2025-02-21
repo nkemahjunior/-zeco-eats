@@ -1,13 +1,12 @@
 import { createSupabaseClient } from '@zeco-eats-lib/utils-client'
-
-//deliveryFee: number | null = null,
-// maxCookTime: number | null = null // in minutes
+import { FoodCategoryName } from '../../types/browseMenuTypes'
 
 export interface BrowseRestaurantsFilter {
   deliveryFee?: number | null
   under30Min?: boolean
   sortHighestRated?: boolean
   rating?: number | null
+  cuisine?: FoodCategoryName | null
 }
 
 export const getRestaurants = async (
@@ -15,12 +14,9 @@ export const getRestaurants = async (
   limit = 20,
   filters: BrowseRestaurantsFilter = {}
 ) => {
-  const { deliveryFee, under30Min, sortHighestRated, rating } = filters
+  const { deliveryFee, under30Min, sortHighestRated, rating, cuisine } = filters
 
   const supabase = createSupabaseClient()
-
-  console.log('innnnnnnnnnnnnnnnnnnnnnnnn')
-  console.log(filters)
 
   let query = supabase
     .from('restaurant')
@@ -44,6 +40,14 @@ export const getRestaurants = async (
 
   if (rating) {
     query = query.gte('rating', rating)
+  }
+
+  // Apply cuisine filter
+  if (cuisine) {
+    const cuisineU = cuisine.toLocaleLowerCase()
+    query = query.or(
+      `cuisine1.eq.${cuisineU},cuisine2.eq.${cuisineU},cuisine3.eq.${cuisineU}`
+    )
   }
 
   const { data, count, error } = await query
