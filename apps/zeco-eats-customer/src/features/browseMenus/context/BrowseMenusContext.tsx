@@ -12,8 +12,8 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
 import { Tables } from '@zeco-eats-lib/utils-client'
 import { getRestaurantsQueryOptions } from '../api/options/options'
-import { BrowseRestaurantsFilter } from '../api/queries/queries'
-import { FoodCategoryName } from '../types/browseMenuTypes'
+import { BrowseRestaurantsFilter } from '../types/browseMenuTypes'
+import { FoodCategoryName } from '@/shared/types/sharedTypes'
 
 // Context Type
 interface BrowseMenusContextType {

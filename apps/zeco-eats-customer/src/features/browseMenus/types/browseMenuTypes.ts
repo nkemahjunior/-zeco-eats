@@ -1,3 +1,9 @@
-import { foodCategoriesIcons } from '@/shared/utils/constants/iconDetails'
+import { FoodCategoryName } from '@/shared/types/sharedTypes'
 
-export type FoodCategoryName = (typeof foodCategoriesIcons)[number]['name']
+export interface BrowseRestaurantsFilter {
+  deliveryFee?: number | null
+  under30Min?: boolean
+  sortHighestRated?: boolean
+  rating?: number | null
+  cuisine?: FoodCategoryName | null
+}

@@ -1,13 +1,5 @@
 import { createSupabaseClient } from '@zeco-eats-lib/utils-client'
-import { FoodCategoryName } from '../../types/browseMenuTypes'
-
-export interface BrowseRestaurantsFilter {
-  deliveryFee?: number | null
-  under30Min?: boolean
-  sortHighestRated?: boolean
-  rating?: number | null
-  cuisine?: FoodCategoryName | null
-}
+import { BrowseRestaurantsFilter } from '../../types/browseMenuTypes'
 
 export const getRestaurants = async (
   page = 1,

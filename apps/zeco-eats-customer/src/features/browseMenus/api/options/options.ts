@@ -1,4 +1,5 @@
-import { BrowseRestaurantsFilter, getRestaurants } from '../queries/queries'
+import { BrowseRestaurantsFilter } from '../../types/browseMenuTypes'
+import { getRestaurants } from '../queries/queries'
 
 export const getRestaurantsQueryOptions = (
   page: number,
