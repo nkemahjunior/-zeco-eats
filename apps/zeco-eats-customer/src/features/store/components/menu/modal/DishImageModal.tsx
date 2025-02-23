@@ -5,8 +5,10 @@ import { RxCross2 } from 'react-icons/rx'
 
 export default function DishImageModal({
   isModal,
+  imageUrl,
 }: {
   isModal: boolean | undefined
+  imageUrl: string
 }) {
   const router = useRouter()
   const imageRef = useRef<HTMLImageElement | null>(null)
@@ -67,7 +69,7 @@ export default function DishImageModal({
           onPointerLeave: () => setHover(false),
         }}
         height="lg:h-full h-[12rem]"
-        src="/devImages/food1.webp"
+        src={imageUrl}
         width=" w-full"
         imageAlt="picture of this dish"
         quality={100}

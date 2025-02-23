@@ -7,9 +7,20 @@ import CurrentMenuIndicator from './CurrentMenuIndicator'
 import MenuItem from './MenuItem'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import { useDeviceType } from '@/shared/hooks/useDeviceType'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { getCompleteRestaurantMenuOption } from '../../api/queries/options/options'
+import { useStoreId } from '../../hooks/useStoreId'
 
 export default function Menu() {
   // const menuTitleRefs = useRef<Record<number, HTMLSpanElement | null>>({});
+
+  const storeId = useStoreId()
+  const { data: completeMenu } = useSuspenseQuery(
+    getCompleteRestaurantMenuOption(Number(storeId))
+  )
+
+  // console.log("*********************************************");
+  // console.log(completeMenu);
   const { isMobile } = useDeviceType()
 
   const [menuTitleDimension, setmenuTitleDimension] = useState({
@@ -27,33 +38,34 @@ export default function Menu() {
   const menuTitleRefs = useRef<(HTMLSpanElement | null)[]>([])
   const menuRefs = useRef<(HTMLDivElement | null)[]>([])
 
-  const titles = [
-    'Sides',
-    'Sandwiches',
-    'Burgers',
-    'All Day Dine',
-    'Toasts',
-    'Desserts',
-    'Saver Menu',
-    'Soft Drinks',
-    'Coffees',
-    'Hot Teas',
-    'Iced Teas',
-    'Juices',
-    'Beers and Ciders',
-    'Wines',
-    'Bubbles',
-    // "Smoothies",
-    // "Mocktails",
-    // "Cocktails",
-    // "Spirits",
-    // "Milkshakes",
-    // "Appetizers",
-    // "Soups",
-    // "Salads",
-    // "Main Course",
-    // "Kids Menu",
-  ]
+  const titles = completeMenu.categories.map((el) => el.category.name)
+  //   = [
+  //   'Sides',
+  //   'Sandwiches',
+  //   'Burgers',
+  //   'All Day Dine',
+  //   'Toasts',
+  //   'Desserts',
+  //   'Saver Menu',
+  //   'Soft Drinks',
+  //   'Coffees',
+  //   'Hot Teas',
+  //   'Iced Teas',
+  //   'Juices',
+  //   'Beers and Ciders',
+  //   'Wines',
+  //   'Bubbles',
+  //   // "Smoothies",
+  //   // "Mocktails",
+  //   // "Cocktails",
+  //   // "Spirits",
+  //   // "Milkshakes",
+  //   // "Appetizers",
+  //   // "Soups",
+  //   // "Salads",
+  //   // "Main Course",
+  //   // "Kids Menu",
+  // ]
 
   useEffect(() => {
     if (!scrollAreaRef.current) return
@@ -221,9 +233,20 @@ export default function Menu() {
         </div>
       </div>
 
-      <div className="mt-8 divide-y-4 divide-backgroundBorder bg-white lg:space-y-8 lg:divide-y-0">
+      {/* <div className="mt-8 divide-y-4 divide-backgroundBorder bg-white lg:space-y-8 lg:divide-y-0">
         {titles.map((el, i) => (
           <MenuItem key={i} menuIndex={i} menuRefs={menuRefs} testEl={el} />
+        ))}
+      </div> */}
+      <div className="mt-8 divide-y-4 divide-backgroundBorder bg-white lg:space-y-8 lg:divide-y-0">
+        {completeMenu.categories.map((el, i) => (
+          <MenuItem
+            key={i}
+            menuIndex={i}
+            menuRefs={menuRefs}
+            categoryName={el.category.name}
+            items={el.items}
+          />
         ))}
       </div>
     </>

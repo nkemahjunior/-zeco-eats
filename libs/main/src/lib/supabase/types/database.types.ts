@@ -103,7 +103,9 @@ export type Database = {
           created_at: string
           id: number
           max_price: string | null
+          max_qty: number | null
           min_price: string | null
+          min_qty: number | null
           name: string | null
           restaurant_id: number | null
           type: string | null
@@ -112,7 +114,9 @@ export type Database = {
           created_at?: string
           id?: number
           max_price?: string | null
+          max_qty?: number | null
           min_price?: string | null
+          min_qty?: number | null
           name?: string | null
           restaurant_id?: number | null
           type?: string | null
@@ -121,7 +125,9 @@ export type Database = {
           created_at?: string
           id?: number
           max_price?: string | null
+          max_qty?: number | null
           min_price?: string | null
+          min_qty?: number | null
           name?: string | null
           restaurant_id?: number | null
           type?: string | null
@@ -289,6 +295,82 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: 'restaurant_items_restaurant_id_fkey'
+            columns: ['restaurant_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      restaurant_menu_all: {
+        Row: {
+          category_id: number | null
+          created_at: string
+          customisation_id: number | null
+          customisation_option_id: number | null
+          id: number
+          item_id: number | null
+          menu_id: number | null
+          restaurant_id: number | null
+        }
+        Insert: {
+          category_id?: number | null
+          created_at?: string
+          customisation_id?: number | null
+          customisation_option_id?: number | null
+          id?: number
+          item_id?: number | null
+          menu_id?: number | null
+          restaurant_id?: number | null
+        }
+        Update: {
+          category_id?: number | null
+          created_at?: string
+          customisation_id?: number | null
+          customisation_option_id?: number | null
+          id?: number
+          item_id?: number | null
+          menu_id?: number | null
+          restaurant_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'restaurant_menu_all_category_id_fkey'
+            columns: ['category_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant_categories'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'restaurant_menu_all_customisation_id_fkey'
+            columns: ['customisation_id']
+            isOneToOne: false
+            referencedRelation: 'customisations'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'restaurant_menu_all_customisation_option_id_fkey'
+            columns: ['customisation_option_id']
+            isOneToOne: false
+            referencedRelation: 'customisation_options'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'restaurant_menu_all_item_id_fkey'
+            columns: ['item_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant_items'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'restaurant_menu_all_menu_id_fkey'
+            columns: ['menu_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant_menus'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'restaurant_menu_all_restaurant_id_fkey'
             columns: ['restaurant_id']
             isOneToOne: false
             referencedRelation: 'restaurant'

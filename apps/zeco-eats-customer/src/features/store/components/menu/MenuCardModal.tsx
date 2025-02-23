@@ -5,6 +5,11 @@ import DishInfoModal from './modal/DishInfoModal'
 import { useRef } from 'react'
 import { useIsIntersecting } from '@/shared/hooks/useIsIntersecting'
 import StickyModalTitle from './modal/StickyModalTitle'
+import { useQuery } from '@tanstack/react-query'
+import { getItemsAndCustomisationOption } from '../../api/queries/options/options'
+import { useSearchParams } from 'next/navigation'
+import { VIEW_DISH } from '../../utils/modalUrlKeys'
+import DishInfoModalProvider from './modal/provider/DishInfoModalProvider'
 
 export default function MenuCardModal({
   gapx = 'gap-x-8',
@@ -13,13 +18,21 @@ export default function MenuCardModal({
   gapx?: string
   isModal?: boolean
 }) {
-  const observerRef = useRef<HTMLDivElement | null>(null)
+  const searchParams = useSearchParams()
+  const itemId = searchParams.get(VIEW_DISH)
 
+  const { data, isLoading } = useQuery(
+    getItemsAndCustomisationOption(Number(itemId))
+  )
+
+  const observerRef = useRef<HTMLDivElement | null>(null)
   const isIntersecting = useIsIntersecting(observerRef, true, {
     root: null,
     rootMargin: '0px ',
     threshold: 1,
   })
+
+  if (isLoading) return <p>Loading</p>
 
   return (
     <div
@@ -32,7 +45,7 @@ export default function MenuCardModal({
         {isModal && (
           <StickyModalTitle
             isIntersecting={isIntersecting}
-            title="Pesto Mozzarella"
+            title={`${data?.item.name}`}
           />
         )}
         <div ref={observerRef} className="h-1 w-full"></div>
@@ -40,8 +53,15 @@ export default function MenuCardModal({
         <div
           className={`flex h-full w-full flex-col space-y-4 lg:flex-row lg:space-y-0 ${gapx}`}
         >
-          <DishImageModal isModal={isModal} />
-          <DishInfoModal isModal={isModal} />
+          <DishImageModal
+            isModal={isModal}
+            imageUrl={data?.item.image_url || '/devImages/food1.webp'}
+          />
+          {data?.item && (
+            <DishInfoModalProvider>
+              <DishInfoModal isModal={isModal} item={data} />
+            </DishInfoModalProvider>
+          )}
         </div>
       </div>
     </div>

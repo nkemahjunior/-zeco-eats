@@ -6,29 +6,37 @@ import {
 import SelectionItem from './SelectionItem'
 import SelectionTitle from './SelectionTitle'
 import { useContext, useEffect } from 'react'
+import { SelectionType } from '@/features/store/types/storeTypes'
+import { Tables } from '@zeco-eats-lib/utils-client'
+import { useDishInfoModal } from './provider/DishInfoModalProvider'
 
 interface fnProps {
   title: string
   status: string
-  chooseAmt: number
-  selectionType: 'qty' | 'radio' | 'checkBox'
+  // selectionType: 'qty' | 'radio' | 'checkBox'
+  selectionType: SelectionType
   max: number
   min: number
+  options: Tables<'customisation_options'>[]
 }
 
 export default function Selection({
   title,
   status,
-  chooseAmt,
   selectionType,
   max,
   min,
+  options,
 }: fnProps) {
-  const fakeArr = Array.from({ length: 5 })
-
   const { setSelectionMinMax } = useContext(
     ControlSelectedQtyContext
   ) as controlSelectedQtyTypes
+
+  const {
+    addMultipleSinglesCustomisation,
+    removeMultipleSinglesCustomisation,
+    addSinglesCustomisation,
+  } = useDishInfoModal()
 
   useEffect(() => {
     setSelectionMinMax({
@@ -39,19 +47,17 @@ export default function Selection({
 
   return (
     <div>
-      <SelectionTitle title={title} status={status} chooseAmt={chooseAmt} />
+      <SelectionTitle title={title} status={status} chooseAmt={max} />
 
       <div className="space-y-4">
-        {fakeArr.map((el, i) => (
-          // an item also has its min and max eg you can not select more 3 chicken
-          <SelectionItem
-            max={3}
-            min={1}
-            key={i}
-            i={i}
-            selectionType={selectionType}
-          />
-        ))}
+        {options.length &&
+          options.map((option, i) => (
+            <SelectionItem
+              key={i}
+              selectionType={selectionType}
+              option={option}
+            />
+          ))}
       </div>
     </div>
   )

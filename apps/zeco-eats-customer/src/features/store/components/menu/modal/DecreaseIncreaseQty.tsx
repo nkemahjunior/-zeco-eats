@@ -6,13 +6,17 @@ import {
 import { useContext, useState } from 'react'
 import { BiMinus, BiPlus } from 'react-icons/bi'
 
+interface fnProps {
+  max: number
+  min: number
+  onIncDecrease: (qty: number) => void
+}
+
 export default function DecreaseIncreaseQty({
   max,
   min,
-}: {
-  max: number
-  min: number
-}) {
+  onIncDecrease,
+}: fnProps) {
   const { SelectionMinMax, totalSelected, setTotalSelected } = useContext(
     ControlSelectedQtyContext
   ) as controlSelectedQtyTypes
@@ -22,15 +26,21 @@ export default function DecreaseIncreaseQty({
   const increaseSelectedQty = () => {
     if (totalSelected >= SelectionMinMax.max) return
     if (selectedQty >= max) return
-    setSelectedQty((prev) => prev + 1)
+
+    const sQty = selectedQty + 1
+    setSelectedQty(sQty)
     setTotalSelected(totalSelected + 1)
+    onIncDecrease(sQty)
   }
 
   const decreaseSelectedQty = () => {
     if (totalSelected < SelectionMinMax.min) return
     if (selectedQty < min) return
-    setSelectedQty((prev) => prev - 1)
+
+    const sQty = selectedQty - 1
+    setSelectedQty(sQty)
     setTotalSelected(totalSelected - 1)
+    onIncDecrease(sQty)
   }
 
   return (

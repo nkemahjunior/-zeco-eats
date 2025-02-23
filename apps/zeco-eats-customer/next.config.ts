@@ -59,6 +59,10 @@ const nextConfig = {
         hostname: 'ihydizyhbzwvaidfdunn.supabase.co',
         pathname: '/storage/v1/object/public/zeco-eats/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.themealdb.com',
+      },
     ],
   },
 }

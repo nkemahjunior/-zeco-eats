@@ -1,2 +1,2 @@
-export const VIEW_DISH = 'view-dish'
+export const VIEW_DISH = 'viewDish'
 export const SELECTION = 'selection'

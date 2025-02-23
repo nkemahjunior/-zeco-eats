@@ -16,7 +16,9 @@ export default function SelectionTitle({
         <CardTitle text={`${title}`} className="font-semibold" />
         <SelectionStatus status={`${status}`} />
       </div>
-      <p className="text-storeTextColorTint">Choose {chooseAmt}</p>
+      <p className="text-storeTextColorTint">
+        Choose up to {chooseAmt} option(s)
+      </p>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import CardTitle from '@/shared/components/text/CardTitle'
 import Image from 'next/image'
 import { useState } from 'react'
-import ImageSkeleton from '../skeletons/ImageSkeleton'
+import ImageSkeleton from '../../../../shared/components/skeletons/ImageSkeleton'
 
 interface DishCardProps {
   name: string

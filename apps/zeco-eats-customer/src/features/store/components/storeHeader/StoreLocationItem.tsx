@@ -1,7 +1,7 @@
 import { BiLocationPlus } from 'react-icons/bi'
 import { BsCopy } from 'react-icons/bs'
 
-export default function StoreLocationItem() {
+export default function StoreLocationItem({ location }: { location: string }) {
   return (
     <div className="flex">
       <div className="flex basis-[20%] items-center justify-center">
@@ -11,8 +11,8 @@ export default function StoreLocationItem() {
       </div>
       <div className="flex basis-[80%] border-b-[1px] border-solid border-backgroundBorder py-2">
         <div className="basis-[80%]">
-          <p className="text-base font-medium">19 New Row</p>
-          <p className="text-storeTextColorTint">London, Emea</p>
+          <p className="text-base font-medium">{location}</p>
+          <p className="text-storeTextColorTint">{location}</p>
         </div>
         <div className="flex basis-[20%] items-center justify-center">
           <button>
