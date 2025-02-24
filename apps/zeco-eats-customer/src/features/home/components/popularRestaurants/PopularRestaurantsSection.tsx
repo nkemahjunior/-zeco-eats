@@ -1,11 +1,11 @@
 import { getQueryClient } from '@/shared/api/tanstackQuery/get-query-client'
-import Carousel from '@/shared/components/carousel/Carousel'
 import Heading from '@/shared/components/text/Heading'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import PopularRestaurantLargeScreen from './PopularRestaurantsLargeScreen'
 import { popularRestaurantsOptions } from '../../api/options/options'
 import { Suspense } from 'react'
 import PopularRestaurantsCardLoading from '../skeletons/PopularRestaurantsCardLoading'
+import PopularRestaurantMobile from './PopularRestaurantMobile'
 
 export default function PopularRestaurantsSection() {
   const queryClient = getQueryClient()
@@ -21,11 +21,11 @@ export default function PopularRestaurantsSection() {
         <Suspense fallback={<PopularRestaurantsCardLoading />}>
           {' '}
           {/* Mobile Carousel */}
-          <div className="block md:hidden">
-            <Carousel />
+          <div className="block 2xl:hidden">
+            <PopularRestaurantMobile />
           </div>
           {/* Desktop Grid */}
-          <div className="hidden md:block">
+          <div className="hidden 2xl:block">
             <PopularRestaurantLargeScreen />
           </div>
         </Suspense>
