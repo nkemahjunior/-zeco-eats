@@ -23,6 +23,7 @@ export interface Item {
 export type SelectionType = 'single' | 'multipleSingles' | 'multiplesMultiples'
 
 export interface SelectedCustomisation {
+  parentCustomisationId: number
   qty: number
   selectedOption: Tables<'customisation_options'>
 }
