@@ -2,7 +2,7 @@
 import DishImageModal from './modal/DishImageModal'
 import BackToRestaurantModal from './modal/BackToRestaurantModal'
 import DishInfoModal from './modal/DishInfoModal'
-import { useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { useIsIntersecting } from '@/shared/hooks/useIsIntersecting'
 import StickyModalTitle from './modal/StickyModalTitle'
 import { useQuery } from '@tanstack/react-query'
@@ -58,9 +58,11 @@ export default function MenuCardModal({
             imageUrl={data?.item.image_url || '/devImages/food1.webp'}
           />
           {data?.item && (
-            <DishInfoModalProvider>
-              <DishInfoModal isModal={isModal} item={data} />
-            </DishInfoModalProvider>
+            <Suspense fallback={<p> loading dish info modal</p>}>
+              <DishInfoModalProvider>
+                <DishInfoModal isModal={isModal} item={data} />
+              </DishInfoModalProvider>
+            </Suspense>
           )}
         </div>
       </div>
