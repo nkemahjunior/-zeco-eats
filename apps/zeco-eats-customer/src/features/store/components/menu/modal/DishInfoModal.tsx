@@ -17,8 +17,8 @@ interface fnProps {
 }
 
 export default function DishInfoModal({ isModal, item }: fnProps) {
-  const { updateItemPrice } = useDishInfoModal()
-  useEffect(() => updateItemPrice(Number(item.item.price)), [])
+  const { selectCurItem } = useDishInfoModal()
+  useEffect(() => selectCurItem(item.item), [])
 
   return (
     <div className="mt-96 flex h-full w-full flex-col justify-center space-y-6 px-4 lg:w-[50%] lg:px-0">
@@ -43,6 +43,7 @@ export default function DishInfoModal({ isModal, item }: fnProps) {
                   customisations.customisation.type as SelectionType
                 }
                 options={customisations.customisation_Options}
+                id={customisations.customisation.id}
               />
             </ControSelectedQtyProvider>
           ))}
