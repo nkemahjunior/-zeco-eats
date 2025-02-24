@@ -1,5 +1,7 @@
+'use client'
 import Image from 'next/image'
-import { MutableRefObject } from 'react'
+import { MutableRefObject, useState } from 'react'
+import ImageSkeleton from '../skeletons/ImageSkeleton'
 
 interface FnProps {
   height: string
@@ -28,10 +30,12 @@ export default function ImageContainer({
   style,
   className,
 }: FnProps) {
+  const [loading, setLoading] = useState(true)
   return (
     <div
       className={`relative ${height} ${width} overflow-hidden ${roundedCorners} ${className} `}
     >
+      {loading && <ImageSkeleton />}
       <Image
         ref={ref}
         {...events}
@@ -43,6 +47,7 @@ export default function ImageContainer({
           objectFit: objectFit,
           ...style,
         }}
+        onLoad={() => setLoading(false)}
       />
     </div>
   )
