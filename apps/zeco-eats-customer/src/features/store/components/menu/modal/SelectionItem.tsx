@@ -9,18 +9,20 @@ import { useDishInfoModal } from './provider/DishInfoModalProvider'
 interface fnProps {
   selectionType: SelectionType
   option: Tables<'customisation_options'>
+  parentCustomisationId: number
 }
 
-export default function SelectionItem({ selectionType, option }: fnProps) {
+export default function SelectionItem({
+  selectionType,
+  option,
+  parentCustomisationId,
+}: fnProps) {
   const {
     addSinglesCustomisation,
     updateMultipleMultiplesCustomisation,
     addMultipleSinglesCustomisation,
     removeMultipleSinglesCustomisation,
   } = useDishInfoModal()
-
-  console.log('----------------')
-  console.log(option)
 
   return (
     <div className="flex h-[3.5rem] items-center justify-between border-b-[1px] border-solid border-b-backgroundBorder font-medium lg:h-[4rem]">
@@ -47,6 +49,7 @@ export default function SelectionItem({ selectionType, option }: fnProps) {
             min={0}
             onIncDecrease={(qty) =>
               updateMultipleMultiplesCustomisation({
+                parentCustomisationId: parentCustomisationId,
                 qty,
                 selectedOption: option,
               })
@@ -61,6 +64,7 @@ export default function SelectionItem({ selectionType, option }: fnProps) {
             value={option.id.toString()}
             onSelect={(e) =>
               addSinglesCustomisation({
+                parentCustomisationId: parentCustomisationId,
                 qty: 1,
                 selectedOption: option,
               })
@@ -76,10 +80,12 @@ export default function SelectionItem({ selectionType, option }: fnProps) {
             onSelect={(e) =>
               e.target.checked
                 ? addMultipleSinglesCustomisation({
+                    parentCustomisationId: parentCustomisationId,
                     qty: 1,
                     selectedOption: option,
                   })
                 : removeMultipleSinglesCustomisation({
+                    parentCustomisationId: parentCustomisationId,
                     qty: 1,
                     selectedOption: option,
                   })

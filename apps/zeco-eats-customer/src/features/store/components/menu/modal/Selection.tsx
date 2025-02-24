@@ -18,6 +18,7 @@ interface fnProps {
   max: number
   min: number
   options: Tables<'customisation_options'>[]
+  id: number
 }
 
 export default function Selection({
@@ -27,16 +28,11 @@ export default function Selection({
   max,
   min,
   options,
+  id,
 }: fnProps) {
   const { setSelectionMinMax } = useContext(
     ControlSelectedQtyContext
   ) as controlSelectedQtyTypes
-
-  const {
-    addMultipleSinglesCustomisation,
-    removeMultipleSinglesCustomisation,
-    addSinglesCustomisation,
-  } = useDishInfoModal()
 
   useEffect(() => {
     setSelectionMinMax({
@@ -47,7 +43,13 @@ export default function Selection({
 
   return (
     <div>
-      <SelectionTitle title={title} status={status} chooseAmt={max} />
+      <SelectionTitle
+        title={title}
+        status={status}
+        chooseAmt={max}
+        min={min}
+        parentCustomisationId={id}
+      />
 
       <div className="space-y-4">
         {options.length &&
@@ -56,6 +58,7 @@ export default function Selection({
               key={i}
               selectionType={selectionType}
               option={option}
+              parentCustomisationId={id}
             />
           ))}
       </div>
