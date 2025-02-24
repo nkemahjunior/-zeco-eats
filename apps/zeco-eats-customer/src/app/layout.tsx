@@ -5,6 +5,7 @@ import NavBar from '../../src/shared/components/navbar/NavBar'
 import FooterSection from '@/shared/components/footer/FooterSection'
 import React from 'react'
 import TanstackQueryProvider from '@/shared/api/tanstackQuery/TanstackQueryProvider'
+import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
   title: 'zeco eats',
@@ -18,6 +19,11 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} text-sm antialiased`}>
         <TanstackQueryProvider>
+          <Toaster
+            position="top-right"
+            richColors
+            //closeButton
+          />
           <NavBar />
           {children}
           <FooterSection />
