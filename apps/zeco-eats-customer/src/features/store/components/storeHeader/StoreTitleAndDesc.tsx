@@ -1,6 +1,8 @@
+'use client'
 import Heading from '@/shared/components/text/Heading'
 import { Tables } from '@zeco-eats-lib/utils-client'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { BiRightArrow, BiStar } from 'react-icons/bi'
 
 export default function StoreTitleAndDesc({
@@ -10,6 +12,11 @@ export default function StoreTitleAndDesc({
   restaurant: Tables<'restaurant'>
   categories: Tables<'restaurant_categories'>[]
 }) {
+  const [numOfRatings, setNumOfRatings] = useState(0)
+  useEffect(() => {
+    setNumOfRatings(Math.floor(Math.random() * 295) + 5)
+  }, [])
+
   return (
     <div className="flex w-full flex-col justify-between space-y-4 text-storeTextColorTint lg:flex-row lg:space-y-0">
       <div className="space-y-2 lg:max-w-[70%]">
@@ -25,7 +32,6 @@ export default function StoreTitleAndDesc({
               {' '}
               <BiStar />
             </span>
-            <span>({Math.floor(Math.random() * 295) + 5})</span>
             <span className="lg:hidden">
               <Link href={' link to ratings'}>
                 <BiRightArrow />
