@@ -48,7 +48,11 @@ export default function UploadProfilePic() {
             your restaurant&apos;s online presence.
           </p>
         </div>
-        <DragAndDropPicture onSelect={onSelect} onRemove={onRemove} />
+        <DragAndDropPicture
+          disable={loading}
+          onSelect={onSelect}
+          onRemove={onRemove}
+        />
       </div>
       <div className="flex w-full items-center justify-end gap-x-4">
         <Link
