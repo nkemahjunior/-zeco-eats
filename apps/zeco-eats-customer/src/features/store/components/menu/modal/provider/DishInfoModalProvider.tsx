@@ -1,8 +1,15 @@
+import { getRestaurantsByIdOption } from '@/features/store/api/queries/options/options'
+import { useStoreId } from '@/features/store/hooks/useStoreId'
 import {
   SelectedCustomisation,
   SelectionType,
 } from '@/features/store/types/storeTypes'
+import { CartItem } from '@/shared/types/storeTypes/storeTypes'
+import { useCartStore } from '@/stores/globalStore'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { Tables } from '@zeco-eats-lib/utils-client'
 import { createContext, useContext, useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 interface DishInfoModalCOntextTypes {
   numItemsSeleted: number
@@ -13,7 +20,8 @@ interface DishInfoModalCOntextTypes {
   addSinglesCustomisation: (option: SelectedCustomisation) => void
   updateMultipleMultiplesCustomisation: (option: SelectedCustomisation) => void
   totalModalPrice: number
-  updateItemPrice: (price: number) => void
+  selectCurItem: (item: Tables<'restaurant_items'>) => void
+  pushToCart: () => void
 }
 
 const DishInfoModalContext = createContext<DishInfoModalCOntextTypes | null>(
@@ -34,10 +42,18 @@ export default function DishInfoModalProvider({
     multiplesMultiples: [],
   })
 
-  const [selectedItemPrice, setSelectedItemPrice] = useState(0)
+  const storeId = useStoreId()
+  const { data: restaurant } = useSuspenseQuery(
+    getRestaurantsByIdOption(Number(storeId))
+  )
+  const addToCart = useCartStore((state) => state.addToCart)
+
+  const [selectedItem, setSelectedItem] =
+    useState<Tables<'restaurant_items'> | null>(null)
   const [totalModalPrice, setTotalModalPrice] = useState(0)
 
-  const updateItemPrice = (price: number) => setSelectedItemPrice(price)
+  const selectCurItem = (item: Tables<'restaurant_items'>) =>
+    setSelectedItem(item)
 
   useEffect(() => {
     const singlesPrice = Number(
@@ -61,12 +77,12 @@ export default function DishInfoModalProvider({
     setTotalModalPrice(
       Number(
         (
-          (totalCustomisationPrice + selectedItemPrice) *
+          (totalCustomisationPrice + Number(selectedItem?.price)) *
           numItemsSeleted
         ).toFixed(2)
       )
     )
-  }, [numItemsSeleted, selectedCustomisations, selectedItemPrice])
+  }, [numItemsSeleted, selectedCustomisations, selectedItem?.price])
 
   const updateNumSelectedItems = (qty: number) => setNumItemsSelected(qty)
 
@@ -122,6 +138,36 @@ export default function DishInfoModalProvider({
     })
   }
 
+  const gatherCustomisations = (key: SelectionType) => {
+    return selectedCustomisations[key].map((el) => ({
+      qtyOdered: el.qty,
+      customisationOption: el.selectedOption,
+    }))
+  }
+
+  const pushToCart = () => {
+    if (!selectedItem) return
+    if (!restaurant) return toast.error('An error happened, try again later')
+
+    const singleCustomisations = gatherCustomisations('single')
+    const multipleSingleCustomisations = gatherCustomisations('multipleSingles')
+    const multipleMultipleCustomisations =
+      gatherCustomisations('multiplesMultiples')
+
+    const cartItem: CartItem = {
+      restaurant: restaurant,
+      item: selectedItem,
+      qtyOdered: numItemsSeleted,
+      customisationOptions: [
+        ...singleCustomisations,
+        ...multipleSingleCustomisations,
+        ...multipleMultipleCustomisations,
+      ],
+    }
+
+    addToCart(cartItem)
+  }
+
   return (
     <DishInfoModalContext.Provider
       value={{
@@ -133,7 +179,8 @@ export default function DishInfoModalProvider({
         addSinglesCustomisation,
         updateMultipleMultiplesCustomisation,
         totalModalPrice,
-        updateItemPrice,
+        selectCurItem,
+        pushToCart,
       }}
     >
       {children}

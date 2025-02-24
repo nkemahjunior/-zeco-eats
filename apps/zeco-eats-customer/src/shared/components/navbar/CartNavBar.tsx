@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { FaShoppingBasket } from 'react-icons/fa'
 import Cart from '../cart/Cart'
+import { useCartStore } from '@/stores/globalStore'
 
 export default function CartNavBar({
   roundedBottom,
@@ -11,6 +12,9 @@ export default function CartNavBar({
   mobile?: boolean
 }) {
   const [open, setOpen] = useState(false)
+
+  const cart = useCartStore((state) => state.cart)
+  const subtotal = useCartStore((state) => state.subtotal)
 
   return (
     <>
@@ -23,11 +27,11 @@ export default function CartNavBar({
           <FaShoppingBasket size={44} />{' '}
         </div>
         <div className="flex h-full items-center text-nowrap border-l-[1px] border-solid border-white px-4 2xl:border-l-2">
-          23 items
+          {cart?.length || 0} items
         </div>
 
         <div className="hidden h-full items-center border-l-[1px] border-solid border-white px-4 md:flex 2xl:border-l-2">
-          GBP 79.89
+          XAF {subtotal}
         </div>
       </div>
       <Cart open={open} setOpen={setOpen} />

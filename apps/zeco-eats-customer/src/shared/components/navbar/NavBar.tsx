@@ -17,7 +17,7 @@ export default function NavBar() {
         <NavBar1 />
         {!hideNavBar && <NavBar2 notHome={notHome} />}
       </nav>
-      {/* <NavBar1Mobile pathname={pathname} /> */}
+      {/* <NavBar2Mobile pathname={pathname} /> */}
     </>
     // <>
     //   <NavBar1Mobile />
