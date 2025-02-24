@@ -1,4 +1,4 @@
-import { createSupabaseClient, Tables } from '@zeco-eats-lib/utils-client'
+import { createSupabaseClient } from '@zeco-eats-lib/utils-client'
 import { createSupabaseServer } from '@zeco-eats-lib/utils-server'
 import {
   Item,
