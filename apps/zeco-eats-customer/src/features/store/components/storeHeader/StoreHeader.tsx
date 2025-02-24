@@ -1,19 +1,18 @@
+'use client'
 import StoreHeaderImage from './StoreHeaderImage'
 import StoreTitleAndDesc from './StoreTitleAndDesc'
 import StoreLocationAndInfo from './StoreLocationAndInfo'
-import { getQueryClient } from '@/shared/api/tanstackQuery/get-query-client'
 import {
   getRestaurantCategoriesOption,
   getRestaurantsByIdOption,
 } from '../../api/queries/options/options'
-//import StoreRatings from './StoreRatings'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-export default async function StoreHeader({ storeId }: { storeId: string }) {
-  const queryClient = getQueryClient()
-  const restaurant = await queryClient.fetchQuery(
+export default function StoreHeader({ storeId }: { storeId: string }) {
+  const { data: restaurant } = useSuspenseQuery(
     getRestaurantsByIdOption(Number(storeId))
   )
-  const categories = await queryClient.fetchQuery(
+  const { data: categories } = useSuspenseQuery(
     getRestaurantCategoriesOption(Number(storeId))
   )
 
