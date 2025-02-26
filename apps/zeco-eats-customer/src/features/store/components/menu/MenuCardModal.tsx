@@ -10,6 +10,8 @@ import { getItemsAndCustomisationOption } from '../../api/queries/options/option
 import { useSearchParams } from 'next/navigation'
 import { VIEW_DISH } from '../../utils/modalUrlKeys'
 import DishInfoModalProvider from './modal/provider/DishInfoModalProvider'
+import { DishInfoSkeleton } from '../skeletons/DishInfoSkeleton'
+import { MenuCardModalSkeleton } from '../skeletons/MenuCardModalSkeleton'
 
 export default function MenuCardModal({
   gapx = 'gap-x-8',
@@ -32,7 +34,7 @@ export default function MenuCardModal({
     threshold: 1,
   })
 
-  if (isLoading) return <p>Loading</p>
+  if (isLoading) return <MenuCardModalSkeleton />
 
   return (
     <div
@@ -58,7 +60,7 @@ export default function MenuCardModal({
             imageUrl={data?.item.image_url || '/devImages/food1.webp'}
           />
           {data?.item && (
-            <Suspense fallback={<p> loading dish info modal</p>}>
+            <Suspense fallback={<DishInfoSkeleton />}>
               <DishInfoModalProvider>
                 <DishInfoModal isModal={isModal} item={data} />
               </DishInfoModalProvider>
