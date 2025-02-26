@@ -97,6 +97,15 @@ export const useLocationStore = create<LocationStore>()(
     (set) => ({
       userLocation: null,
       setLocation: (location) => set({ userLocation: location }),
+      setToDefault: () =>
+        set({
+          userLocation: {
+            name: 'Buea',
+            fullName: 'Buea',
+            lat: 4.1567895,
+            lon: 9.2315915,
+          },
+        }),
     }),
     {
       name: 'location-storage',

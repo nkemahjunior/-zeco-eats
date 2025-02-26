@@ -36,4 +36,5 @@ export interface LocationData {
 export interface LocationStore {
   userLocation: LocationData | null
   setLocation: (location: LocationData) => void
+  setToDefault: () => void
 }
