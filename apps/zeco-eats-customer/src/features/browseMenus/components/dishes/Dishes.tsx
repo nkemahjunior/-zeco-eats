@@ -1,10 +1,10 @@
 'use client'
 
+import Link from 'next/link'
 import { useBrowseMenus } from '../../context/BrowseMenusContext'
 import DishCardSkeleton from '../skeletons/DishCardSkeleton'
 import DishCard from './DishCard'
 
-// Component Using the Context
 export default function Dishes() {
   const { restaurants, totalCount, page, isLoading, isFetching, setNextPage } =
     useBrowseMenus()
@@ -25,14 +25,15 @@ export default function Dishes() {
     <div className="mt-6 space-y-8">
       <div className="grid grid-cols-1 gap-y-6 md:grid-cols-3 md:gap-x-4 lg:grid-cols-4">
         {restaurants.map((restaurant, i) => (
-          <DishCard
-            key={i}
-            name={restaurant.name || ''}
-            image={restaurant.image || ''}
-            minAvgCookTime={restaurant.min_avg_cook_time || 0}
-            maxAvgCookTime={restaurant.max_avg_cook_time || 0}
-            rating={restaurant.rating || 4.0}
-          />
+          <Link href={`/store/${restaurant.id}`} key={i}>
+            <DishCard
+              name={restaurant.name || ''}
+              image={restaurant.image || ''}
+              minAvgCookTime={restaurant.min_avg_cook_time || 0}
+              maxAvgCookTime={restaurant.max_avg_cook_time || 0}
+              rating={restaurant.rating || 4.0}
+            />
+          </Link>
         ))}
 
         {isFetching &&
