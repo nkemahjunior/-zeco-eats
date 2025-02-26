@@ -2,6 +2,7 @@
 import Heading from '@/shared/components/text/Heading'
 import PopularCategoriesCard from './PopularCategoriesCard'
 import Link from 'next/link'
+import { useLocationStore } from '@/stores/globalStore'
 
 const popularCategories = [
   {
@@ -43,6 +44,7 @@ const popularCategories = [
 ]
 
 export default function PopularCategoriesSection() {
+  const userLocation = useLocationStore((state) => state.userLocation)
   return (
     <section className="mx-sm mt-Ysm bg-background md:mx-md lg:mx-lg lg:mt-Ylg xl:mx-xl xl:bg-white 2xl:mx-xxl 2xl:mt-YXl">
       <div className="mb-Ysm lg:mb-Ylg 2xl:mb-YXl">
@@ -53,7 +55,7 @@ export default function PopularCategoriesSection() {
         {popularCategories.map((category, index) => (
           <Link
             key={index}
-            href={`/browse/?cuisine=${category.name.replaceAll(' ', '+')}`}
+            href={`/browse/?cuisine=${category.name.replaceAll(' ', '+')}?location=${userLocation?.fullName}`}
           >
             <PopularCategoriesCard
               name={category.name}
