@@ -1,4 +1,4 @@
-import { CartStore } from '@/shared/types/storeTypes/storeTypes'
+import { CartStore, LocationStore } from '@/shared/types/storeTypes/storeTypes'
 import { toast } from 'sonner'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
@@ -88,6 +88,18 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: 'cart-storage',
+    }
+  )
+)
+
+export const useLocationStore = create<LocationStore>()(
+  persist(
+    (set) => ({
+      userLocation: null,
+      setLocation: (location) => set({ userLocation: location }),
+    }),
+    {
+      name: 'location-storage',
     }
   )
 )

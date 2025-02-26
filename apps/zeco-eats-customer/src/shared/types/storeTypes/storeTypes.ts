@@ -19,3 +19,21 @@ export interface CartStore {
   changeItemQty: (itemId: number, action: 'inc' | 'dec') => void
   resetCart: () => void
 }
+
+// export interface LocationStore {
+//   userLocation: string | null
+//   latLon: {lat:string | null , lon:string | null }
+//   setLocation: (location: string) => void
+// }
+
+export interface LocationData {
+  name: string
+  fullName: string
+  lat: number
+  lon: number
+}
+
+export interface LocationStore {
+  userLocation: LocationData | null
+  setLocation: (location: LocationData) => void
+}
