@@ -14,6 +14,7 @@ import { Tables } from '@zeco-eats-lib/utils-client'
 import { getRestaurantsQueryOptions } from '../api/options/options'
 import { BrowseRestaurantsFilter } from '../types/browseMenuTypes'
 import { FoodCategoryName } from '@/shared/types/sharedTypes'
+import { useLocationStore } from '@/stores/globalStore'
 
 // Context Type
 interface BrowseMenusContextType {
@@ -46,6 +47,7 @@ export const BrowseMenusProvider = ({ children }: { children: ReactNode }) => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
+  const userLocation = useLocationStore((state) => state.userLocation)
 
   // pagination states
   const [page, setPage] = useState(1)
@@ -117,18 +119,21 @@ export const BrowseMenusProvider = ({ children }: { children: ReactNode }) => {
 
   // Fetch Restaurants
   const { data, isLoading, isFetching } = useQuery(
-    getRestaurantsQueryOptions(page, filters)
+    getRestaurantsQueryOptions(page, userLocation?.fullName || 'buea', filters)
   )
 
   // Accumulate Data
   useEffect(() => {
-    if (data?.data && data.count) {
+    const length = data?.data.length
+    if (length === 0) router.replace('/no-restaurant')
+
+    if (data?.count) {
       setRestaurants((prev) =>
         page === 1 ? data.data : [...prev, ...data.data]
       )
       setTotalCount(data.count)
     }
-  }, [data, page])
+  }, [data, page, router])
 
   return (
     <BrowseMenusContext.Provider
