@@ -24,9 +24,7 @@ export default async function RootLayout({
             richColors
             //closeButton
           />
-          <NavBar />
           {children}
-          <FooterSection />
         </TanstackQueryProvider>
       </body>
     </html>
