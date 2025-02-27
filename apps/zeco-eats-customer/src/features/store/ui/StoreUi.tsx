@@ -6,6 +6,8 @@ import {
   getRestaurantCategoriesOption,
 } from '../api/queries/options/options'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+import { Suspense } from 'react'
+import StoreSkeleton from '../components/skeletons/StoreSkeleton'
 
 export default function StoreUi({ storeId }: { storeId: string }) {
   const queryClient = getQueryClient()
@@ -14,12 +16,14 @@ export default function StoreUi({ storeId }: { storeId: string }) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="space-y-8">
-        <StoreHeader storeId={storeId} />{' '}
-        <div className="mx-sm md:mx-md lg:mx-lg xl:mx-xl 2xl:mx-[14rem]">
-          <Menu />
+      <Suspense fallback={<StoreSkeleton />}>
+        <div className="space-y-8">
+          <StoreHeader storeId={storeId} />{' '}
+          <div className="mx-sm md:mx-md lg:mx-lg xl:mx-xl 2xl:mx-[14rem]">
+            <Menu />
+          </div>
         </div>
-      </div>
+      </Suspense>
     </HydrationBoundary>
   )
 }
