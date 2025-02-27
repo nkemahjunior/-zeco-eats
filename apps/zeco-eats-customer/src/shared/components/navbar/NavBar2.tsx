@@ -52,7 +52,7 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         <li>
           <Link
             className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
-            href={'/'}
+            href={'/home'}
           >
             Home
           </Link>
@@ -60,7 +60,7 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         <li>
           <Link
             className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
-            href={'/'}
+            href={'/browse'}
           >
             Browse Menu
           </Link>{' '}
@@ -68,7 +68,7 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         <li>
           <Link
             className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
-            href={'/'}
+            href={'/special-offers'}
           >
             Special Offers
           </Link>
@@ -76,7 +76,7 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         <li>
           <Link
             className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
-            href={'/'}
+            href={'/browse'}
           >
             Restaurants
           </Link>
@@ -84,9 +84,9 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         <li>
           <Link
             className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
-            href={'/'}
+            href={'/favourites'}
           >
-            Track Order
+            Favourites
           </Link>
         </li>
 
