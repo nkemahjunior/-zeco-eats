@@ -2,11 +2,12 @@ import { CartStore, LocationStore } from '@/shared/types/storeTypes/storeTypes'
 import { toast } from 'sonner'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { calculateSubtotal } from './storeHelpers'
+import { calculateNumItems, calculateSubtotal } from './storeHelpers'
 
 const initialCartState = {
   restaurant: null,
   cart: null,
+  numOfItems: 0,
   subtotal: 0,
 }
 
@@ -23,6 +24,7 @@ export const useCartStore = create<CartStore>()(
           set(() => ({
             restaurant: cartItem.restaurant,
             cart: newCart,
+            numOfItems: calculateNumItems(newCart),
             subtotal: calculateSubtotal(newCart),
           }))
           toast.success('Item added to cart')
@@ -53,6 +55,7 @@ export const useCartStore = create<CartStore>()(
           set({
             restaurant: cartItem.restaurant,
             cart: updatedCart,
+            numOfItems: calculateNumItems(updatedCart),
             subtotal: calculateSubtotal(updatedCart),
           })
           toast.success('Item added to cart')
@@ -76,9 +79,31 @@ export const useCartStore = create<CartStore>()(
 
           return {
             cart: updatedCart,
+            numOfItems: calculateNumItems(updatedCart),
             subtotal: calculateSubtotal(updatedCart),
           }
         })
+      },
+
+      removeFromCart: (itemId) => {
+        const state = get()
+        if (!state.cart) return
+
+        const updatedCart = state.cart.filter(
+          (cartItem) => cartItem.item.id !== itemId
+        )
+
+        if (updatedCart.length < 1) {
+          set(initialCartState)
+          toast.success('Item removed, cart is now empty')
+        } else {
+          set({
+            cart: updatedCart,
+            numOfItems: calculateNumItems(updatedCart),
+            subtotal: calculateSubtotal(updatedCart),
+          })
+          toast.success('Item removed from cart')
+        }
       },
 
       resetCart: () => {

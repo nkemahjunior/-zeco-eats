@@ -21,3 +21,9 @@ export const calculateSubtotal = (cart: CartItem[] | null): number => {
 
   return Number(subtotal.toFixed(2))
 }
+
+export const calculateNumItems = (cart: CartItem[] | null): number => {
+  if (!cart || cart.length === 0) return 0
+
+  return cart.reduce((acc, cartItem) => acc + cartItem.qtyOdered, 0)
+}

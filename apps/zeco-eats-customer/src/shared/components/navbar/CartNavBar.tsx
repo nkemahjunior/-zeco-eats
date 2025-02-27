@@ -13,7 +13,7 @@ export default function CartNavBar({
 }) {
   const [open, setOpen] = useState(false)
 
-  const cart = useCartStore((state) => state.cart)
+  const numOfCartItems = useCartStore((state) => state.numOfItems)
   const subtotal = useCartStore((state) => state.subtotal)
 
   return (
@@ -27,7 +27,7 @@ export default function CartNavBar({
           <FaShoppingBasket size={44} />{' '}
         </div>
         <div className="flex h-full items-center text-nowrap border-l-[1px] border-solid border-white px-4 2xl:border-l-2">
-          {cart?.length || 0} items
+          {numOfCartItems}&nbsp; {numOfCartItems === 1 ? 'Item' : 'Items'}
         </div>
 
         <div className="hidden h-full items-center border-l-[1px] border-solid border-white px-4 md:flex 2xl:border-l-2">

@@ -14,9 +14,11 @@ export interface CartItem {
 export interface CartStore {
   restaurant: Tables<'restaurant'> | null
   cart: CartItem[] | null
+  numOfItems: number
   subtotal: number
   addToCart: (cartItem: CartItem) => void
   changeItemQty: (itemId: number, action: 'inc' | 'dec') => void
+  removeFromCart: (itemId: number) => void
   resetCart: () => void
 }
 
