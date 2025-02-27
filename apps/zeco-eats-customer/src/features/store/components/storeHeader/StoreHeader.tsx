@@ -23,7 +23,7 @@ export default function StoreHeader({ storeId }: { storeId: string }) {
       </div>
       <div className="mx-sm space-y-4 md:mx-md lg:mx-lg lg:space-y-8 xl:mx-xl 2xl:mx-[14rem]">
         <StoreTitleAndDesc restaurant={restaurant!} categories={categories!} />
-        <StoreLocationAndInfo location={restaurant?.location || ''} />
+        <StoreLocationAndInfo restaurant={restaurant!} />
         {/* <StoreRatings /> */}
       </div>
     </div>
