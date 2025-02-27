@@ -151,9 +151,9 @@ export type Database = {
           delivery_fee: number | null
           id: number
           image: string | null
-          lat: string | null
+          lat: number | null
           location: string | null
-          long: string | null
+          long: number | null
           max_avg_cook_time: number | null
           min_avg_cook_time: number | null
           min_order_price: string | null
@@ -170,9 +170,9 @@ export type Database = {
           delivery_fee?: number | null
           id?: number
           image?: string | null
-          lat?: string | null
+          lat?: number | null
           location?: string | null
-          long?: string | null
+          long?: number | null
           max_avg_cook_time?: number | null
           min_avg_cook_time?: number | null
           min_order_price?: string | null
@@ -189,9 +189,9 @@ export type Database = {
           delivery_fee?: number | null
           id?: number
           image?: string | null
-          lat?: string | null
+          lat?: number | null
           location?: string | null
-          long?: string | null
+          long?: number | null
           max_avg_cook_time?: number | null
           min_avg_cook_time?: number | null
           min_order_price?: string | null
