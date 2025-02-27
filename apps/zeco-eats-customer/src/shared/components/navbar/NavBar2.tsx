@@ -3,6 +3,7 @@ import { GoPersonFill } from 'react-icons/go'
 import { useState } from 'react'
 import Link from 'next/link'
 import Logo from '../Logo'
+import NavAuthButton from './NavAuthButton'
 
 export default function NavBar2({ notHome }: { notHome: boolean }) {
   const [showNavMobile, setShowNavMobile] = useState(false)
@@ -90,12 +91,19 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
           </Link>
         </li>
 
-        <li className="= flex w-full items-center gap-x-2 bg-secondary p-2 text-white lg:w-auto lg:rounded-xl lg:p-2 xl:p-3 2xl:rounded-3xl 2xl:px-6">
-          <span className="block rounded-full bg-primary p-1">
-            <GoPersonFill color="#03081F" />
-          </span>
-          <Link href={'/'}>Login/Signup</Link>
-        </li>
+        {/* <li>
+          <Link
+            href={'/auth/signin'}
+            className="= flex w-full items-center gap-x-2 bg-secondary p-2 text-white lg:w-auto lg:rounded-xl lg:p-2 xl:p-3 2xl:rounded-3xl 2xl:px-6"
+          >
+            {' '}
+            <span className="block rounded-full bg-primary p-1">
+              <GoPersonFill color="#03081F" />
+            </span>
+            <span>Login/Signup</span>
+          </Link>
+        </li> */}
+        <NavAuthButton />
       </ul>
     </div>
   )
