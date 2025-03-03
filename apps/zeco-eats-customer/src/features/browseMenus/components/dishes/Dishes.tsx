@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useBrowseMenus } from '../../context/BrowseMenusContext'
 import DishCardSkeleton from '../skeletons/DishCardSkeleton'
-import DishCard from './DishCard'
+import DishCard from '../../../../shared/components/DishCard'
 
 export default function Dishes() {
   const { restaurants, totalCount, page, isLoading, isFetching, setNextPage } =
