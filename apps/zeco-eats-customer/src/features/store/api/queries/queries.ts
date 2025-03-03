@@ -5,6 +5,10 @@ import {
   ItemMap,
   RestaurantCompleteMenuMap,
 } from '../../types/storeTypes'
+import {
+  validateAndGetUserClient,
+  validateAndGetUserServer,
+} from '@/shared/api/queries/server/serverQueries'
 
 export const getRestaurantById = async (id: number) => {
   const supabase = await createSupabaseServer()
@@ -191,4 +195,23 @@ function transformItemData(data: any): Item {
     item: map.item,
     customisations: Array.from(map.customisations.values()),
   }
+}
+
+export const getUserFavouriteStores = async (storeId: number) => {
+  const supabase = createSupabaseClient()
+
+  const user = await validateAndGetUserClient()
+
+  const { data, error } = await supabase
+    .from('user_favourite_stores')
+    .select('*')
+    .eq('user_id', user.id)
+    .eq('store_id', storeId)
+    .single()
+
+  if (error) {
+    throw error
+  }
+
+  return data
 }

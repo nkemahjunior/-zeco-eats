@@ -4,6 +4,7 @@ import {
   getItemAndCustomisations,
   getRestaurantById,
   getRestaurantCategories,
+  getUserFavouriteStores,
 } from '../queries'
 
 export const getRestaurantsByIdOption = (id: number) => {
@@ -31,5 +32,12 @@ export const getItemsAndCustomisationOption = (itemId: number) => {
   return queryOptions({
     queryKey: ['restaurant-items', itemId],
     queryFn: () => getItemAndCustomisations(itemId),
+  })
+}
+
+export const getUserFavouriteStoresOption = (storeId: number) => {
+  return queryOptions({
+    queryKey: ['user-favourite-stores', storeId],
+    queryFn: () => getUserFavouriteStores(storeId),
   })
 }
