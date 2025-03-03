@@ -47,7 +47,7 @@ export default function DishImageModal({
       className={`w-full lg:sticky ${isModal ? 'lg:top-[5.5rem]' : 'lg:top-[8rem]'} lg:h-[35rem] lg:w-[50%]`}
     >
       <button
-        className="absolute left-2 top-4 z-[1] flex items-center justify-center rounded-full bg-background p-3 hover:bg-backgroundShade1 lg:hidden"
+        className="absolute left-6 top-4 z-[1] flex items-center justify-center rounded-full bg-background p-3 hover:bg-backgroundShade1 lg:hidden"
         onClick={() => {
           router.back()
         }}
