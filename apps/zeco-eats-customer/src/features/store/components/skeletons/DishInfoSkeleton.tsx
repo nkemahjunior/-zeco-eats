@@ -2,7 +2,7 @@ import { Shimmer } from '@zeco-eats-lib/utils-client'
 
 export function DishInfoSkeleton() {
   return (
-    <div className="h-[12rem] w-full space-y-6 px-4 lg:h-[35rem]">
+    <div className="w-full space-y-6 px-4 lg:h-[35rem]">
       {/* Price */}
       <div className="h-4 w-[30%]">
         <Shimmer className="h-full w-full rounded-md" />
@@ -49,7 +49,7 @@ export function DishInfoSkeleton() {
         <div className="h-12 w-full">
           <Shimmer className="h-full w-full rounded-md" />
         </div>
-        <div className="h-12 w-full">
+        <div className="hidden h-12 w-full lg:block">
           <Shimmer className="h-full w-full rounded-md" />
         </div>
       </div>
