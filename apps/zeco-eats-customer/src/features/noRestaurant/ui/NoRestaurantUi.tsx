@@ -8,7 +8,7 @@ export default function NoRestaurantUi() {
   const { userLocation, setToDefault } = useLocationStore()
 
   return (
-    <div className="flex h-full items-center justify-center">
+    <div className="-mt-20 flex h-screen items-center justify-center">
       <div className="mx-auto overflow-hidden rounded-lg p-8 text-center">
         <div className="mb-6">
           <FaSadTear className="mx-auto text-gray-400" size={48} />
