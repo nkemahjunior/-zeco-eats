@@ -4,6 +4,7 @@ import { createSupabaseServer } from '@zeco-eats-lib/utils-server'
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
+  const signinRedirect = searchParams.get('redirect') || '/home'
 
   if (code) {
     const supabase = await createSupabaseServer()
@@ -17,15 +18,7 @@ export async function GET(request: Request) {
       return NextResponse.redirect(`${origin}/auth/auth-code-error`)
     }
 
-    // Get the current user
-    const { data: userData, error: userError } = await supabase.auth.getUser()
-
-    if (userError || !userData.user) {
-      console.error('Error fetching user:', userError || 'No user data')
-      return NextResponse.redirect(`${origin}/auth/auth-code-error`)
-    }
-
-    return NextResponse.redirect(`${origin}/home`)
+    return NextResponse.redirect(`${origin}${signinRedirect}`)
   }
 
   // return the user to an error page with instructions
