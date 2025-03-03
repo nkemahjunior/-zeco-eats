@@ -6,6 +6,7 @@ import CartItem from './CartItem'
 import CloseClearCart from './CloseClearCart'
 import { AnimatePresence, motion } from 'motion/react'
 import { useCartStore } from '@/stores/globalStore'
+import CheckoutButton from './CheckoutButton'
 
 interface fnProps {
   open: boolean
@@ -33,20 +34,28 @@ export default function Cart({ open, setOpen }: fnProps) {
                 <RestaurantTitleCart restaurant={oderingRestaurant} />
               )}
               <Line />
-              <div className="space-y- divide-y-[1px] divide-backgroundBorder">
-                {cart &&
-                  cart.map((cartItem, i) => (
+
+              {cart && cart.length > 0 ? (
+                <div className="space-y- divide-y-[1px] divide-backgroundBorder">
+                  {cart.map((cartItem, i) => (
                     <CartItem key={i} item={cartItem} />
                   ))}
-              </div>
+                </div>
+              ) : (
+                <div className="flex h-full items-center justify-center">
+                  <p>Your card is empty</p>
+                </div>
+              )}
+
               <Line />
               <div className="flex items-center justify-between font-semibold text-secondary">
                 <span>SubTotal</span>
                 <span>XAF {subtotal}</span>
               </div>
-              <button className="absolute bottom-0 flex h-[3.5rem] w-full items-center justify-center rounded-lg bg-secondary font-semibold text-white transition-colors duration-300 hover:bg-secondaryTint">
+              {/* <button className="absolute bottom-0 flex h-[3.5rem] w-full items-center justify-center rounded-lg bg-secondary font-semibold text-white transition-colors duration-300 hover:bg-secondaryTint">
                 <span>Go to checkout</span>
-              </button>
+              </button> */}
+              <CheckoutButton />
             </div>
           </motion.div>
         </ModalOverlayR>
