@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { poppins } from '@/shared/fonts/fonts'
-import NavBar from '../../src/shared/components/navbar/NavBar'
-import FooterSection from '@/shared/components/footer/FooterSection'
 import React from 'react'
 import TanstackQueryProvider from '@/shared/api/tanstackQuery/TanstackQueryProvider'
 import { Toaster } from 'sonner'
@@ -24,6 +22,7 @@ export default async function RootLayout({
             richColors
             //closeButton
           />
+
           {children}
         </TanstackQueryProvider>
       </body>
