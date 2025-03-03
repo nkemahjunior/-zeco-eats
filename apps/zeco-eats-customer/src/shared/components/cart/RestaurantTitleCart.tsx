@@ -18,6 +18,7 @@ export default function RestaurantTitleCart({
           imageAlt={`photo of ${restaurant.name}`}
           src={restaurant.image || '/devImages/profile.png'}
           className="rounded-full"
+          sizes="3rem"
         />
 
         <div className="flex flex-col space-y-1">

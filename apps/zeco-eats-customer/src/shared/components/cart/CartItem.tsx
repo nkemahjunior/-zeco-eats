@@ -5,15 +5,14 @@ import CartIncreaseDecreaseQty from './CartIncreaseDecreaseQty'
 export default function CartItem({ item }: { item: CartItemType }) {
   return (
     <div className="flex items-center space-x-4 py-4">
-      <div className="w-[7rem]">
-        <ImageContainer
-          height="h-[5rem]"
-          width="w-full"
-          imageAlt={`photo of ${item.item.name}`}
-          src={item.item.image_url || '/devImages/food1.webp'}
-          className="rounded-lg"
-        />
-      </div>
+      <ImageContainer
+        height="h-[5rem]"
+        width="w-[7rem]"
+        imageAlt={`photo of ${item.item.name}`}
+        src={item.item.image_url || '/devImages/food1.webp'}
+        className="rounded-lg"
+        sizes="7rem"
+      />
 
       <div className="flex w-full flex-col justify-center text-storeTextColorTint">
         <p className="text-base font-medium text-secondary">{item.item.name}</p>
