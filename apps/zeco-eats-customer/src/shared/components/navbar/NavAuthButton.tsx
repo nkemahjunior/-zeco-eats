@@ -5,19 +5,19 @@ import Link from 'next/link'
 import { IoLogOutOutline } from 'react-icons/io5'
 import { GoPersonFill } from 'react-icons/go'
 import { createSupabaseClient } from '@zeco-eats-lib/utils-client'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { useGenerateSigninLink } from '@/shared/hooks/useGenerateSigninLink'
 
 export default function NavAuthButton() {
   const [user, setUser] = useState<any>(null)
   const supabase = createSupabaseClient()
   const router = useRouter()
+  const signinLink = useGenerateSigninLink()
 
   useEffect(() => {
     const checkUser = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession()
-      setUser(session?.user || null)
+      const user = await supabase.auth.getUser()
+      setUser(user.data.user || null)
     }
     checkUser()
   }, [supabase])
@@ -29,7 +29,7 @@ export default function NavAuthButton() {
   }
 
   const buttonStyles =
-    'flex w-full items-center gap-x-2 bg-secondary p-2 text-white lg:w-auto lg:rounded-xl lg:p-2 xl:p-3 2xl:rounded-3xl 2xl:px-6'
+    'flex w-fit lg:w-full rounded-lg items-center gap-x-2 bg-secondary p-2 text-white lg:w-auto lg:rounded-xl lg:p-2 xl:p-3 2xl:rounded-3xl 2xl:px-6'
 
   return (
     <li>
@@ -43,7 +43,7 @@ export default function NavAuthButton() {
         </button>
       ) : (
         // Login/Signup Link
-        <Link href="/auth/signin" className={buttonStyles}>
+        <Link href={signinLink} className={buttonStyles}>
           <span className="block rounded-full bg-primary p-1">
             <GoPersonFill color="#03081F" size={20} />
           </span>
