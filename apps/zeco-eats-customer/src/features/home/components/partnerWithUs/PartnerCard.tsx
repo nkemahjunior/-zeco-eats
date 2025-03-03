@@ -44,6 +44,7 @@ export default function PartnerCard({ details }: fnProps) {
           objectFit: 'cover',
         }}
         fill
+        sizes="(max-width: 1279px) 100vw, (min-width: 1280px) 50vw"
       />
     </div>
   )

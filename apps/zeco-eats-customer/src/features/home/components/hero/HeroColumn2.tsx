@@ -7,8 +7,10 @@ export default function HeroColumn2() {
         <Image
           src={'/hero/heroImg1.webp'}
           fill={true}
-          alt="hero image 1"
+          alt="hero image "
           quality={100}
+          priority
+          sizes="(max-width: 1279px) 0px, (max-width: 1536px) 40vw, 50vw"
         />
       </div>
     </div>
