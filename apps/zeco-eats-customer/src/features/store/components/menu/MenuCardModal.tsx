@@ -41,7 +41,7 @@ export default function MenuCardModal({
       className={` ${!isModal ? 'flex w-full justify-center bg-[#f7f7f7] lg:bg-white' : ' '} `}
     >
       <div
-        className={`${!isModal ? 'lg:min-h-[32rem]' : 'min-h-[35rem]'} w-full lg:w-[65rem]`}
+        className={`${!isModal ? 'lg:min-h-[32rem]' : 'min-h-[35rem]'} mx-sm w-full md:mx-md lg:mx-lg xl:mx-[10rem] 2xl:mx-0 2xl:w-[65rem]`}
       >
         {!isModal && <BackToRestaurantModal />}
         {isModal && (
