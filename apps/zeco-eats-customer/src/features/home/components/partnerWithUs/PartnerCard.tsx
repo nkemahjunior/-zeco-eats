@@ -26,12 +26,15 @@ export default function PartnerCard({ details }: fnProps) {
             {details.signupText2}
           </p>
         </div>
-        <Link
-          href={'/signup---'}
+        {/* <Link
+          href={'/home'}
           className="block w-[8rem] rounded-3xl bg-primary py-2 text-center font-medium text-white md:w-[12rem] md:py-4"
         >
           Get Started
-        </Link>
+        </Link> */}
+        <button className="block w-[8rem] rounded-3xl bg-primary py-2 text-center font-medium text-white md:w-[12rem] md:py-4">
+          Get Started
+        </button>
       </div>
       <Image
         alt="picture of a restaurant partner"
