@@ -587,6 +587,35 @@ export type Database = {
           },
         ]
       }
+      user_favourite_stores: {
+        Row: {
+          created_at: string
+          id: number
+          store_id: number | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          store_id?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          store_id?: number | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'user_favourite_stores_restaurant_id_fkey'
+            columns: ['store_id']
+            isOneToOne: false
+            referencedRelation: 'restaurant'
+            referencedColumns: ['id']
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
