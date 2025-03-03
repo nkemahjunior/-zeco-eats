@@ -9,6 +9,7 @@ import { VIEW_DISH } from '@/features/store/utils/modalUrlKeys'
 import { Tables } from '@zeco-eats-lib/utils-client'
 import { useState } from 'react'
 import ImageSkeleton from '@/shared/components/skeletons/ImageSkeleton'
+import { useStoreId } from '../../hooks/useStoreId'
 
 export default function MenuCard({
   id,
@@ -21,10 +22,12 @@ export default function MenuCard({
   const { isMobile } = useDeviceType()
   const updateParams = useUpdateUrlParams()
   const [imageLoad, setImageLoad] = useState(true)
+  const storeId = useStoreId()
 
   const openModal = (itemId: number) => {
     if (isMobile) {
-      router.push(`storeName/dish-details`)
+      //${storeId}/dish-details?${VIEW_DISH}=${itemId}
+      router.push(`${storeId}/dish-details?${VIEW_DISH}=${itemId}`)
       return
     }
     // updateParams(VIEW_DISH, id.toString() + 'testMenu')
