@@ -18,9 +18,6 @@ export default function Menu() {
   const { data: completeMenu } = useSuspenseQuery(
     getCompleteRestaurantMenuOption(Number(storeId))
   )
-
-  // console.log("*********************************************");
-  // console.log(completeMenu);
   const { isMobile } = useDeviceType()
 
   const [menuTitleDimension, setmenuTitleDimension] = useState({
