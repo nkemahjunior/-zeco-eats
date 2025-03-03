@@ -14,7 +14,7 @@ export default function StoreLocationItem({ location }: { location: string }) {
       await navigator.clipboard.writeText(location)
       toast.success('Location copied!')
     } catch (error) {
-      toast.error('Failed to copy')
+      toast.error('Failed to copy!')
     } finally {
       setIsCopying(false)
     }
