@@ -1,15 +1,20 @@
 'use client'
-import { GoPersonFill } from 'react-icons/go'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Logo from '../Logo'
 import NavAuthButton from './NavAuthButton'
+import { usePathname } from 'next/navigation'
 
 export default function NavBar2({ notHome }: { notHome: boolean }) {
+  const pathname = usePathname()
   const [showNavMobile, setShowNavMobile] = useState(false)
   const toggleNavMobile = (show: boolean) => {
     setShowNavMobile(show)
   }
+
+  useEffect(() => {
+    if (showNavMobile) setShowNavMobile(false)
+  }, [pathname])
 
   return (
     <div
@@ -20,7 +25,7 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
           <Logo text1Size="text-xl" />
         </div>
 
-        <div className="uuborder-l-[1px] flex h-full w-16 items-center justify-center border-solid border-backgroundBorder">
+        <div className="flex h-full w-16 items-center justify-center border-solid border-backgroundBorder">
           <div
             className="z-20 cursor-pointer space-y-2 lg:hidden"
             onClick={() => toggleNavMobile(!showNavMobile)}
@@ -40,19 +45,19 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         </div>
       </div>
 
-      {showNavMobile && (
+      {/* {showNavMobile && (
         <div
           className="fixed inset-0 z-10 bg-black opacity-5 lg:hidden"
           onClick={() => toggleNavMobile(false)}
-        ></div>
-      )}
+        >ooooooooooooooo---------</div>
+      )} */}
 
       <ul
-        className={`fixed right-0 top-16 z-20 h-fit space-y-4 py-4 transition-transform duration-300 ease-in-out lg:static lg:right-auto lg:top-auto lg:z-0 lg:h-auto lg:space-y-0 lg:py-0 ${showNavMobile ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'} font-medium lg:flex lg:flex-grow lg:items-center lg:justify-between`}
+        className={`bg fixed inset-0 right-0 top-16 z-[104] ml-sm h-full space-y-4 bg-white py-4 transition-transform duration-300 ease-in-out md:ml-md lg:static lg:inset-auto lg:right-auto lg:top-auto lg:z-0 lg:ml-0 lg:h-auto lg:space-y-0 lg:py-0 ${showNavMobile ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'} font-medium lg:flex lg:flex-grow lg:items-center lg:justify-between`}
       >
         <li>
           <Link
-            className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
+            className="= block w-full p-2 lg:w-auto lg:rounded-xl lg:p-2 lg:hover:bg-primary lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
             href={'/home'}
           >
             Home
@@ -60,7 +65,7 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         </li>
         <li>
           <Link
-            className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
+            className="= block w-full p-2 lg:w-auto lg:rounded-xl lg:p-2 lg:hover:bg-primary lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
             href={'/browse'}
           >
             Browse Menu
@@ -68,7 +73,7 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         </li>
         <li>
           <Link
-            className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
+            className="= block w-full p-2 lg:w-auto lg:rounded-xl lg:p-2 lg:hover:bg-primary lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
             href={'/special-offers'}
           >
             Special Offers
@@ -76,7 +81,7 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         </li>
         <li>
           <Link
-            className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
+            className="= block w-full p-2 lg:w-auto lg:rounded-xl lg:p-2 lg:hover:bg-primary lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
             href={'/browse'}
           >
             Restaurants
@@ -84,7 +89,7 @@ export default function NavBar2({ notHome }: { notHome: boolean }) {
         </li>
         <li>
           <Link
-            className="= block w-full p-2 hover:bg-primary lg:w-auto lg:rounded-xl lg:p-2 lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
+            className="= block w-full p-2 lg:w-auto lg:rounded-xl lg:p-2 lg:hover:bg-primary lg:hover:text-white xl:p-3 2xl:rounded-3xl 2xl:px-6"
             href={'/favourites'}
           >
             Favourites
