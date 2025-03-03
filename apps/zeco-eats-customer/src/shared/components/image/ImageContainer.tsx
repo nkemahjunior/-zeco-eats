@@ -9,6 +9,8 @@ interface FnProps {
   src: string
   imageAlt: string
   quality?: number
+  sizes?: string
+  priority?: boolean
   roundedCorners?: string
   objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
   events?: React.DOMAttributes<HTMLImageElement>
@@ -23,6 +25,8 @@ export default function ImageContainer({
   src,
   imageAlt,
   quality = 75,
+  sizes,
+  priority = false,
   events,
   roundedCorners,
   objectFit = 'cover',
@@ -33,7 +37,9 @@ export default function ImageContainer({
   const [loading, setLoading] = useState(true)
   return (
     <div
-      className={`relative ${height} ${width} overflow-hidden ${roundedCorners} ${className} `}
+      className={`relative ${height} ${width} overflow-hidden ${roundedCorners} transition-opacity duration-300 ${
+        loading ? 'opacity-0' : 'opacity-100'
+      } ${className} `}
     >
       {loading && <ImageSkeleton />}
       <Image
@@ -43,6 +49,8 @@ export default function ImageContainer({
         alt={imageAlt}
         fill
         quality={quality}
+        sizes={sizes}
+        priority={priority}
         style={{
           objectFit: objectFit,
           ...style,
