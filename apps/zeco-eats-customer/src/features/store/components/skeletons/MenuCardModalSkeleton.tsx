@@ -4,7 +4,7 @@ import { DishInfoSkeleton } from './DishInfoSkeleton'
 export function MenuCardModalSkeleton({ gapx = 'gap-x-8' }) {
   return (
     <div className="flex h-fit w-full justify-center bg-[#f7f7f7] lg:mt-2 lg:bg-white xl:mt-auto">
-      <div className="w-full space-y-4 lg:h-[60rem] lg:w-[55rem] xl:h-[32rem] xl:w-[65rem]">
+      <div className="w-full space-y-4 lg:h-[60rem] lg:w-[55rem] xl:min-h-[32rem] xl:w-[65rem]">
         <div className="hidden h-12 w-full lg:block">
           <Shimmer className="h-full w-full rounded-md" />
         </div>

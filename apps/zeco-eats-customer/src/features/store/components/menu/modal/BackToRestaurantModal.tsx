@@ -16,7 +16,7 @@ export default function BackToRestaurantModal() {
       <span>
         <BiArrowBack />
       </span>
-      <span>Back to restaurant name</span>
+      <span>Back to restaurant</span>
     </button>
   )
 }
