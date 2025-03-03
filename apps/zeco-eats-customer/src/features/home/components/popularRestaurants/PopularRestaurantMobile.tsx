@@ -20,7 +20,7 @@ export default function PopularRestaurantMobile() {
     [Autoplay()]
   )
   const { data: popularRestaurants } = useSuspenseQuery(
-    popularRestaurantsOptions
+    popularRestaurantsOptions()
   )
 
   // const onNavButtonClick = useCallback((emblaApi: EmblaCarouselType) => {

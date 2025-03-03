@@ -9,7 +9,7 @@ import PopularRestaurantMobile from './PopularRestaurantMobile'
 
 export default function PopularRestaurantsSection() {
   const queryClient = getQueryClient()
-  queryClient.prefetchQuery(popularRestaurantsOptions)
+  queryClient.prefetchQuery(popularRestaurantsOptions())
 
   return (
     <section className="mx-sm mt-Ysm md:mx-md lg:mx-lg lg:mt-Ylg xl:mx-xl 2xl:mx-xxl 2xl:mt-YXl">
