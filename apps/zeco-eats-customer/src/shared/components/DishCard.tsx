@@ -1,8 +1,6 @@
 'use client'
 import CardTitle from '@/shared/components/text/CardTitle'
-import Image from 'next/image'
-import { useState } from 'react'
-import ImageSkeleton from './skeletons/ImageSkeleton'
+import ImageContainer from './image/ImageContainer'
 
 interface DishCardProps {
   name: string
@@ -19,24 +17,17 @@ export default function DishCard({
   maxAvgCookTime,
   rating,
 }: DishCardProps) {
-  const [isLoading, setIsLoading] = useState(true)
-
   return (
     <div className="w-full space-y-4 border-0 border-solid border-purple-600">
-      <div className="relative h-[8rem] w-full overflow-hidden rounded-lg border-0 border-solid border-red-600">
-        {isLoading && <ImageSkeleton />}
-        <Image
-          alt={`Image of ${name}`}
-          src={image}
-          fill
-          quality={100}
-          style={{
-            objectFit: 'cover',
-            display: isLoading ? 'none' : 'block',
-          }}
-          onLoad={() => setIsLoading(false)}
-        />
-      </div>
+      <ImageContainer
+        imageAlt={`Image of ${name} restaurant`}
+        src={image}
+        quality={100}
+        height="h-[8rem]"
+        width="w-full"
+        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 33vw, (min-width: 1024px) 25vw"
+        roundedCorners="rounded-lg"
+      />
       <div className="flex w-full items-center justify-between border-0 border-solid border-green-600">
         <div className="space-y-1">
           <CardTitle text={name} />
