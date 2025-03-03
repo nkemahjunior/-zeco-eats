@@ -48,7 +48,7 @@ export default function HeroSearchBar() {
       </div>
 
       {open && value.length > 0 && (
-        <ul className="absolute top-14 z-[11] h-[10rem] w-full space-y-2 overflow-y-auto rounded-lg bg-white py-4 shadow-md shadow-black/30">
+        <ul className="absolute top-14 z-[11] mt-2 h-[20rem] w-full space-y-2 overflow-y-auto rounded-lg bg-white py-4 shadow-md shadow-black/30 lg:mt-auto lg:h-[10rem]">
           {loading ? (
             <li className="px-4 py-2">Loading Addresses...</li>
           ) : addresses && addresses.length > 0 ? (
