@@ -1,3 +1,4 @@
+'use client'
 import { Tables } from '@zeco-eats-lib/utils-client'
 import StoreLocationItem from './StoreLocationItem'
 import StoreMap from './StoreMap'
