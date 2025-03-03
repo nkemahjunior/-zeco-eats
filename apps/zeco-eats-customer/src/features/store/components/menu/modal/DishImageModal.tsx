@@ -73,6 +73,7 @@ export default function DishImageModal({
         width=" w-full"
         imageAlt="picture of this dish"
         quality={100}
+        sizes="(max-width: 1023px) 100vw, (min-width: 1024px) 50vw"
       />
     </div>
   )

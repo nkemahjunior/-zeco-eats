@@ -24,6 +24,8 @@ export default function StoreHeaderImage({ image }: { image: string }) {
             objectFit: 'cover',
           }}
           onLoad={() => setLoading(false)}
+          sizes="(max-width: 1023px) 100vw, (min-width: 1024px) 90vw"
+          priority
         />
       </div>
     </div>

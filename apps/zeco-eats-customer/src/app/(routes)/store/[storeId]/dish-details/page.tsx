@@ -1,7 +1,7 @@
 import MenuCardModal from '@/features/store/components/menu/MenuCardModal'
 
 export default function page() {
-  return <MenuCardModal gapx="gap-x-12" isModal={false} />
+  return <MenuCardModal gapx="gap-x-8 xl:gap-x-12" isModal={false} />
 }
 
 /**

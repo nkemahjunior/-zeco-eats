@@ -8,7 +8,7 @@ export default function BackToRestaurantModal() {
 
   return (
     <button
-      className={`sticky mb-4 hidden w-full items-center space-x-2 font-medium lg:flex`}
+      className={`sticky mb-4 mt-8 hidden w-full items-center space-x-2 font-medium lg:flex xl:mt-auto`}
       onClick={() => {
         router.back()
       }}
