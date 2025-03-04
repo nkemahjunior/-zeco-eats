@@ -11,6 +11,13 @@ const initialCartState = {
   subtotal: 0,
 }
 
+const defaultLocation = {
+  name: 'Buea',
+  fullName: 'Buea',
+  lat: 4.1567895,
+  lon: 9.2315915,
+}
+
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
@@ -120,16 +127,11 @@ export const useCartStore = create<CartStore>()(
 export const useLocationStore = create<LocationStore>()(
   persist(
     (set) => ({
-      userLocation: null,
+      userLocation: defaultLocation,
       setLocation: (location) => set({ userLocation: location }),
       setToDefault: () =>
         set({
-          userLocation: {
-            name: 'Buea',
-            fullName: 'Buea',
-            lat: 4.1567895,
-            lon: 9.2315915,
-          },
+          userLocation: defaultLocation,
         }),
     }),
     {
