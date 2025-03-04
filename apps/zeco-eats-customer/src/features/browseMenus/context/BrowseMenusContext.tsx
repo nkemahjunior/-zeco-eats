@@ -125,7 +125,8 @@ export const BrowseMenusProvider = ({ children }: { children: ReactNode }) => {
   // Accumulate Data
   useEffect(() => {
     const length = data?.data.length
-    if (length === 0) router.replace('/no-restaurant')
+    if (!isLoading && (length === 0 || !data?.data))
+      router.replace('/no-restaurant')
 
     if (data?.count) {
       setRestaurants((prev) =>
@@ -133,7 +134,7 @@ export const BrowseMenusProvider = ({ children }: { children: ReactNode }) => {
       )
       setTotalCount(data.count)
     }
-  }, [data, page, router])
+  }, [data, isLoading, page, router])
 
   return (
     <BrowseMenusContext.Provider
