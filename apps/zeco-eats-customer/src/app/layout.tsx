@@ -6,7 +6,7 @@ import TanstackQueryProvider from '@/shared/api/tanstackQuery/TanstackQueryProvi
 import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
-  title: 'zeco eats',
+  title: 'Zeco Eats | Food Delivery | Order Food Online',
   description:
     'Order delicious food from local restaurants and have it delivered to your doorstep.',
 }
