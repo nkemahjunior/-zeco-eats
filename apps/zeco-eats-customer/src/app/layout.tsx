@@ -7,7 +7,8 @@ import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
   title: 'zeco eats',
-  description: 'Get your food wherever you want',
+  description:
+    'Order delicious food from local restaurants and have it delivered to your doorstep.',
 }
 
 export default async function RootLayout({
