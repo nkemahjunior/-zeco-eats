@@ -2,49 +2,54 @@
 import Heading from '@/shared/components/text/Heading'
 import PopularCategoriesCard from './PopularCategoriesCard'
 import Link from 'next/link'
-import { useLocationStore } from '@/stores/globalStore'
+import { FoodCategoryName } from '@/shared/types/sharedTypes'
 
-const popularCategories = [
+type FoodCategory = {
+  name: FoodCategoryName
+  image: string
+  numRestaurants: number
+}
+
+const popularCategories: FoodCategory[] = [
   {
     name: 'Bakery',
     image:
       'https://ihydizyhbzwvaidfdunn.supabase.co/storage/v1/object/public/zeco-eats/popular-categories/bakery.jpg',
-    numRestaurants: 4,
+    numRestaurants: 1,
   },
   {
-    name: 'Fast Food',
+    name: 'Fast Foods',
     image:
       'https://ihydizyhbzwvaidfdunn.supabase.co/storage/v1/object/public/zeco-eats/popular-categories/fast%20foods.jpg',
-    numRestaurants: 2,
+    numRestaurants: 11,
   },
   {
-    name: 'Salad',
+    name: 'Vegan',
     image:
       'https://ihydizyhbzwvaidfdunn.supabase.co/storage/v1/object/public/zeco-eats/popular-categories/salad.jpg',
-    numRestaurants: 6,
+    numRestaurants: 8,
   },
   {
-    name: 'Smoothies',
+    name: 'Fruit Juice',
     image:
       'https://ihydizyhbzwvaidfdunn.supabase.co/storage/v1/object/public/zeco-eats/popular-categories/smoothies.jpg',
-    numRestaurants: 3,
+    numRestaurants: 4,
   },
   {
     name: 'Soup',
     image:
       'https://ihydizyhbzwvaidfdunn.supabase.co/storage/v1/object/public/zeco-eats/popular-categories/soup.jpg',
-    numRestaurants: 10,
+    numRestaurants: 5,
   },
   {
-    name: 'Dinner',
+    name: 'Supper',
     image:
       'https://ihydizyhbzwvaidfdunn.supabase.co/storage/v1/object/public/zeco-eats/popular-categories/supper.jpg',
-    numRestaurants: 8,
+    numRestaurants: 1,
   },
 ]
 
 export default function PopularCategoriesSection() {
-  const userLocation = useLocationStore((state) => state.userLocation)
   return (
     <section className="mx-sm mt-Ysm bg-background md:mx-md lg:mx-lg lg:mt-Ylg xl:mx-xl xl:bg-white 2xl:mx-xxl 2xl:mt-YXl">
       <div className="mb-Ysm lg:mb-Ylg 2xl:mb-YXl">
@@ -55,7 +60,7 @@ export default function PopularCategoriesSection() {
         {popularCategories.map((category, index) => (
           <Link
             key={index}
-            href={`/browse/?cuisine=${category.name.replaceAll(' ', '+')}?location=${userLocation?.fullName}`}
+            href={`/browse/?cuisine=${category.name.replaceAll(' ', '+')}`}
           >
             <PopularCategoriesCard
               name={category.name}
